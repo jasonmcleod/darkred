@@ -3,9 +3,12 @@
  * Module dependencies.
  */
 
-var express = require('express'),
-  routes = require('./routes'),
-  api = require('./routes/api');
+var express = require('express');
+var routes = require('./routes');
+var api = require('./routes/api');
+
+var hbs = require('express-hbs');
+
 
 var app = module.exports = express();
 
@@ -13,11 +16,15 @@ var app = module.exports = express();
 
 app.configure(function(){
   app.set('views', __dirname + '/views');
-  app.set('view engine', 'jade');
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(express.static(__dirname + '/public'));
   app.use(app.router);
+
+
+  app.set('views', __dirname + '/views');
+//  app.set('view engine', 'jade');
+  app.set('view engine', 'ejs');
 });
 
 app.configure('development', function(){
