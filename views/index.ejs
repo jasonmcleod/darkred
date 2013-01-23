@@ -9,7 +9,7 @@
     </head>
 
     <body>
-        <div ng-controller="LoginCtrl" ng-show="!loggedIn">
+        <div ng-controller="LoginCtrl" ng-hide="$parent.loggedIn">
             <input type="text" ng-model="username">
             <input type="password" ng-model="password">
             <button ng-click="login()" ng-disabled="!validate()">Login</button>
@@ -31,6 +31,10 @@
                 <input type="text" ng-model="formNewCharacterName">
                 <button class="btn" ng-click="addCharacter()">Add</button>
             </form>
+        </div>
+
+        <div ng-controller="LogoutCtrl" ng-show="$parent.loggedIn">
+            <a ng-click='logout()'>Logout</a>
         </div>
 
         <script src="js/lib/angular/angular.js"></script>
