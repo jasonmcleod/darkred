@@ -15,4 +15,13 @@ var app = angular.module('myApp', ['myApp.filters', 'myApp.directives', 'state']
     }
 ]);
 
+var cursorX, cursorY;
+
+$(function() {
+    $(window).bind('mousemove',function(e) {
+        cursorX = e.pageX;
+        cursorY = e.pageY;
+
+    })
+})
 

@@ -38,7 +38,7 @@ function Renderer(options) {
     // method to render the tiles to the buffer
     var renderBuffer = function(x,y) {
 
-        // if(x==lastBufferRender.x && y==lastBufferRender.y) return;
+        if(x==lastBufferRender.x && y==lastBufferRender.y) return;
 
         // var walls = [];
 
@@ -53,6 +53,7 @@ function Renderer(options) {
 
         lastBufferRender = {x:x, y:y}
 
+        return true;
         // return walls;
 
         // easelStage.update();
@@ -69,7 +70,23 @@ function Renderer(options) {
 
     // method to render the terrain base
     var render = function(x,y) {
-        stageCtx.drawImage(bufferCanvas, 0, 0)
+
+
+        // viewport_ctx.drawImage(base_canvas,x%TILE_SIZE,y%TILE_SIZE, CAMERA_WIDTH * TILE_SIZE, CAMERA_HEIGHT * TILE_SIZE, 0, 0, CAMERA_WIDTH * TILE_SIZE, CAMERA_HEIGHT * TILE_SIZE)
+        // viewport_ctx.drawImage(stage_canvas,x%TILE_SIZE,y%TILE_SIZE, CAMERA_WIDTH * TILE_SIZE, CAMERA_HEIGHT * TILE_SIZE, 0, 0, CAMERA_WIDTH * TILE_SIZE, CAMERA_HEIGHT * TILE_SIZE)
+        // viewport_ctx.drawImage(lighting_canvas,x%TILE_SIZE,y%TILE_SIZE, CAMERA_WIDTH * TILE_SIZE, CAMERA_HEIGHT * TILE_SIZE, 0, 0, CAMERA_WIDTH * TILE_SIZE, CAMERA_HEIGHT * TILE_SIZE)
+
+        stageCtx.drawImage(bufferCanvas,x%options.tileSize,y%options.tileSize, camera.width * options.tileSize, camera.height * options.tileSize, 0, 0, camera.width * options.tileSize, camera.height * options.tileSize)
+
+        // console.log(bufferCanvas,
+        //     x % options.tileSize ,
+        //     y % options.tileSize ,
+        //     y,
+        //     camera.width * options.tileSize ,
+        //     y,
+        //     camera.height * options.tileSize ,y, 0, 0, camera.width * options.tileSize ,y, camera.height * options.tileSize ,y)
+        // stageCtx.drawImage(bufferCanvas, x % options.tileSize ,y % options.tileSize ,y, camera.width * options.tileSize ,y, camera.height * options.tileSize ,y, 0, 0, camera.width * options.tileSize ,y, camera.height * options.tileSize ,y)
+        // stageCtx.drawImage(bufferCanvas, 0, 0)
     }
 
 
@@ -79,6 +96,7 @@ function Renderer(options) {
         stageCanvas:stageCanvas,
         easelStage:easelStage,
         render:render,
-        renderBuffer:renderBuffer
+        renderBuffer:renderBuffer,
+        bufferCanvas:bufferCanvas
     };
 }

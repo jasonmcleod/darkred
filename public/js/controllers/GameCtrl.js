@@ -13,12 +13,9 @@ function GameCtrl($scope, socket, $rootScope, $location) {
             // follows the player
             $scope.camera = new Camera({
                 tileSize:$scope.tileSize,
-                width:39,
-                height:31,
-                x:10,
-                y:10
+                width:19,
+                height:19
             });
-
 
             // renders everything onto a canvas
             $scope.renderer = new Renderer({
@@ -32,16 +29,25 @@ function GameCtrl($scope, socket, $rootScope, $location) {
             $scope.tileset = tileset;
 
             document.getElementById('stage').appendChild($scope.renderer.stageCanvas)
+            document.getElementById('stage').appendChild($scope.renderer.bufferCanvas)
 
-            // $scope.renderer.renderBuffer(0,0)
-            $scope.renderer.render();
+            var me = {
+                x:150,
+                y:150
+            }
 
             setInterval(function() {
-                $scope.camera.x++;
-                $scope.camera.y++;
-                $scope.renderer.renderBuffer(0,0)
-                $scope.renderer.render();
-            },200)
+                // me.x++
+                // me.y++
+
+                me.x = cursorX
+                me.y = cursorY
+                $scope.camera.x = Math.floor(me.x/$scope.tileSize) - Math.floor(($scope.camera.width)/2);
+                $scope.camera.y = Math.floor(me.y/$scope.tileSize) - Math.floor(($scope.camera.height)/2);
+
+                $scope.renderer.renderBuffer(me.x,me.y)
+                $scope.renderer.render(me.x, me.y);
+            },5)
 
             // // test drawing a moving an item
             // var sprite = new createjs.Shape();
