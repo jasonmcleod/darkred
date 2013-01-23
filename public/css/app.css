@@ -1,4 +1,7 @@
 /* app css stylesheet */
+canvas {
+  background:#eee;
+}
 
 .menu {
   list-style: none;

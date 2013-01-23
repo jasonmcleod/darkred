@@ -1,0 +1,13 @@
+<div ng-controller="CharactersCtrl">
+    <h2>Total Characters: {{characters.length}}</h2>
+    <ul>
+        <li ng-repeat="character in characters">
+            <a level="{{character.level}}">{{character.name}} ({{character.level}})</a>
+            <span>Str: {{character.str}}</span>
+            <span>Dex: {{character.dex}}</span>
+            <span>Int: {{character.int}}</span>
+            <span>Con: {{character.con}}</span>
+            <button ng-click="selectCharacter()">Select</button>
+        </li>
+    </ul>
+</div>

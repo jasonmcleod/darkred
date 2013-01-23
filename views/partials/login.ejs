@@ -1,0 +1,7 @@
+<div ng-controller="LoginCtrl">
+    <form>
+        <input type="text" value='foo' ng-model="username">
+        <input type="password" value='foo' ng-model="password">
+        <button ng-click="login()" ng-disabled="!validate()">Login</button>
+    </form>
+</div>

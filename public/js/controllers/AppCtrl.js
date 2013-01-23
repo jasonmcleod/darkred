@@ -5,7 +5,6 @@ function AppCtrl($scope, socket) {
     $scope.loggedIn = false
 
     socket.on('news', function (data) {
-        console.log('init')
       $scope.name = data.name;
       $scope.users = data.users;
     });

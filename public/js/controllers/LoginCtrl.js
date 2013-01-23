@@ -1,10 +1,14 @@
-function LoginCtrl($scope, socket, $rootScope) {
+function LoginCtrl($scope, socket, $rootScope, $location) {
+
+    $scope.username = 'foo'
+    $scope.password = 'foo'
 
     $scope.login = function() {
         console.log('connect')
         socket.emit('connect', {username:$scope.username, password:$scope.password})
-        $scope.$parent.loggedIn = true
-
+        // $scope.$parent.loggedIn = true
+        $rootScope.loggedIn = true
+        $location.path('/characters')
     }
 
     $scope.validate = function() {
