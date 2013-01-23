@@ -2,7 +2,7 @@
 
 
 // Declare app level module which depends on filters, and services
-var app = angular.module('myApp', ['myApp.filters', 'myApp.directives']).config([
+var app = angular.module('myApp', ['myApp.filters', 'myApp.directives', 'state']).config([
     '$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
         $routeProvider.when('/view1', {templateUrl: 'partials/partial1', controller: MyCtrl1});
         $routeProvider.when('/view2', {templateUrl: 'partials/partial2', controller: MyCtrl2});
@@ -11,15 +11,4 @@ var app = angular.module('myApp', ['myApp.filters', 'myApp.directives']).config(
     }
 ]);
 
-function AppCtrl($scope, socket) {
 
-    $scope.players = [];
-
-    socket.on('news', function (data) {
-        console.log('init')
-      $scope.name = data.name;
-      $scope.users = data.users;
-    });
-
-    socket.emit('hi', {yay:'!'})
-}

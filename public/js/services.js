@@ -9,6 +9,14 @@
 //   value('version', '0.1');
 //
 
+app.factory('shared', function($rootScope) {
+    var shared = {
+        loggedIn:false
+    }
+
+    return shared;
+})
+
 app.factory('socket', function ($rootScope) {
     var socket = io.connect();
     return {

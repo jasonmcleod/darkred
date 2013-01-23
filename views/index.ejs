@@ -9,10 +9,11 @@
     </head>
 
     <body>
-        <div ng-controller="LoginCtrl">
+        <div ng-controller="LoginCtrl" ng-show="!loggedIn">
             <input type="text" ng-model="username">
             <input type="password" ng-model="password">
             <button ng-click="login()" ng-disabled="!validate()">Login</button>
+            <a ng-click="doAlert()">Alert</a>
         </div>
 
         <div ng-controller="CharactersCtrl">
