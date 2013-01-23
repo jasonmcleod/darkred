@@ -19,7 +19,7 @@ function GameCtrl($scope, socket, $rootScope, $location) {
                 y:10
             });
 
-            console.log(tileset)
+
             // renders everything onto a canvas
             $scope.renderer = new Renderer({
                 map:map,
@@ -31,14 +31,16 @@ function GameCtrl($scope, socket, $rootScope, $location) {
             $scope.map = map;
             $scope.tileset = tileset;
 
-            document.getElementById('stage').appendChild($scope.renderer.canvas)
+            document.getElementById('stage').appendChild($scope.renderer.stageCanvas)
 
-            $scope.renderer.renderBuffer(0,0)
+            // $scope.renderer.renderBuffer(0,0)
+            $scope.renderer.render();
 
             setInterval(function() {
                 $scope.camera.x++;
                 $scope.camera.y++;
                 $scope.renderer.renderBuffer(0,0)
+                $scope.renderer.render();
             },200)
 
             // // test drawing a moving an item
