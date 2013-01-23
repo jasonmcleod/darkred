@@ -14,9 +14,9 @@ function CharactersCtrl($scope, socket, $rootScope, $location) {
         $location.path('/instances')
     }
 
-    // $scope.addCharacter = function() {
-    //     $scope.characters.push({name: 'test', level:1,dex:1,  str:2,  con:3,  int:4})
-    //     $scope.formNewCharacterName = ''
-    // }
+    $scope.addCharacter = function() {
+        $scope.characters.push({name: 'test', level:1,dex:1,  str:2,  con:3,  int:4})
+        $scope.formNewCharacterName = ''
+    }
 
 }

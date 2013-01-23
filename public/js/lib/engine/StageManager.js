@@ -4,7 +4,6 @@ function StageManager(options) {
     this.elements = []
 
     this.add = function(what, index) {
-        console.log(arguments)
         this.elements.push(what)
         if(arguments.length==2) {
             this.stage.addChildAt(what, index)
