@@ -3,6 +3,11 @@ function GameCtrl($scope, socket, $rootScope, $location) {
     // tile size (square tiles)
     $scope.tileSize = 16;
 
+    // $scope.me = Player.extend({name:'Me'});
+    // $scope.me.fire();
+    // $scope.$watch('me.name', function() { console.log(arguments) },true);
+    // $scope.changeName = function() { $scope.me.name='test2' };
+
     // loads the map
     $scope.mapParser = new MapParser({
         map:'/assets/maps/level2.json',
