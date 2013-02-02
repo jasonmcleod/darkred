@@ -3,7 +3,11 @@ function GameCtrl($scope, socket, $rootScope, $location) {
     // tile size (square tiles)
     $scope.tileSize = 16;
 
-    // $scope.me = Player.extend({name:'Me'});
+    $scope.me = Player.extend({name:'Me', socket:socket});
+    $scope.me.join();
+    ME = $scope.me;
+
+
     // $scope.me.fire();
     // $scope.$watch('me.name', function() { console.log(arguments) },true);
     // $scope.changeName = function() { $scope.me.name='test2' };
@@ -41,18 +45,18 @@ function GameCtrl($scope, socket, $rootScope, $location) {
                 y:150
             }
 
-            setInterval(function() {
-                // me.x++
-                // me.y++
-
-                me.x = cursorX
-                me.y = cursorY
-                $scope.camera.x = Math.floor(me.x/$scope.tileSize) - Math.floor(($scope.camera.width)/2);
-                $scope.camera.y = Math.floor(me.y/$scope.tileSize) - Math.floor(($scope.camera.height)/2);
-
-                $scope.renderer.renderBuffer(me.x,me.y)
-                $scope.renderer.render(me.x, me.y);
-            },5)
+            // setInterval(function() {
+            //     // me.x++
+            //     // me.y++
+            //
+            //     me.x = cursorX
+            //     me.y = cursorY
+            //     $scope.camera.x = Math.floor(me.x/$scope.tileSize) - Math.floor(($scope.camera.width)/2);
+            //     $scope.camera.y = Math.floor(me.y/$scope.tileSize) - Math.floor(($scope.camera.height)/2);
+            //
+            //     $scope.renderer.renderBuffer(me.x,me.y)
+            //     $scope.renderer.render(me.x, me.y);
+            // },5)
 
             // // test drawing a moving an item
             // var sprite = new createjs.Shape();

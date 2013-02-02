@@ -49,17 +49,17 @@ app.instances = {};
 // Start server
 server.listen(3000)
 io = socketio.listen(server);
-io.sockets.on('connection', function (socket) {
-    console.log('connection')
-    socket.emit('news', { hello: 'world' });
-    socket.on('hi', function (data) {
-        console.log(data);
-    });
-});
+// io.sockets.on('connection', function (socket) {
+//     console.log('connection')
+//     socket.emit('news', { hello: 'world' });
+//     socket.on('hi', function (data) {
+//         console.log(data);
+//     });
+// });
 io.set('log level', 1);
 
-// var instance = new Instance('challenger-io');
-// instance.attachPacketHandlers(app.io)
-// app.instances[instance.id] = instance;
+var instance = new Instance('main');
+instance.attachPacketHandlers(io)
+app.instances[instance.id] = instance;
 
 

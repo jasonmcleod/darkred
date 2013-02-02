@@ -66,15 +66,19 @@ var Instance = function(id) {
 
     this.attachPacketHandlers = function(io) {
 
-        this.iio = io.of('/instance/' + this.id);
-        this.iio.on('connection', function (socket) {
+        this.iio = io;
+        io.on('connection', function(socket) {
+
+        // this.iio = io.of('/game');
+        // this.iio.on('connection', function (socket) {
 
             var player = self.addPlayer(socket.id);
 
             socket.on('join', function(name) {
+                console.log('join')
 
                 player.name = name;
-                player.setPosition(self.map.randomSpawn())
+                // player.setPosition(self.map.randomSpawn())
 
                 socket.emit('instance', self.data());
                 self.iio.emit('addPlayer', player);
