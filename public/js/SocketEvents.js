@@ -5,7 +5,7 @@ function SocketEvents($scope, socket) {
     });
 
     socket.on('players', function(data) {
-        $scope.setPlayers(data)
+        $scope.set('players',data)
     })
 
     socket.on('')

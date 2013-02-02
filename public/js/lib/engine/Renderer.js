@@ -1,26 +1,31 @@
 function Renderer(options) {
     var options = options || {}
+    options.width = options.width || 640;
+    options.height = options.height || 480;
 
 
     // localize camera, tileset, and map. throw errors if they are not passed correctly
-    var camera = options.camera || false; if(!camera) console.error('Renderer needs a Camera() passed into it.');
-    var tileset = options.tileset || false; if(!tileset) console.error('Renderer needs a MapParser.tileset passed into it.');
-    var map = options.map || false; if(!tileset) console.error('Renderer needs a MapParser.map passed into it.');
+    var camera =    options.camera  || false; if(!camera)  console.error('Renderer needs a Camera() passed into it.');
+    var tileset =   options.tileset || false; if(!tileset) console.error('Renderer needs a MapParser.tileset passed into it.');
+    var map =       options.map     || false; if(!tileset) console.error('Renderer needs a MapParser.map passed into it.');
 
+    var finalCanvas = document.createElement('canvas');
+    finalCanvas.width = options.width;
+    finalCanvas.height = options.height;
+    var finalCtx = finalCanvas.getContext('2d')
 
     // setup a canvas to render the tileset
     var bufferCanvas = document.createElement('canvas');
-    bufferCanvas.width = options.width || 640;
-    bufferCanvas.height = options.height || 480;
+    bufferCanvas.width = options.width;
+    bufferCanvas.height = options.height;
     var bufferCtx = bufferCanvas.getContext('2d')
 
 
     // setup a canvas to use as the easel stage
     var stageCanvas = document.createElement('canvas')
-    stageCanvas.width = options.width || 640;
-    stageCanvas.height = options.height || 480;
+    stageCanvas.width = options.width;
+    stageCanvas.height = options.height;
     var stageCtx = stageCanvas.getContext('2d')
-
 
     // initialize an easel stage
     var easelStage = new createjs.Stage(stageCanvas);
@@ -76,7 +81,11 @@ function Renderer(options) {
         // viewport_ctx.drawImage(stage_canvas,x%TILE_SIZE,y%TILE_SIZE, CAMERA_WIDTH * TILE_SIZE, CAMERA_HEIGHT * TILE_SIZE, 0, 0, CAMERA_WIDTH * TILE_SIZE, CAMERA_HEIGHT * TILE_SIZE)
         // viewport_ctx.drawImage(lighting_canvas,x%TILE_SIZE,y%TILE_SIZE, CAMERA_WIDTH * TILE_SIZE, CAMERA_HEIGHT * TILE_SIZE, 0, 0, CAMERA_WIDTH * TILE_SIZE, CAMERA_HEIGHT * TILE_SIZE)
 
-        stageCtx.drawImage(bufferCanvas,x%options.tileSize,y%options.tileSize, camera.width * options.tileSize, camera.height * options.tileSize, 0, 0, camera.width * options.tileSize, camera.height * options.tileSize)
+        // finalCtx.drawImage(bufferCanvas,x%options.tileSize,y%options.tileSize, camera.width * options.tileSize, camera.height * options.tileSize, 0, 0, camera.width * options.tileSize, camera.height * options.tileSize)
+        // finalCtx.drawImage(stageCanvas,x%options.tileSize,y%options.tileSize, camera.width * options.tileSize, camera.height * options.tileSize, 0, 0, camera.width * options.tileSize, camera.height * options.tileSize)
+
+        finalCtx.drawImage(bufferCanvas,x%options.tileSize,y%options.tileSize, camera.width * options.tileSize, camera.height * options.tileSize, 0, 0, camera.width * options.tileSize, camera.height * options.tileSize)
+        finalCtx.drawImage(stageCanvas,camera.x+0,camera.y+0, camera.width * options.tileSize, camera.height * options.tileSize, 0, 0, camera.width * options.tileSize, camera.height * options.tileSize)
 
         // console.log(bufferCanvas,
         //     x % options.tileSize ,
@@ -97,6 +106,7 @@ function Renderer(options) {
         easelStage:easelStage,
         render:render,
         renderBuffer:renderBuffer,
-        bufferCanvas:bufferCanvas
+        bufferCanvas:bufferCanvas,
+        finalCanvas:finalCanvas
     };
 }
