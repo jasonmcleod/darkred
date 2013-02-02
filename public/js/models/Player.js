@@ -11,7 +11,6 @@ Player.extend({
     },
 
     join:function() {
-        console.log(this.socket)
         this.socket.emit('join','test')
         // socket.emit('hi', {yay:'!'})
     }

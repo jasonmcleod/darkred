@@ -26,6 +26,8 @@ var Instance = function(id) {
     this.removePlayer = function(id) {
         this.kills = this.kills - this.players[id].killCount;
         delete this.players[id]
+        console.log('sending players, remove')
+        self.iio.sockets.emit('players', self.players);
     }
 
     this.playerList = function() {
@@ -81,7 +83,8 @@ var Instance = function(id) {
                 // player.setPosition(self.map.randomSpawn())
 
                 socket.emit('instance', self.data());
-                self.iio.emit('addPlayer', player);
+                console.log('sending players, add', self.players)
+                self.iio.sockets.emit('players', self.players);
             })
 
             socket.on('move', function(data) {
@@ -200,7 +203,7 @@ var Instance = function(id) {
 
             socket.on('disconnect', function(data) {
                 self.removePlayer(player.id);
-                self.iio.emit('removePlayer', player);
+                // self.iio.emit('removePlayer', player);
             })
 
             socket.on('say', function(data) {

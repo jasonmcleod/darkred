@@ -1,10 +1,31 @@
 function GameCtrl($scope, socket, $rootScope, $location) {
 
+    $scope.set = function(v, d) { $scope[v] = d; }
+    $scope.setPlayers = function(data) {
+        console.log(data)
+        $scope.players = data
+        console.log($scope.players)
+    }
+
     // tile size (square tiles)
     $scope.tileSize = 16;
-
+    $scope.players = [];
     $scope.me = Player.extend({name:'Me', socket:socket});
     $scope.me.join();
+
+    $scope.socketEvents = new SocketEvents($scope, socket)
+
+    // socket.on('news', function (data) {
+    //   $scope.name = data.name;
+    //   $scope.users = data.users;
+    // });
+    //
+    // $scope.$watch('instanceData', function(data, old) {
+    //     if(data===undefined) return
+    //     console.log(arguments)
+    //     $scope.players = data.players;
+    // })
+
     ME = $scope.me;
 
 
