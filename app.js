@@ -6,6 +6,7 @@ var hbs = require('express-hbs');
 var socketio = require('socket.io');
 var app = module.exports = express();
 var server = require('http').createServer(app)
+require('./lib/objectWatch');
 
 // load models
 var Instance = require('./models/instance')
@@ -61,5 +62,20 @@ io.set('log level', 1);
 var instance = new Instance('main');
 instance.attachPacketHandlers(io)
 app.instances[instance.id] = instance;
+
+
+
+// test object.watch
+var foo = {val1:'test1', val2:'test2'}
+foo.watch('val1',function(oldVal,dunno,newVal) {
+    console.log(arguments)
+    console.log('was ', oldVal)
+    console.log('now ', newVal)
+})
+
+foo.val1 = 'test1-1'
+setTimeout(function() {
+    foo.val1 = 'test1-2'
+},1000)
 
 
