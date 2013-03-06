@@ -34,16 +34,21 @@ function GameCtrl($scope, socket, $rootScope, $location) {
                 tileSize:$scope.tileSize,
                 camera:$scope.camera,
                 tileset:tileset
-            });
+            })
+
+            // start the renderloop
+            $scope.renderer.start();
 
             $scope.map = map;
             $scope.tileset = tileset;
 
             document.getElementById('stage').appendChild($scope.renderer.finalCanvas).setAttribute('id','final')
-            document.getElementById('stage').appendChild($scope.renderer.stageCanvas).setAttribute('id','stage')
-            document.getElementById('stage').appendChild($scope.renderer.bufferCanvas).setAttribute('id','buffer')
+            if(debugging) document.getElementById('stage').appendChild($scope.renderer.stageCanvas).setAttribute('id','stage')
+            if(debugging) document.getElementById('stage').appendChild($scope.renderer.bufferCanvas).setAttribute('id','buffer')
 
             $(document).trigger('gameready', $scope)
+
+
 
         }
     });

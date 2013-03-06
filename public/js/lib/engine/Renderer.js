@@ -1,4 +1,6 @@
 function Renderer(options) {
+    var self = this;
+
     var options = options || {}
     options.width = options.width || 640;
     options.height = options.height || 480;
@@ -46,7 +48,12 @@ function Renderer(options) {
         for(var yy=0;yy<camera.height+1;yy++) {
             for(var xx=0;xx<camera.width+1;xx++) {
 
-                var tile = map[yy + ~~(camera.y/16)][xx + ~~(camera.x/16)];
+                var mapX = xx + ~~(camera.x/16)
+                var mapY = yy + ~~(camera.y/16)
+
+                if(!map[mapY] || !map[mapY][mapX]) { console.warn('out of range'); return}
+
+                var tile = map[mapY][mapX];
                 renderTile(bufferCtx, tile-1, xx*options.tileSize,yy*options.tileSize)
                 // if($.inArray(tile, tilesThatBlockView) >-1) walls[walls.length] = {x:xx, y:yy}
             }
@@ -101,6 +108,17 @@ function Renderer(options) {
         // stageCtx.drawImage(bufferCanvas, 0, 0)
     }
 
+    var start = function() {
+        (function animloop(){
+          requestAnimFrame(animloop);
+          loop();
+        })();
+    }
+
+    var loop = function() {
+        renderBuffer(camera.x,camera.y)
+        render(camera.x, camera.y);
+    }
 
     // return whats public
     return {
@@ -110,6 +128,7 @@ function Renderer(options) {
         render:render,
         renderBuffer:renderBuffer,
         bufferCanvas:bufferCanvas,
-        finalCanvas:finalCanvas
+        finalCanvas:finalCanvas,
+        start:start
     };
 }

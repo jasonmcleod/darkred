@@ -12,6 +12,7 @@ function StageManager(options) {
         } else {
             this.stage.addChild(what)
         }
+        this.stage.update();
     }
 
     this.remove = function(what) {
