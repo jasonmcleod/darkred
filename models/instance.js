@@ -30,6 +30,10 @@ var Instance = function(id) {
         self.iio.sockets.emit('players', self.players);
     }
 
+    this.watch('players.length', function() {
+        console.log(hi)
+    })
+
     this.playerList = function() {
         var playerNames = [];
         for(var p = 0, plen = Object.keys(this.players).length; p < plen; p++) {

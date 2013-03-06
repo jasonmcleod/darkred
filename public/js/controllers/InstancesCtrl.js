@@ -9,3 +9,4 @@ function InstancesCtrl($scope, socket, $rootScope, $location) {
         $location.path('/game')
     }
 }
+

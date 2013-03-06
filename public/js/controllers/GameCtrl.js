@@ -21,7 +21,9 @@ function GameCtrl($scope, socket, $rootScope, $location) {
             $scope.camera = new Camera({
                 tileSize:$scope.tileSize,
                 width:19,
-                height:19
+                height:19,
+                x:0,
+                y:0
             });
 
             // renders everything onto a canvas
@@ -37,39 +39,12 @@ function GameCtrl($scope, socket, $rootScope, $location) {
             $scope.map = map;
             $scope.tileset = tileset;
 
-            document.getElementById('stage').appendChild($scope.renderer.finalCanvas)
-            document.getElementById('stage').appendChild($scope.renderer.stageCanvas)
-            document.getElementById('stage').appendChild($scope.renderer.bufferCanvas)
+            document.getElementById('stage').appendChild($scope.renderer.finalCanvas).setAttribute('id','final')
+            document.getElementById('stage').appendChild($scope.renderer.stageCanvas).setAttribute('id','stage')
+            document.getElementById('stage').appendChild($scope.renderer.bufferCanvas).setAttribute('id','buffer')
 
-            var me = {
-                x:150,
-                y:150
-            }
+            $(document).trigger('gameready', $scope)
 
-            setInterval(function() {
-                me.x++
-                me.y++
-
-                $scope.camera.x = Math.floor(me.x/$scope.tileSize) - Math.floor(($scope.camera.width)/2);
-                $scope.camera.y = Math.floor(me.y/$scope.tileSize) - Math.floor(($scope.camera.height)/2);
-
-                $scope.renderer.renderBuffer(me.x,me.y)
-                $scope.renderer.render(me.x, me.y);
-            },5)
-
-            // // test drawing a moving an item
-            var sprite = new createjs.Shape();
-            sprite.graphics.beginFill('#FF0000').drawRect(0,0,16,16)
-            sprite.x = 200;
-            sprite.y = 200;
-
-            $scope.renderer.stage.add(sprite);
-
-            setInterval(function() {
-                sprite.x+=.1
-                sprite.y+=.1
-                $scope.renderer.easelStage.update();
-            },10)
         }
     });
 

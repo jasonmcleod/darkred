@@ -4,6 +4,8 @@ function StageManager(options) {
     this.elements = []
 
     this.add = function(what, index) {
+        what.x = what.globalx;
+        what.y = what.globaly;
         this.elements.push(what)
         if(arguments.length==2) {
             this.stage.addChildAt(what, index)

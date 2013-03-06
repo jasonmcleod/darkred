@@ -3,7 +3,6 @@ function Renderer(options) {
     options.width = options.width || 640;
     options.height = options.height || 480;
 
-
     // localize camera, tileset, and map. throw errors if they are not passed correctly
     var camera =    options.camera  || false; if(!camera)  console.error('Renderer needs a Camera() passed into it.');
     var tileset =   options.tileset || false; if(!tileset) console.error('Renderer needs a MapParser.tileset passed into it.');
@@ -20,7 +19,6 @@ function Renderer(options) {
     bufferCanvas.height = options.height;
     var bufferCtx = bufferCanvas.getContext('2d')
 
-
     // setup a canvas to use as the easel stage
     var stageCanvas = document.createElement('canvas')
     stageCanvas.width = options.width;
@@ -31,14 +29,12 @@ function Renderer(options) {
     var easelStage = new createjs.Stage(stageCanvas);
     easelStage.autoClear = true;
 
-
     // initilaize a stage manager to help add/remove elements
     var stage = new StageManager({stage:easelStage})
-
+    STAGE = stage;
 
     // cache the last zone that was drawn. if we are asked to draw here again, abort.
     lastBufferRender = {x:undefined,y:undefined};
-
 
     // method to render the tiles to the buffer
     var renderBuffer = function(x,y) {
@@ -50,7 +46,7 @@ function Renderer(options) {
         for(var yy=0;yy<camera.height+1;yy++) {
             for(var xx=0;xx<camera.width+1;xx++) {
 
-                var tile = map[yy + camera.y][xx + camera.x];
+                var tile = map[yy + ~~(camera.y/16)][xx + ~~(camera.x/16)];
                 renderTile(bufferCtx, tile-1, xx*options.tileSize,yy*options.tileSize)
                 // if($.inArray(tile, tilesThatBlockView) >-1) walls[walls.length] = {x:xx, y:yy}
             }
@@ -76,7 +72,6 @@ function Renderer(options) {
     // method to render the terrain base
     var render = function(x,y) {
 
-
         // viewport_ctx.drawImage(base_canvas,x%TILE_SIZE,y%TILE_SIZE, CAMERA_WIDTH * TILE_SIZE, CAMERA_HEIGHT * TILE_SIZE, 0, 0, CAMERA_WIDTH * TILE_SIZE, CAMERA_HEIGHT * TILE_SIZE)
         // viewport_ctx.drawImage(stage_canvas,x%TILE_SIZE,y%TILE_SIZE, CAMERA_WIDTH * TILE_SIZE, CAMERA_HEIGHT * TILE_SIZE, 0, 0, CAMERA_WIDTH * TILE_SIZE, CAMERA_HEIGHT * TILE_SIZE)
         // viewport_ctx.drawImage(lighting_canvas,x%TILE_SIZE,y%TILE_SIZE, CAMERA_WIDTH * TILE_SIZE, CAMERA_HEIGHT * TILE_SIZE, 0, 0, CAMERA_WIDTH * TILE_SIZE, CAMERA_HEIGHT * TILE_SIZE)
@@ -85,7 +80,15 @@ function Renderer(options) {
         // finalCtx.drawImage(stageCanvas,x%options.tileSize,y%options.tileSize, camera.width * options.tileSize, camera.height * options.tileSize, 0, 0, camera.width * options.tileSize, camera.height * options.tileSize)
 
         finalCtx.drawImage(bufferCanvas,x%options.tileSize,y%options.tileSize, camera.width * options.tileSize, camera.height * options.tileSize, 0, 0, camera.width * options.tileSize, camera.height * options.tileSize)
-        finalCtx.drawImage(stageCanvas,camera.x+0,camera.y+0, camera.width * options.tileSize, camera.height * options.tileSize, 0, 0, camera.width * options.tileSize, camera.height * options.tileSize)
+
+        stage.elements.map(function(elm) {
+            elm.x = elm.globalx - x
+            elm.y = elm.globaly - y
+        })
+        stage.stage.update()
+
+        finalCtx.drawImage(stageCanvas, 0, 0, camera.width * options.tileSize, camera.height * options.tileSize, 0, 0, camera.width * options.tileSize, camera.height * options.tileSize)
+
 
         // console.log(bufferCanvas,
         //     x % options.tileSize ,

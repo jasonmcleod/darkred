@@ -1,6 +1,7 @@
 /* app css stylesheet */
 canvas {
   background:#eee;
+  opacity:.5;
 }
 
 .menu {
