@@ -1,28 +1,13 @@
-function tests($scope) {
+function mainloop($scope) {
+    if(key.isPressed("W") || key.isPressed(38)) $scope.camera.y-=4
+    if(key.isPressed("S") || key.isPressed(40)) $scope.camera.y+=4
 
-    // create a new shape
-    var sprite = new createjs.Shape();
-    sprite.graphics.beginFill('#FF0000').drawRect(0,0,16,16)
-    sprite.globalx = 100;
-    sprite.globaly = 100;
-
-    // add it to the stage
-    $scope.renderer.stage.add(sprite);
-
-    setInterval(function() {
-        sprite.globalx+=.75
-        sprite.globaly+=.75
-        $scope.renderer.easelStage.update();
-
-        $scope.camera.x+=1;
-        $scope.camera.y+=1;
-
-    },5)
-
+    if(key.isPressed("A") || key.isPressed(37)) $scope.camera.x-=4
+    if(key.isPressed("D") || key.isPressed(49)) $scope.camera.x+=4
 }
 
 $(function() {
     $(document).live('gameready', function(e, $scope){
-        tests($scope)
+        setInterval(mainloop,15,$scope)
     })
 })

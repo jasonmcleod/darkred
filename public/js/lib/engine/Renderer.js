@@ -51,7 +51,7 @@ function Renderer(options) {
                 var mapX = xx + ~~(camera.x/16)
                 var mapY = yy + ~~(camera.y/16)
 
-                if(!map[mapY] || !map[mapY][mapX]) { console.warn('out of range'); return}
+                if(!map[mapY] || !map[mapY][mapX]) { return }
 
                 var tile = map[mapY][mapX];
                 renderTile(bufferCtx, tile-1, xx*options.tileSize,yy*options.tileSize)
