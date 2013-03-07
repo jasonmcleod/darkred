@@ -4,6 +4,10 @@ Player.extend({
 
     fire:function() {
         console.log('pew')
+    },
+
+    setRotation:function(r) {
+        this.sprite.rotation = r;
     }
 
 })
