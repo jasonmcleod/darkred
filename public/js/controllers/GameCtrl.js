@@ -47,11 +47,10 @@ function GameCtrl($scope, socket, $rootScope, $location) {
 
             $scope.me.join();
 
-            bootstrapBindings();
-
             $(document).trigger('gameready', $scope)
 
         }
     });
 
+    $scope.bindings = new BindingsManager($scope)
 }
