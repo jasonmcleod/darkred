@@ -16,7 +16,7 @@ function StageManager(options) {
     }
 
     this.remove = function(what) {
-        this.stage.removeChild(what.container)
+        this.stage.removeChild(what)
         $.each(this.elements, function() {
             if(this==what) delete this;
         })

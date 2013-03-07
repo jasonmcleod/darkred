@@ -24,15 +24,11 @@ var Instance = function(id) {
     }
 
     this.removePlayer = function(id) {
-        this.kills = this.kills - this.players[id].killCount;
+        // this.kills = this.kills - this.players[id].killCount;
         delete this.players[id]
         console.log('sending players, remove')
-        self.iio.sockets.emit('players', self.players);
+        // self.iio.sockets.emit('players', self.players);
     }
-
-    this.watch('players.length', function() {
-        console.log(hi)
-    })
 
     this.playerList = function() {
         var playerNames = [];
@@ -73,148 +69,150 @@ var Instance = function(id) {
     this.attachPacketHandlers = function(io) {
 
         this.iio = io;
-        io.on('connection', function(socket) {
-
-        // this.iio = io.of('/game');
-        // this.iio.on('connection', function (socket) {
-
-            var player = self.addPlayer(socket.id);
+        io.sockets.on('connection', function(socket) {
 
             socket.on('join', function(name) {
-                console.log('join')
+
+                var player = self.addPlayer(socket.id);
 
                 player.name = name;
                 // player.setPosition(self.map.randomSpawn())
 
-                socket.emit('instance', {instance:self.data(), me:socket.id});
-                console.log('sending players, add', self.players)
-                //self.iio.sockets.emit('players', self.players);
+                socket.emit('instance', {instance:self.data(), me:player.id});
+                console.log('emit instance')
+
+                socket.broadcast.emit('playerJoin', player)
             })
 
             socket.on('move', function(data) {
                 var player = self.players[socket.id]
-                player.moveBy(data)
-                //
-                // self.iio.volatile.emit('moved', player)
-            });
-
-            socket.on('dash', function(best) {
-                var player = self.players[socket.id]
-                player.dash(best)
-
-                self.iio.emit('dashed', {player:player, best:best})
-            })
-
-            socket.on('fire', function(data) {
-                var shooter = self.players[data.owner];
-                data.ownerClip = shooter.clip;
-                if(!shooter.isEmpty()) {
-                    shooter.shotFired();
-                    self.iio.emit('fired', data)
-                }
-                if(shooter.isEmpty()) {
-                    if(!shooter.reloading) {
-                        self.iio.sockets[shooter.id].emit('reload', shooter)
-                        shooter.reloading = true;
-                        setTimeout(function() {
-                            shooter.reload();
-                            if(self.iio.sockets[shooter.id]) self.iio.sockets[shooter.id].emit('reloaded', shooter)
-                            shooter.reloading = false;
-                        }, RELOAD_TIME)
-                    }
-                }
-            });
-
-            socket.on('manual_reload', function(data) {
-                self.iio.sockets[socket.id].emit('reload', player)
-                player.reloading = true;
-                setTimeout(function() {
-                    player.reload();
-                    socket.emit('reloaded', player)
-                    player.reloading = false;
-                }, RELOAD_TIME)
-            })
-
-            socket.on('hit', function(data) {
-                // supposedly data.bullet hit data.hitPlayer
-                // validate that at some point
-                var killer = self.players[data.bullet.owner];
-                var player = self.players[data.hitPlayer.id];
-
-                if(player) {
-
-                    if(!player.isDead()) {
-                        player.takeDamage(killer.id);
-                        self.iio.emit('damage', player)
-                    } else {
-                        self.iio.emit('died', player)
-                        if(!player.respawning) {
-                            player.respawning = true;
-                            setTimeout(function() {
-
-                                player.setPosition(self.map.randomSpawn())
-                                player.respawn();
-
-                                if(self.iio.sockets[player.id]) self.iio.sockets[player.id].emit('respawn', player)
-                                player.respawning = false;
-                            }, gameConfig.respawn_time)
-                        }
-
-                        killer.killCount++;
-                        killer.killSpree++;
-                        self.iio.emit('kill', {id: killer.id, killCount: killer.killCount, killee: player.id})
-
-                        if(killer.onKillingSpree()) {
-                            self.iio.emit('said', {name: 'Server', text: killer.killSpreeLevel()} )
-                            self.iio.emit('spree', killer.killSpreeLevel())
-                        }
-
-                        self.kills++;
-                        self.iio.emit('score', self.data())
-
-                        if(self.gameover()) {
-                            self.iio.emit('gameover')
-                            self.state = 'stopped';
-                            setTimeout(function() {
-                                self.state = 'running';
-                                self.newGame();
-                                self.iio.emit('new_game', self.data())
-                            }, WAIT_TIME)
-                        } else {
-                            if(!player.respawning) {
-                                player.respawning = true;
-                                setTimeout(function() {
-
-                                    player.setPosition(self.randomSpawn())
-                                    player.respawn();
-
-                                    if(self.iio.sockets[player.id]) self.iio.sockets[player.id].emit('respawn', player)
-                                    player.respawning = false;
-                                }, RESPAWN_TIME)
-                            }
-                        }
-                    }
-                }
-            })
-
-            socket.on('pickup', function(data) {
-                console.log('pickup', data);
-            });
-
-            socket.on('drop', function(data) {
-                console.log('drop', data);
+                player.x = data.x
+                player.y = data.y
+                socket.broadcast.emit('moved', player)
             });
 
             socket.on('disconnect', function(data) {
-                self.removePlayer(player.id);
-                // self.iio.emit('removePlayer', player);
+                self.removePlayer(this.id);
+                socket.broadcast.emit('playerDrop', {id:this.id});
             })
 
-            socket.on('say', function(data) {
-                var player = self.players[this.id];
-                var str = data.replace(/<[a-zA-Z\/][^>]*>/igm, '');
-                self.iio.emit('said', {name: player.name, text: str});
-            })
+            // socket.on('dash', function(best) {
+            //     var player = self.players[socket.id]
+            //     player.dash(best)
+            //
+            //     self.iio.emit('dashed', {player:player, best:best})
+            // })
+            //
+            // socket.on('fire', function(data) {
+            //     var shooter = self.players[data.owner];
+            //     data.ownerClip = shooter.clip;
+            //     if(!shooter.isEmpty()) {
+            //         shooter.shotFired();
+            //         self.iio.emit('fired', data)
+            //     }
+            //     if(shooter.isEmpty()) {
+            //         if(!shooter.reloading) {
+            //             self.iio.sockets[shooter.id].emit('reload', shooter)
+            //             shooter.reloading = true;
+            //             setTimeout(function() {
+            //                 shooter.reload();
+            //                 if(self.iio.sockets[shooter.id]) self.iio.sockets[shooter.id].emit('reloaded', shooter)
+            //                 shooter.reloading = false;
+            //             }, RELOAD_TIME)
+            //         }
+            //     }
+            // });
+            //
+            // socket.on('manual_reload', function(data) {
+            //     self.iio.sockets[socket.id].emit('reload', player)
+            //     player.reloading = true;
+            //     setTimeout(function() {
+            //         player.reload();
+            //         socket.emit('reloaded', player)
+            //         player.reloading = false;
+            //     }, RELOAD_TIME)
+            // })
+            //
+            // socket.on('hit', function(data) {
+            //     // supposedly data.bullet hit data.hitPlayer
+            //     // validate that at some point
+            //     var killer = self.players[data.bullet.owner];
+            //     var player = self.players[data.hitPlayer.id];
+            //
+            //     if(player) {
+            //
+            //         if(!player.isDead()) {
+            //             player.takeDamage(killer.id);
+            //             self.iio.emit('damage', player)
+            //         } else {
+            //             self.iio.emit('died', player)
+            //             if(!player.respawning) {
+            //                 player.respawning = true;
+            //                 setTimeout(function() {
+            //
+            //                     player.setPosition(self.map.randomSpawn())
+            //                     player.respawn();
+            //
+            //                     if(self.iio.sockets[player.id]) self.iio.sockets[player.id].emit('respawn', player)
+            //                     player.respawning = false;
+            //                 }, gameConfig.respawn_time)
+            //             }
+            //
+            //             killer.killCount++;
+            //             killer.killSpree++;
+            //             self.iio.emit('kill', {id: killer.id, killCount: killer.killCount, killee: player.id})
+            //
+            //             if(killer.onKillingSpree()) {
+            //                 self.iio.emit('said', {name: 'Server', text: killer.killSpreeLevel()} )
+            //                 self.iio.emit('spree', killer.killSpreeLevel())
+            //             }
+            //
+            //             self.kills++;
+            //             self.iio.emit('score', self.data())
+            //
+            //             if(self.gameover()) {
+            //                 self.iio.emit('gameover')
+            //                 self.state = 'stopped';
+            //                 setTimeout(function() {
+            //                     self.state = 'running';
+            //                     self.newGame();
+            //                     self.iio.emit('new_game', self.data())
+            //                 }, WAIT_TIME)
+            //             } else {
+            //                 if(!player.respawning) {
+            //                     player.respawning = true;
+            //                     setTimeout(function() {
+            //
+            //                         player.setPosition(self.randomSpawn())
+            //                         player.respawn();
+            //
+            //                         if(self.iio.sockets[player.id]) self.iio.sockets[player.id].emit('respawn', player)
+            //                         player.respawning = false;
+            //                     }, RESPAWN_TIME)
+            //                 }
+            //             }
+            //         }
+            //     }
+            // })
+            //
+            // socket.on('pickup', function(data) {
+            //     console.log('pickup', data);
+            // });
+            //
+            // socket.on('drop', function(data) {
+            //     console.log('drop', data);
+            // });
+            //
+            // socket.on('disconnect', function(data) {
+            //     self.removePlayer(player.id);
+            //     // self.iio.emit('removePlayer', player);
+            // })
+            //
+            // socket.on('say', function(data) {
+            //     var player = self.players[this.id];
+            //     var str = data.replace(/<[a-zA-Z\/][^>]*>/igm, '');
+            //     self.iio.emit('said', {name: player.name, text: str});
+            // })
         })
     }
 };

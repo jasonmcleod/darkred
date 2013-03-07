@@ -1,6 +1,7 @@
 function BindingsManager($scope) {
 
     $(document).bind('mousemove', function(e) {
+        if(!$scope.me) return
         var deltaX = (e.offsetX) - ($scope.camera.width *  $scope.tileSize) / 2
         var deltaY = (e.offsetY) - ($scope.camera.height * $scope.tileSize) / 2
         $scope.me.setRotation(Math.atan2(deltaY, deltaX) / Math.PI * 180);

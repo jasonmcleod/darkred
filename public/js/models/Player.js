@@ -1,14 +1,31 @@
-var Player = new Base;
-Player.extend({
-    name:'Unnamed Player',
+Player = function(data) {
+    var self = this;
+    this.x = data.x || 0
+    this.y = data.y || 0
+    this.rotation = data.rotation || 0
+    this.$scope = data.$scope
 
-    fire:function() {
-        console.log('pew')
-    },
-
-    setRotation:function(r) {
+    this.setRotation = function(r) {
         this.sprite.rotation = r;
     }
 
-})
+    this.addToStage = function() {
+        self.sprite = new SpriteWithContainer('/assets/sprites/fed.png', 32, 32)
+        self.sprite.globalx = self.x
+        self.sprite.globaly = self.y
+        self.$scope.renderer.stage.add(self.sprite);
+    }
 
+    this.update = function(data) {
+        self.x = data.x;
+        self.y = data.y;
+        self.sprite.globalx = data.x;
+        self.sprite.globaly = data.y;
+        self.sprite.rotation = data.rotation
+    }
+
+    this.drop = function() {
+        self.$scope.renderer.stage.remove(self.sprite)
+    }
+
+}
