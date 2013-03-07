@@ -86,16 +86,16 @@ var Instance = function(id) {
                 player.name = name;
                 // player.setPosition(self.map.randomSpawn())
 
-                socket.emit('instance', self.data());
+                socket.emit('instance', {instance:self.data(), me:socket.id});
                 console.log('sending players, add', self.players)
-                self.iio.sockets.emit('players', self.players);
+                //self.iio.sockets.emit('players', self.players);
             })
 
             socket.on('move', function(data) {
                 var player = self.players[socket.id]
-                player.move(data)
-
-                self.iio.volatile.emit('moved', player)
+                player.moveBy(data)
+                //
+                // self.iio.volatile.emit('moved', player)
             });
 
             socket.on('dash', function(best) {

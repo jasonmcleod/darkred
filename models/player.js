@@ -15,8 +15,8 @@ Player.prototype.reset = function(id, name) {
     this.id = id;
     this.name = name;
     this.team = 0;
-    this.x = 0;
-    this.y = 0;
+    this.x = 300;
+    this.y = 300;
     this.rotation = 0;
 
     this.lastUpdate = 0;
@@ -37,6 +37,11 @@ Player.prototype.move = function(data) {
     this.x = data.x || this.x;
     this.y = data.y || this.y;
     this.rotation = data.rotation || this.rotation;
+}
+
+Player.prototype.moveBy = function(data) {
+    this.x += data.x || 0
+    this.y += data.y || 0
 }
 
 Player.prototype.dash = function(data) {

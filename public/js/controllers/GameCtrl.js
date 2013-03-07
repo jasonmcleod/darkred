@@ -2,9 +2,11 @@ function GameCtrl($scope, socket, $rootScope, $location) {
 
     $scope.set = function(v, d) { $scope[v] = d; }
 
+    $scope.socket = socket;
+
     $scope.tileSize = 16;
     $scope.players = [];
-    $scope.me = Player.extend({name:'Me', socket:socket, globalx:100, globaly:100, $scope:$scope});
+    $scope.me = Player.extend({$scope:$scope, name:'Me', globalx:100, globaly:100});
     $.extend($scope.me, LocalPlayer.extend());
 
     $scope.socketEvents = new SocketEvents($scope, socket)
@@ -45,6 +47,7 @@ function GameCtrl($scope, socket, $rootScope, $location) {
             if(debugging) document.getElementById('stage').appendChild($scope.renderer.stageCanvas).setAttribute('id','stage')
             if(debugging) document.getElementById('stage').appendChild($scope.renderer.bufferCanvas).setAttribute('id','buffer')
 
+            $scope.bindings = new BindingsManager($scope)
             $scope.me.join();
 
             $(document).trigger('gameready', $scope)
@@ -52,5 +55,4 @@ function GameCtrl($scope, socket, $rootScope, $location) {
         }
     });
 
-    $scope.bindings = new BindingsManager($scope)
 }

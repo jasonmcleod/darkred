@@ -14,7 +14,6 @@ function scraps($scope) {
         sprite.globalx+=.75
         sprite.globaly+=.75
         sprite.rotation+=1
-        $scope.renderer.easelStage.update();
     },10)
 
 }
