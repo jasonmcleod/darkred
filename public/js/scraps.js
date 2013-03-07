@@ -1,5 +1,8 @@
 function scraps($scope) {
 
+    SCOPE = $scope;
+    ME = $scope.me;
+
     // create a new shape
     var sprite = new createjs.Shape();
     sprite.graphics.beginFill('#FF0000').drawRect(0,0,16,16)
@@ -9,11 +12,14 @@ function scraps($scope) {
     // add it to the stage
     $scope.renderer.stage.add(sprite);
 
+
+
     setInterval(function() {
         sprite.globalx+=.75
         sprite.globaly+=.75
+        sprite.rotation+=1
         $scope.renderer.easelStage.update();
-    },50)
+    },10)
 
 }
 
