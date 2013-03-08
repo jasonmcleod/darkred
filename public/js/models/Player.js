@@ -1,5 +1,6 @@
 Player = function(data) {
     var self = this;
+    this.name = data.name || 'Unnamed Player'
     this.x = data.x || 0
     this.y = data.y || 0
     this.rotation = data.rotation || 0
@@ -21,7 +22,8 @@ Player = function(data) {
         self.y = data.y;
         self.sprite.globalx = data.x;
         self.sprite.globaly = data.y;
-        self.sprite.rotation = data.rotation
+        self.sprite.rotation = data.rotation;
+        //self.name = data.name
     }
 
     this.drop = function() {

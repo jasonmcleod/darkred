@@ -1,5 +1,4 @@
 function mainloop($scope) {
-    // bindings.monitorMovement($scope)
     $scope.bindings.monitorMovement();
 }
 

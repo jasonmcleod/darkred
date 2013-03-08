@@ -3,13 +3,8 @@ function GameCtrl($scope, socket, $rootScope, $location) {
     $scope.set = function(v, d) { $scope[v] = d; }
 
     $scope.socket = socket;
-
     $scope.tileSize = 16;
     $scope.players = {};
-
-    // $scope.me = Player.extend({$scope:$scope, name:'Me'});
-    // $.extend($scope.me, LocalPlayer.extend());
-
     $scope.socketEvents = new SocketEvents($scope, socket)
 
     // loads the map
@@ -50,7 +45,7 @@ function GameCtrl($scope, socket, $rootScope, $location) {
 
             $scope.bindings = new BindingsManager($scope)
 
-            $scope.socket.emit('join')
+            $scope.socket.emit('join', {name:$scope.name})
 
             $(document).trigger('gameready', $scope)
 

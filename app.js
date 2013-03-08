@@ -12,6 +12,7 @@ require('./lib/objectWatch');
 var Instance = require('./models/instance')
 
 
+
 // Configuration
 app.configure(function(){
   app.set('views', __dirname + '/views');

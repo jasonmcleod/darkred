@@ -1,5 +1,13 @@
 <div ng-controller="GameCtrl">
-    <ul><li ng-repeat='player in players'>{{player.name}}</li></ul>
+    <!-- <ul><li ng-repeat='player in players'>{{player.name}}</li></ul> -->
     <div id='stage'></div>
-    <button ng-click='changeName()'>Change Name</button>
+
+    <div ng-controller="ChatCtrl">
+        <form ng-submit="sendMessage()">
+        <input ng-model='input' ng-model-instant placeholder='Press enter to chat'>
+        </form>
+        <ul>
+            <li ng-repeat="msg in messages">{{msg.name}}: {{msg.text}}</li>
+        </li>
+    </div>
 </div>

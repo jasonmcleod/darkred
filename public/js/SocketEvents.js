@@ -15,20 +15,7 @@ function SocketEvents($scope, socket) {
 
     });
 
-    socket.on('playerJoin', function(data) {
-        data.$scope = $scope;
-        $scope.players[data.id] = new Player(data)
-        $scope.players[data.id].addToStage();
-    })
-
-    socket.on('playerDrop', function(data) {
-        $scope.players[data.id].drop()
-        delete $scope.players[data.id]
-    })
-
-
-    socket.on('moved', function(data) {
-        $scope.players[data.id].update(data)
-    })
+    // player messages
+    new PlayerManager($scope, socket)
 
 }
