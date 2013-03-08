@@ -3,9 +3,7 @@
     <div id='stage'></div>
 
     <div ng-controller="ChatCtrl">
-        <form ng-submit="sendMessage()">
-        <input ng-model='input' ng-model-instant placeholder='Press enter to chat'>
-        </form>
+        <input chat-input ng-model='input' ng-model-instant placeholder='Press enter to chat'>
         <ul>
             <li ng-repeat="msg in messages">{{msg.name}}: {{msg.text}}</li>
         </li>

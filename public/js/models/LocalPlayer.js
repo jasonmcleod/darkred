@@ -1,7 +1,9 @@
 function LocalPlayer(options) {
 
-    this.moveBy = function(options) {
+    this.lastPushTime = 0;
+    this.lastPushData = {}
 
+    this.moveBy = function(options) {
 
         var final = {
             x:this.x + (options.x || 0),
@@ -15,15 +17,25 @@ function LocalPlayer(options) {
 
             this.sprite.globalx += options.x || 0
             this.sprite.globaly += options.y || 0
-            this.x = this.sprite.globalx
-            this.y = this.sprite.globaly
+            this.rotation = this.sprite.rotation = options.rotation || this.rotation
 
-            this.$scope.socket.emit('move', {x:this.x, y:this.y})
+            this.x = this.sprite.globalx;
+            this.y = this.sprite.globaly;
 
             this.syncCamera()
 
+            if((new Date()).getTime() - this.lastPushTime > 40) {
+                if(this.lastPushData.x != this.x || this.lastPushData.y != this.y) {
+                    this.$scope.socket.emit('move', {x:this.x, y:this.y, rotation:this.rotation})
+                    this.lastPushTime = (new Date()).getTime()
+                }
+            }
         }
 
+    }
+
+    this.push = function() {
+        this.$scope.socket.emit('move', {x:this.x, y:this.y})
     }
 
     this.syncCamera = function() {

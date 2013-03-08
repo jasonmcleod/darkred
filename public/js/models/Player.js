@@ -6,10 +6,6 @@ Player = function(data) {
     this.rotation = data.rotation || 0
     this.$scope = data.$scope
 
-    this.setRotation = function(r) {
-        this.sprite.rotation = r;
-    }
-
     this.addToStage = function() {
         self.sprite = new SpriteWithContainer('/assets/sprites/fed.png', 32, 32)
         self.sprite.globalx = self.x

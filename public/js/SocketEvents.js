@@ -10,7 +10,7 @@ function SocketEvents($scope, socket) {
             $scope.players[k].addToStage()
         })
 
-        $scope.me = $.extend($scope.players[data.me], new LocalPlayer());
+        $scope.me = $.extend($scope.players[data.me], new LocalPlayer({$scope:$scope}));
         $scope.me.syncCamera();
 
     });

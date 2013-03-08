@@ -13,8 +13,10 @@ module.exports = function(socket, io, instance) {
 
     socket.on('move', function(data) {
         var player = instance.players[socket.id]
+        if(!player) return
         player.x = data.x
         player.y = data.y
+        player.rotation = data.rotation
         socket.broadcast.emit('playerMove', player)
     });
 
