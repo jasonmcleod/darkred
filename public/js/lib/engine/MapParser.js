@@ -1,5 +1,11 @@
 function MapParser(options) {
 
+    MAP = this
+    MAPOP = options
+
+    var blocksMovement = []
+    var blocksView = [];
+
     var arr = [];
 
     $.get(options.map, function(data) {
@@ -12,7 +18,7 @@ function MapParser(options) {
             }
 
             if(this.hasOwnProperty('blocksMovement')) {
-                //options.blockMovement.push(parseInt(key)+1)
+                blocksMovement.push(parseInt(key)+1)
             }
 
         })
@@ -40,5 +46,13 @@ function MapParser(options) {
             options.callback(arr, tileset)
         }
     });
+
+    this.blocked = function(x, y) {
+
+        var tileX = Math.floor(x/16)
+        var tileY = Math.floor(y/16)
+
+        return blocksMovement.indexOf(arr[tileY][tileX])>-1
+    }
 
 }
