@@ -5,8 +5,17 @@ function LoginCtrl($scope, socket, $rootScope, $location) {
 
     $scope.login = function() {
         console.log('connect')
-        socket.emit('login', {username:$scope.username, password:$scope.password})
-        $scope.$parent.loggedIn = true
+        $.post('/auth/', {email:$scope.email, password:$scope.password}, function(data) {
+            if(data.success==1) {
+                $scope.$parent.loggedIn = true
+                $(document).trigger('characterList', {characters:data.characters})
+            } else {
+                $scope.error = 'Invalid login'
+            }
+            $scope.$apply();
+        })
+        // socket.emit('login', {username:$scope.username, password:$scope.password})
+
     }
 
     $scope.validate = function() {

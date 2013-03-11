@@ -1,6 +1,6 @@
 function CharactersCtrl($scope, socket, $rootScope, $location) {
 
-    if(!$rootScope.loggedIn) $location.path('/login')
+    CHARS = $scope;
 
     $scope.selectCharacter = function() {
         $rootScope.name = $scope.characters[this.$index].name
@@ -9,8 +9,9 @@ function CharactersCtrl($scope, socket, $rootScope, $location) {
         $scope.$parent.characterSelected = true
     }
 
-    socket.on('characters', function(data) {
-        $scope.characters = data.characters
+    $(document).on('characterList', function(e, data) {
+        $scope.characters = data.characters.map(function(d) { return new Character(d)})
+        $scope.$apply();
     })
 
 }

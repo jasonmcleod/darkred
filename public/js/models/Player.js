@@ -6,6 +6,10 @@ Player = function(data) {
     this.rotation = data.rotation || 0
     this.$scope = data.$scope
 
+    this.level = function() {
+        return new LevelTable.calculate(this.xp)
+    }
+
     this.addToStage = function() {
         self.sprite = new SpriteWithContainer('/assets/sprites/fed.png', 32, 32)
         self.sprite.globalx = self.x

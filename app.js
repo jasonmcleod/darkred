@@ -1,42 +1,13 @@
 var config = require('./config/application');
 var express = require('express');
 var routes = require('./routes');
-var api = require('./routes/api');
+var ajax = require('./routes/ajax');
 var hbs = require('express-hbs');
 var socketio = require('socket.io');
 var app = module.exports = express();
 var server = require('http').createServer(app)
 var util = require('util');
-// var everyauth = require('everyauth');
-// require('./auth').setup();
-// require('./lib/objectWatch');
-
-
-var passport = require('passport'), LocalStrategy = require('passport-local').Strategy;
-passport.use(new LocalStrategy(
-    function(username, password, done) {
-        User.findOne({ username: username }, function (err, user) {
-            if (err) { return done(err); }
-            if (!user) {
-                return done(null, false, { message: 'Incorrect username.' });
-            }
-            if (!user.validPassword(password)) {
-                return done(null, false, { message: 'Incorrect password.' });
-            }
-            return done(null, user);
-        });
-    }
-));
-
-
-
-
-
-
-
-
-
-
+db = require('./lib/db')
 
 // load models
 var Instance = require('./models/instance')
@@ -47,9 +18,6 @@ app.configure(function(){
   app.use(express.bodyParser());
   app.use(express.cookieParser());
   app.use(express.session({secret:'as09fj2p3oj23f0i32'}));
-  // app.use(everyauth.middleware());
-  app.use(passport.initialize());
-  app.use(passport.session());
   app.use(express.methodOverride());
   app.use(express.static(__dirname + '/public'));
   app.use(app.router);
@@ -71,22 +39,18 @@ require('./lib/frontEndPackage').generate(function(files) { global.frontEndPacka
 
 // Routes
 app.get('/', routes.index);
-// app.get('/partials/:name', routes.partials);
+app.post('/auth', ajax.auth);
+app.get('/login', ajax.login)
 
-// JSON API
-// app.get('/api/name', api.name);
-
-// redirect all others to the index (HTML5 history)
-// app.get('*', routes.index);
-
-
-app.post('/login',
-    passport.authenticate('local', {
-        successRedirect: '/',
-        failureRedirect: '/login',
-        failureFlash: true
+// shared directory
+require("fs").readdirSync("./shared/").forEach(function(file) {
+    app.get('/shared/' + file, function(req, res) {
+        require("fs").readFile('./shared/' + file, function(err, data) {
+            res.writeHead(200, {'Content-Type':'text/javascript'});
+            res.end(data, 'utf-8');
+        })
     })
-);
+});
 
 // bootstrap app
 app.instances = {};
@@ -99,5 +63,3 @@ io.set('log level', 1);
 var instance = new Instance('main');
 instance.attachPacketHandlers(io)
 app.instances[instance.id] = instance;
-
-

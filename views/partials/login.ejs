@@ -1,21 +1,21 @@
 <div ng-controller="LoginCtrl" ng-show="!$parent.loggedIn">
-    <form action="/login" method="post">
+    <form method="post">
         <div>
-            <label>Username:</label>
-            <input type="text" name="username"/>
+            <label>Email:</label>
+            <input type="text" ng-model="email" name="email" value='t@t.com'/>
         </div>
         <div>
             <label>Password:</label>
-            <input type="password" name="password"/>
+            <input type="password" ng-model="password" name="password" value="test"/>
         </div>
         <div>
-            <input type="submit" value="Log In"/>
+            <button ng-click="login()">Log In</button>
         </div>
     </form>
-    <form>
+    <!-- <form>
         <input type="text" value='foo' ng-model="username">
         <input type="password" value='foo' ng-model="password">
         <button ng-click="login()" ng-disabled="!validate()">Login</button>
-    </form>
+    </form> -->
     <a href='/auth/twitter'>Log in with Twitter</a>
 </div>

@@ -14,6 +14,12 @@
         <% include partials/characters %>
         <% include partials/game %>
 
+        <h1>
+        <% if(typeof token != 'undefined') { %>
+            well?<%- token %>
+        <% } %>
+        </h1>
+
         <div ng-controller="LogoutCtrl" ng-show="$parent.loggedIn">
             <a ng-click='logout()'>Logout</a>
         </div>
@@ -36,6 +42,8 @@
         <script src="/js/services.js"></script>
         <script src="/js/SocketEvents.js"></script>
         <script src="/js/mainloop.js"></script>
+
+        <script src="/shared/LevelTable.js"></script>
 
         <script src="/js/scraps.js"></script>
 
