@@ -6,7 +6,6 @@ var app = angular.module('myApp', ['myApp.filters', 'myApp.directives', 'state']
 
         $routeProvider.when('/login', {templateUrl: 'partials/login'});
         $routeProvider.when('/characters', {templateUrl: 'partials/characters'});
-        $routeProvider.when('/instances', {templateUrl: 'partials/instances'});
         $routeProvider.when('/game', {templateUrl: 'partials/game'});
 
         $routeProvider.otherwise({redirectTo: '/login'});

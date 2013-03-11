@@ -12,7 +12,7 @@ function CharactersCtrl($scope, socket, $rootScope, $location) {
     $scope.selectCharacter = function() {
         $rootScope.name = $scope.characters[this.$index].name
         console.log('selected ' + $scope.characters[this.$index].name, $scope.characters[this.$index])
-        $location.path('/instances')
+        $location.path('/game')
     }
 
     $scope.addCharacter = function() {
