@@ -3,3 +3,4 @@ module.exports = function(socket, io) {
         io.sockets.emit('addChat', {user: socket.id, text:data.text})
     });
 }
+managers.push(module.exports)

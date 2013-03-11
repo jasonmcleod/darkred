@@ -45,8 +45,6 @@ function GameCtrl($scope, socket, $rootScope, $location) {
 
             $scope.bindings = new BindingsManager($scope)
 
-            $scope.socket.emit('join', {name:$scope.name})
-
             $(document).trigger('gameready', $scope)
 
         }

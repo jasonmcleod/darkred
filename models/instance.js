@@ -1,8 +1,8 @@
 var config = require('../config/application');
 var gameConfig = require('../config/game.config');
 
-var ChatManager = require('../managers/ChatManager')
-var PlayerManager = require('../managers/PlayerManager')
+managers = [];
+require("fs").readdirSync("./managers/").forEach(function(file) { require('../managers/' + file.replace('.js','')) });
 
 var Player = require('./player');
 
@@ -65,8 +65,9 @@ var Instance = function(id) {
         var self = this;
         io.sockets.on('connection', function(socket) {
 
-            new ChatManager(socket,io, self)
-            new PlayerManager(socket, io, self)
+            for(var m in managers) {
+                managers[m](socket,io,self)
+            }
 
         })
     }

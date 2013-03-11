@@ -26,3 +26,5 @@ module.exports = function(socket, io, instance) {
     })
 
 }
+
+managers.push(module.exports)

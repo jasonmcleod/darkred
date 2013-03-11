@@ -10,7 +10,9 @@
 
     <body>
 
-        <div ng-view></div>
+        <% include partials/login %>
+        <% include partials/characters %>
+        <% include partials/game %>
 
         <div ng-controller="LogoutCtrl" ng-show="$parent.loggedIn">
             <a ng-click='logout()'>Logout</a>
