@@ -1,4 +1,4 @@
-<div ng-controller="CharactersCtrl" ng-show="$parent.loggedIn && !$parent.characterSelected">
+<div ng-controller="CharactersCtrl" ng-show="$parent.loggedIn && !$parent.characterSelected && !$parent.creatingCharacter">
     <h2>Total Characters: {{characters.length}}</h2>
     <ul>
         <li ng-repeat="character in characters">

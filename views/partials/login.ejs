@@ -1,4 +1,4 @@
-<div ng-controller="LoginCtrl" ng-show="!$parent.loggedIn">
+<div ng-controller="LoginCtrl" ng-show="!$parent.loggedIn && !$parent.creatingAccount">
     <form method="post">
         <div>
             <label>Email:</label>
@@ -11,5 +11,9 @@
         <div>
             <button ng-click="login()">Log In</button>
         </div>
+        <div>
+            <button ng-click="create()">Create an account</button>
+        </div>
+
     </form>
 </div>

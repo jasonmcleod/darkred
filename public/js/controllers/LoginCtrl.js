@@ -15,9 +15,8 @@ function LoginCtrl($scope, socket, $rootScope, $location) {
         })
     }
 
-    $scope.validate = function() {
-        if($scope.username === undefined || $scope.password === undefined) return false
-        return $scope.username.length >=3 && $scope.password.length >=3
+    $scope.create = function() {
+        $scope.$parent.creatingAccount = true
     }
 
     socket.on('login', function() {

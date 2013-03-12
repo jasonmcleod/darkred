@@ -1,10 +1,29 @@
-exports.init = function(app) {
-    app.get('/', function(req,res) { res.redirect('/instance'); });
+var routes = require('../routes');
+// var ajax = require('../routes/ajax');
 
-    var instances = require('../controllers/instances').init(app);
-    app.get('/', instances.index);
-    app.get('/instance', instances.index);
-    app.post('/instance/player', instances.get_join);
-    app.post('/instance/join', instances.post_join);
-    app.get('/instance/:id', instances.show);
+var User = require('../models/User');
+
+exports.init = function(app) {
+
+    // root
+    app.get('/', routes.index);
+
+    // authenticate (accepts email/password), generates token
+    app.post('/auth', User.authenticate);
+
+    // login with token
+    app.get('/login', User.findByToken)
+
+    // app.get('/account/create', )
+
+    // dynamically create routes for all files in the shared directory
+    require("fs").readdirSync("./shared/").forEach(function(file) {
+        app.get('/shared/' + file, function(req, res) {
+            require("fs").readFile('./shared/' + file, function(err, data) {
+                res.writeHead(200, {'Content-Type':'text/javascript'});
+                res.end(data, 'utf-8');
+            })
+        })
+    });
+
 }

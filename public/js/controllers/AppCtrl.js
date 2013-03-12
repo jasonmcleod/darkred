@@ -4,5 +4,8 @@ function AppCtrl($scope, socket) {
     $scope.loggedIn = false;
     $scope.characterSelected = false;
 
+    $scope.creatingCharacter = false;
+    $scope.creatingAccount = false;
+
     socket.emit('hi', {yay:'!'})
 }

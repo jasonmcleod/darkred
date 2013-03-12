@@ -10,7 +10,7 @@ function CharactersCtrl($scope, socket, $rootScope, $location) {
     }
 
     $scope.create = function() {
-        $(document).trigger('character-create');
+        $scope.$parent.creatingCharacter = true
     }
 
     $(document).on('characterList', function(e, data) {

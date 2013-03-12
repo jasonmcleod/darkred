@@ -1,4 +1,4 @@
-<div ng-controller="CharacterCreateCtrl" ng-show="creating">
+<div ng-controller="CharacterCreateCtrl" ng-show="$parent.creatingCharacter">
     <form>
         <input ng-model="name"><br>
         <button ng-click="create()">Create</button>
