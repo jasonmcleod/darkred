@@ -1,0 +1,169 @@
+# ************************************************************
+# Sequel Pro SQL dump
+# Version 3408
+#
+# http://www.sequelpro.com/
+# http://code.google.com/p/sequel-pro/
+#
+# Host: 127.0.0.1 (MySQL 5.5.9)
+# Database: arpg
+# Generation Time: 2013-03-12 21:06:55 +0000
+# ************************************************************
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+
+# Dump of table account_tokens
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `account_tokens`;
+
+CREATE TABLE `account_tokens` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `account` int(11) NOT NULL,
+  `token` varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+LOCK TABLES `account_tokens` WRITE;
+/*!40000 ALTER TABLE `account_tokens` DISABLE KEYS */;
+
+INSERT INTO `account_tokens` (`id`, `account`, `token`)
+VALUES
+	(4,1,'25692.285484100226'),
+	(5,1,'54118.620883600786'),
+	(6,1,'16505.50674805278'),
+	(7,1,'21265.789198729908'),
+	(8,1,'17760.722962005297'),
+	(9,1,'73245.63083067792'),
+	(10,1,'58521.8493548627'),
+	(11,1,'54098.36509955954'),
+	(12,1,'66583.17380255624'),
+	(13,1,'57203.32977621001'),
+	(14,1,'53716.262215989176'),
+	(15,1,'9560.041966666002'),
+	(16,1,'28416.00941714924'),
+	(17,1,'3442.9800984570757'),
+	(18,1,'10589.080303422175'),
+	(19,1,'158.5285857275594'),
+	(20,1,'26043.2312126623'),
+	(21,1,'50686.53233075584'),
+	(22,1,'77662.26238987246'),
+	(23,1,'71309.38606675761'),
+	(24,1,'15516.671644841088'),
+	(25,1,'21006.00523173879'),
+	(26,1,'12330.943668425549'),
+	(27,1,'2504.4564933835063'),
+	(28,1,'81445.64379501482'),
+	(29,1,'25909.568551316857'),
+	(30,1,'45200.615662365686'),
+	(31,1,'51729.12253273814'),
+	(32,1,'331.6482193011325'),
+	(33,1,'16106.780248726252'),
+	(34,1,'19583.614049891476'),
+	(35,1,'84289.04613871872'),
+	(36,1,'18570.39958691108'),
+	(37,1,'89397.37597795716'),
+	(38,1,'33659.27709513344'),
+	(39,1,'15640.598869574256'),
+	(40,1,'55041.61046286835'),
+	(41,1,'85940.0533758807'),
+	(42,1,'62347.15976358857'),
+	(43,1,'36696.13893075683'),
+	(44,1,'73133.55612714565'),
+	(45,1,'58398.24473704328'),
+	(46,1,'43219.40506857913'),
+	(47,1,'48319.009177760454'),
+	(48,1,'40958.80652662902'),
+	(49,1,'4119.18404992274'),
+	(50,1,'45998.78865930112'),
+	(51,1,'76714.72537207534'),
+	(52,1,'55040.34594900487'),
+	(53,1,'54172.90266330354'),
+	(54,1,'31851.567624115152'),
+	(55,1,'95487.16536175087'),
+	(56,1,'15965.428315852303'),
+	(57,1,'41520.09459391306'),
+	(58,1,'73094.20683801337'),
+	(59,1,'48165.618693861645'),
+	(60,1,'10731.035866986495'),
+	(61,1,'26603.754275950603'),
+	(62,1,'2822.722649148898'),
+	(63,1,'19691.694490542635'),
+	(64,1,'13387.71546637849'),
+	(65,1,'33579.343944726745'),
+	(66,1,'20016.64300522115'),
+	(67,1,'4476.72175344592'),
+	(68,1,'64688.5998356177'),
+	(69,1,'76178.73933989089'),
+	(70,1,'94447.99163590232'),
+	(71,1,'91623.55979409046'),
+	(72,1,'35215.97200780967');
+
+/*!40000 ALTER TABLE `account_tokens` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table accounts
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `accounts`;
+
+CREATE TABLE `accounts` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) NOT NULL DEFAULT '',
+  `password` varchar(255) NOT NULL DEFAULT '',
+  `username` varchar(32) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+LOCK TABLES `accounts` WRITE;
+/*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
+
+INSERT INTO `accounts` (`id`, `email`, `password`, `username`)
+VALUES
+	(1,'t@t.com','test','testuser');
+
+/*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table characters
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `characters`;
+
+CREATE TABLE `characters` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `account` int(11) NOT NULL,
+  `name` varchar(32) NOT NULL DEFAULT '',
+  `xp` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+LOCK TABLES `characters` WRITE;
+/*!40000 ALTER TABLE `characters` DISABLE KEYS */;
+
+INSERT INTO `characters` (`id`, `account`, `name`, `xp`)
+VALUES
+	(1,1,'player 1',1000),
+	(2,1,'player 2',5000);
+
+/*!40000 ALTER TABLE `characters` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
