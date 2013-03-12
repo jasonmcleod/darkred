@@ -9,6 +9,10 @@ function CharactersCtrl($scope, socket, $rootScope, $location) {
         $scope.$parent.characterSelected = true
     }
 
+    $scope.create = function() {
+        $(document).trigger('character-create');
+    }
+
     $(document).on('characterList', function(e, data) {
         $scope.characters = data.characters.map(function(d) { return new Character(d)})
         $scope.$apply();

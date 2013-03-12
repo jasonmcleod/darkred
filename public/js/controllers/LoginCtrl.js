@@ -1,10 +1,9 @@
 function LoginCtrl($scope, socket, $rootScope, $location) {
 
-    $scope.username = 'foo'
-    $scope.password = 'foo'
+    $scope.email = 't@t.com'
+    $scope.password = 'test'
 
     $scope.login = function() {
-        console.log('connect')
         $.post('/auth/', {email:$scope.email, password:$scope.password}, function(data) {
             if(data.success==1) {
                 $scope.$parent.loggedIn = true
@@ -14,8 +13,6 @@ function LoginCtrl($scope, socket, $rootScope, $location) {
             }
             $scope.$apply();
         })
-        // socket.emit('login', {username:$scope.username, password:$scope.password})
-
     }
 
     $scope.validate = function() {

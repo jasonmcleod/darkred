@@ -13,12 +13,8 @@
         <% include partials/login %>
         <% include partials/characters %>
         <% include partials/game %>
+        <% include partials/character-create %>
 
-        <h1>
-        <% if(typeof token != 'undefined') { %>
-            well?<%- token %>
-        <% } %>
-        </h1>
 
         <div ng-controller="LogoutCtrl" ng-show="$parent.loggedIn">
             <a ng-click='logout()'>Logout</a>
