@@ -8,6 +8,7 @@ function LoginCtrl($scope, socket, $rootScope, $location) {
             if(data.success==1) {
                 $scope.$parent.loggedIn = true
                 $(document).trigger('characterList', {characters:data.characters})
+                $scope.$parent.token = data.token;
             } else {
                 $scope.error = 'Invalid login'
             }

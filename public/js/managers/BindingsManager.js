@@ -14,7 +14,7 @@ function BindingsManager($scope) {
             if(key.isPressed("S") || key.isPressed(40)) $scope.me.moveBy({y: 2})
 
             if(key.isPressed("A") || key.isPressed(37)) $scope.me.moveBy({x:-2})
-            if(key.isPressed("D") || key.isPressed(49)) $scope.me.moveBy({x: 2})
+            if(key.isPressed("D") || key.isPressed(39)) $scope.me.moveBy({x: 2})
         }
     }
 }

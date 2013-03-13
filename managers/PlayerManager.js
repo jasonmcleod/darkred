@@ -1,14 +1,21 @@
+var User = require('../models/User')
 module.exports = function(socket, io, instance) {
     socket.on('join', function(data) {
+        console.log(data)
 
-        var player = instance.addPlayer(socket.id, data.name);
+        User.findCharacter(data.character, data.token, function(results) {
+            console.log(results)
+            if(results.length<=0) { socket.emit('join-fail'); return false; }
 
-        player.name = data.name;
+            var player = instance.addPlayer(socket.id, results[0].name);
 
-        socket.emit('instance', {instance:instance.data(), me:player.id});
-        console.log('emit instance')
+            socket.emit('instance', {instance:instance.data(), me:player.id});
+            socket.emit('join-success', {me:player.id});
 
-        socket.broadcast.emit('playerJoin', player)
+            socket.broadcast.emit('playerJoin', player)
+
+        })
+
     })
 
     socket.on('move', function(data) {

@@ -1,20 +1,13 @@
 var routes = require('../routes');
-// var ajax = require('../routes/ajax');
-
-var User = require('../models/User');
+var auth = require('../routes/auth');
 
 exports.init = function(app) {
 
     // root
     app.get('/', routes.index);
 
-    // authenticate (accepts email/password), generates token
-    app.post('/auth', User.authenticate);
-
-    // login with token
-    app.get('/login', User.findByToken)
-
-    // app.get('/account/create', )
+    // authentication
+    app.post('/auth', auth.index)
 
     // dynamically create routes for all files in the shared directory
     require("fs").readdirSync("./shared/").forEach(function(file) {

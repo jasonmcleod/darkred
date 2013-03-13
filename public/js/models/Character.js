@@ -1,7 +1,5 @@
 function Character(options) {
-    this.name = options.name || 'Unnamed Character'
-    this.xp = options.xp || 0
-    this.str = options.str || 0;
+    $.extend(this, options)
 
     this.level = function() {
         var table = new LevelTable();

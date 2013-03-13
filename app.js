@@ -5,7 +5,17 @@ var socketio = require('socket.io');
 var app = module.exports = express();
 var server = require('http').createServer(app)
 var util = require('util');
-db = require('./lib/db')
+// db = require('./lib/db')
+
+var config = require('./config/application');
+var Db = require('mysql-activerecord');
+db = new Db.Adapter({
+    server: config.database.host,
+    username: config.database.user,
+    password: config.database.pass,
+    database: config.database.database,
+    port:config.database.port
+});
 
 // load models
 var Instance = require('./models/instance')

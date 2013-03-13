@@ -3,10 +3,8 @@ function CharactersCtrl($scope, socket, $rootScope, $location) {
     CHARS = $scope;
 
     $scope.selectCharacter = function() {
-        $rootScope.name = $scope.characters[this.$index].name
-        // console.log('selected ' + $scope.characters[this.$index].name, $scope.characters[this.$index])
-        socket.emit('join', {name:$scope.name})
-        $scope.$parent.characterSelected = true
+        console.log($scope.characters[this.$index].id)
+        socket.emit('join', {character:$scope.characters[this.$index].id, token:$scope.$parent.token})
     }
 
     $scope.create = function() {
@@ -16,6 +14,14 @@ function CharactersCtrl($scope, socket, $rootScope, $location) {
     $(document).on('characterList', function(e, data) {
         $scope.characters = data.characters.map(function(d) { return new Character(d)})
         $scope.$apply();
+    })
+
+    socket.on('join-fail', function() {
+        $scope.error = 'Unable to join game.'
+    })
+
+    socket.on('join-success', function() {
+        $scope.$parent.characterSelected = true
     })
 
 }
