@@ -1,7 +1,7 @@
 function LoginCtrl($scope, socket, $rootScope, $location) {
 
-    $scope.email = 't@t.com'
-    $scope.password = 'test'
+    $scope.email = 'tests'
+    $scope.password = 'tests'
 
     $scope.login = function() {
         $.post('/auth/', {email:$scope.email, password:$scope.password}, function(data) {

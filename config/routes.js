@@ -1,5 +1,5 @@
 var routes = require('../routes');
-var auth = require('../routes/auth');
+var account = require('../routes/account');
 
 exports.init = function(app) {
 
@@ -7,7 +7,10 @@ exports.init = function(app) {
     app.get('/', routes.index);
 
     // authentication
-    app.post('/auth', auth.index)
+    app.post('/auth', account.index)
+
+    // account creation
+    app.get('/account/create', account.create)
 
     // dynamically create routes for all files in the shared directory
     require("fs").readdirSync("./shared/").forEach(function(file) {

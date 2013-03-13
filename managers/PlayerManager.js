@@ -1,10 +1,10 @@
-var User = require('../models/User')
+var Account = require('../models/Account')
 module.exports = function(socket, io, instance) {
     socket.on('join', function(data) {
-        console.log(data)
 
-        User.findCharacter(data.character, data.token, function(results) {
-            console.log(results)
+        var account = new Account();
+
+        account.findCharacter(data.character, data.token, function(results) {
             if(results.length<=0) { socket.emit('join-fail'); return false; }
 
             var player = instance.addPlayer(socket.id, results[0].name);
