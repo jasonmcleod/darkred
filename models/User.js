@@ -2,7 +2,6 @@ var User = {
 
     authenticate:function(email, password, cb) {
         db.where({email:email, password:password}).get('accounts',function(err, results) {
-            console.log(results)
             if(results.length==0) {
                 cb({success:0})
             } else {
@@ -15,20 +14,22 @@ var User = {
 
     generateToken:function(account) {
         var token = Math.random()*99999;
-        db.insert('account_tokens', {token:token, account:account},function(err, results) {
-
-        })
+        db.insert('account_tokens', {token:token, account:account})
         return token;
+    },
+
+    destroyTokens:function(account) {
+        db.where({account:account}).delete('account_tokens')
     },
 
     findCharacter:function(character, token, cb) {
 
         db.query([
-            "SELECT characters.*",
+            "SELECT characters.*, accounts.id as account",
             "FROM account_tokens, characters, accounts",
             "WHERE account_tokens.account = characters.account AND characters.id = " + character + " AND account_tokens.token = '" + token + "'"
         ].join(' '),function(err, results) {
-            console.log(results)
+            if(results.length==1) User.destroyTokens(results[0].account)
             cb(results)
         })
 

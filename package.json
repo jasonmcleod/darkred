@@ -7,5 +7,12 @@
     , "ejs": ">= 0.0.1"
     , "socket.io": "0.9.11"
     , "mysql-activerecord": "*"
+    , "mocha": ""
+    , "should":""
+
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --require should --recursive --reporter spec ./tests",
+    "start": "node server.js"
   }
 }
