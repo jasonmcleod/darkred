@@ -10,6 +10,9 @@
 
     <body>
 
+        <div class='error' ng-show="error">{{error}}</div>
+        <div class='notice' ng-show="notice">{{notice}}</div>
+
         <% include partials/login %>
         <% include partials/characters %>
         <% include partials/game %>

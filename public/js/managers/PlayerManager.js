@@ -6,8 +6,10 @@ function PlayerManager($scope, socket) {
     })
 
     socket.on('playerDrop', function(data) {
-        $scope.players[data.id].drop()
-        delete $scope.players[data.id]
+        if($scope.players[data.id]) {
+            $scope.players[data.id].drop()
+            delete $scope.players[data.id]
+        }
     })
 
     socket.on('playerMove', function(data) {

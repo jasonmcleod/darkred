@@ -9,6 +9,8 @@
     , "mysql-activerecord": "*"
     , "mocha": ""
     , "should":""
+    , "email-templates":""
+    , "nodemailer":""
 
   },
   "scripts": {

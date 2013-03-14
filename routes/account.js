@@ -9,8 +9,19 @@ exports.index = function(req, res) {
 
 exports.create = function(req, res) {
     var account = new Account()
-    account.create(req.body, function() {
+    account.create(req.body, function(data) {
         res.send(data)
+    })
+}
+
+exports.activate = function(req, res) {
+    var account = new Account()
+    account.activate(req.params.code, function(data) {
+        if(data.success==1) {
+            res.redirect('/#activated')
+        } else {
+            res.redirect('/#activated-failed')
+        }
     })
 }
 

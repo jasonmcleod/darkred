@@ -4,17 +4,18 @@ var account = require('../routes/account');
 exports.init = function(app) {
 
     // root
-    app.get('/', routes.index);
+    app.get('/',                            routes.index);
 
     // authentication
-    app.post('/auth', account.index)
+    app.post('/auth',                       account.index)
 
     // account
-    app.get('/account/create', account.create)
+    app.post('/accounts/create',            account.create)
+    app.get('/accounts/activate/:code',     account.activate)
 
-    // chracter
-    app.post('/characters/create', account.createCharacter)
-    app.get('/characters/list', account.characterList)
+    // character
+    app.post('/characters/create',          account.createCharacter)
+    app.get('/characters/list',             account.characterList)
 
     // dynamically create routes for all files in the shared directory
     require("fs").readdirSync("./shared/").forEach(function(file) {

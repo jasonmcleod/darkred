@@ -18,26 +18,58 @@ db.where({name:'testCharacter'}).delete('characters')
 
 describe('New Account', function() {
 
-    it('create a new account with a unique email, and valid credential', function(done) {
+    it('should create a new account with a unique email, and valid credential', function(done) {
         account.create({email: account.email, password:account.password}, function(results) {
 
             results.success.should.equal(1)
             done();
 
+        }, true)
+    })
+
+    it('should activate the new account', function(done) {
+        db.where({id:account.id}).get('account_activations', function(err, results) {
+            account.activate(results[0].code, function(results) {
+                results.success.should.equal(1)
+                done()
+            })
         })
+    })
+
+    it('should fail if the email is already registered', function(done) {
+        account.create({email: account.email, password:account.password}, function(results) {
+
+            results.success.should.equal(0)
+            done();
+
+        }, true)
     })
 });
 
+
 describe('Login', function() {
 
-    it('find a user if login is valid', function(done) {
+    it('should find a user if login is valid and account is activated', function(done) {
         account.authenticate(account.email, account.password, function(results) {
             results.success.should.equal(1)
             done();
         })
     })
 
-    it('fail to find a user if login is invalid', function(done) {
+    it('should block you from logging in if account is not active', function(done) {
+        db.where({id:account.id}).update('accounts',{activated:0});
+        account.authenticate(account.email, account.password, function(results) {
+
+            results.success.should.equal(0)
+
+            db.where({id:account.id}).update('accounts',{activated:1});
+
+            done();
+
+        })
+    })
+
+    it('should fail to find a user if login is invalid', function(done) {
         account.authenticate(account.email, 'badpassword', function(results) {
             results.success.should.equal(0)
             done();
@@ -48,7 +80,7 @@ describe('Login', function() {
 
 describe('Characters', function() {
 
-    it('create a character with a unique name', function(done) {
+    it('should create a character with a unique name', function(done) {
         account.authenticate(account.email, account.password, function(results) {
             var token = results.token
 
@@ -60,7 +92,7 @@ describe('Characters', function() {
         })
     })
 
-    it('fail when creating a character, if the name is in use', function(done) {
+    it('should fail when creating a character, if the name is in use', function(done) {
         account.authenticate(account.email, account.password, function(results) {
             var token = results.token
 
@@ -72,7 +104,7 @@ describe('Characters', function() {
         })
     })
 
-    it('return a list of characters', function(done) {
+    it('should return a list of characters', function(done) {
         account.authenticate(account.email, account.password, function(results) {
             var token = results.token
             results.success.should.equal(1)
@@ -81,7 +113,7 @@ describe('Characters', function() {
         })
     })
 
-    it('allow me to select one of my own characters', function(done) {
+    it('should allow me to select one of my own characters', function(done) {
         account.authenticate(account.email, account.password, function(results) {
             var token = results.token
             account.findCharacter(results.characters[0].id, token, function(chars) {
@@ -91,7 +123,7 @@ describe('Characters', function() {
         })
     })
 
-    it('allow fail if i try to select a character thats not mine', function(done) {
+    it('should allow fail if i try to select a character thats not mine', function(done) {
         account.authenticate(account.email, account.password, function(results) {
             var token = results.token
             account.findCharacter(-1, token, function(chars) {
@@ -105,7 +137,7 @@ describe('Characters', function() {
 
 describe('Tokens', function() {
 
-    it('create a token for me', function(done) {
+    it('should create a token for me', function(done) {
         account.authenticate(account.email, account.password, function(results) {
             var token = results.token
             results.token.should.not.equal(false)
@@ -116,7 +148,7 @@ describe('Tokens', function() {
         })
     })
 
-    it('authenticate with a token', function(done) {
+    it('should authenticate with a token', function(done) {
         account.authenticate(account.email, account.password, function(results) {
             var token = results.token
             var accountCheck1 = results.id
@@ -127,7 +159,7 @@ describe('Tokens', function() {
         })
     })
 
-    it('remove my tokens from the database once I choose a character', function(done) {
+    it('should remove my tokens from the database once I choose a character', function(done) {
         account.authenticate(account.email, account.password, function(results) {
             var token = results.token
             account.findCharacter(results.characters[0].id, token, function(chars) {
