@@ -9,8 +9,12 @@ exports.init = function(app) {
     // authentication
     app.post('/auth', account.index)
 
-    // account creation
+    // account
     app.get('/account/create', account.create)
+
+    // chracter
+    app.post('/characters/create', account.createCharacter)
+    app.get('/characters/list', account.characterList)
 
     // dynamically create routes for all files in the shared directory
     require("fs").readdirSync("./shared/").forEach(function(file) {

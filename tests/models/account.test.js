@@ -75,17 +75,16 @@ describe('Characters', function() {
     it('return a list of characters', function(done) {
         account.authenticate(account.email, account.password, function(results) {
             var token = results.token
-            account.findCharacter(account.id, token, function(chars) {
-                chars.length.should.be.above(0)
-                done();
-            })
+            results.success.should.equal(1)
+            results.characters.length.should.be.above(0)
+            done();
         })
     })
 
     it('allow me to select one of my own characters', function(done) {
         account.authenticate(account.email, account.password, function(results) {
             var token = results.token
-            account.findCharacter(account.id, token, function(chars) {
+            account.findCharacter(results.characters[0].id, token, function(chars) {
                 chars[0].id.should.be.above(0)
                 done();
             })
@@ -102,8 +101,6 @@ describe('Characters', function() {
         })
     })
 
-
-
 })
 
 describe('Tokens', function() {
@@ -119,10 +116,21 @@ describe('Tokens', function() {
         })
     })
 
+    it('authenticate with a token', function(done) {
+        account.authenticate(account.email, account.password, function(results) {
+            var token = results.token
+            var accountCheck1 = results.id
+            account.authByToken(token, function(data) {
+                data.success.should.equal(1)
+                done();
+            })
+        })
+    })
+
     it('remove my tokens from the database once I choose a character', function(done) {
         account.authenticate(account.email, account.password, function(results) {
             var token = results.token
-            account.findCharacter(account.id, token, function(chars) {
+            account.findCharacter(results.characters[0].id, token, function(chars) {
                 db.where({account:account.id}).get('account_tokens', function(err, results) {
                     results.length.should.equal(0)
                     done()

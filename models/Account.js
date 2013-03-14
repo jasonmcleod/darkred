@@ -18,25 +18,38 @@ var Account = function(options) {
             if(results.length==0) {
                 cb({success:0})
             } else {
-                self.characterList(results[0].id, function(characters) {
+                self.id = results[0].id
+                self.characterList(function(characters) {
                     cb({success:1, token:self.generateToken(results[0].id), characters:characters})
                 })
             }
         })
     }
 
-    this.generateToken = function(account) {
+    this.authByToken = function(token, cb) {
+        db.where({token:token}).get('account_tokens', function(err, results) {
+            if(results.length==1) {
+                self.id = results[0].account
+                cb({success:1})
+            } else {
+                cb({success:0})
+            }
+        })
+    }
+
+    this.generateToken = function() {
         var token = Math.random()*99999;
-        db.insert('account_tokens', {token:token, account:account})
+        db.insert('account_tokens', {token:token, account:self.id})
         return token;
     }
 
-    this.destroyTokens = function(account) {
-        db.where({account:account}).delete('account_tokens')
+    this.destroyTokens = function() {
+        db.where({account:self.id}).delete('account_tokens')
     }
 
-    this.characterList = function(account, cb) {
-        db.where({account:account}).get('characters', function(err, results) {
+    this.characterList = function(cb) {
+        var account = self.id
+        db.where({account:self.id}).get('characters', function(err, results) {
             cb(results)
         })
     }
@@ -55,7 +68,9 @@ var Account = function(options) {
     }
 
     this.createCharacter = function(token, details, cb) {
+
         db.where({token:token}).get('account_tokens', function(err, results) {
+
             if(results.length==0) { cb({success:0}); return; }
             details.account = results[0].account
 
