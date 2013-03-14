@@ -1,4 +1,3 @@
-// var User = require('../models/User');
 var Account = require('../models/Account');
 
 exports.index = function(req, res) {
@@ -11,5 +10,14 @@ exports.index = function(req, res) {
 
 exports.create = function(req, res) {
     var account = new Account()
-    account.create({email:'test!'})
+    account.create(req.body, function() {
+        res.send(data)
+    })
+}
+
+exports.createCharacter = function(req, res) {
+    var account = new Account();
+    account.createCharacter(req.body, function() {
+        res.send(data)
+    })
 }

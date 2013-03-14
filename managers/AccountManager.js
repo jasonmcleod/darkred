@@ -1,15 +1,22 @@
-// module.exports = function(socket, io, instance) {
-//     // socket.on('login', function(data) {
-//     //     socket.emit('login', {result:"ok"})
-//     //     socket.emit('characters', {characters:[
-//     //         {name:'Jeezle', id:1,   level:2,    dex:1,  str:2,  con:3,  int:4},
-//     //         {name:'Sns',    id:2,   level:12,   dex:1,  str:2,  con:3,  int:4},
-//     //         {name:'Test',   id:3,   level:12,   dex:1,  str:2,  con:3,  int:4},
-//     //     ]})
-//     // })
-//
-//     socket.on('character-select', function() {
-//         console.log(data)
-//     })
-// }
-// managers.push(module.exports)
+var Account = require('../models/Account')
+module.exports = function(socket, io, instance) {
+    socket.on('createCharacter', function(data) {
+
+        var account = new Account();
+
+        account.findCharacter(data.character, data.token, function(results) {
+            if(results.length<=0) { socket.emit('join-fail'); return false; }
+
+            var player = instance.addPlayer(socket.id, results[0].name);
+
+            socket.emit('instance', {instance:instance.data(), me:player.id});
+            socket.emit('join-success', {me:player.id});
+
+            socket.broadcast.emit('playerJoin', player)
+
+        })
+
+    })
+}
+
+managers.push(module.exports)

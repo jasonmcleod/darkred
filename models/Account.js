@@ -6,8 +6,11 @@ var Account = function(options) {
     this.password = options.password || '';
     this.email = options.email || '';
 
-    this.create = function(details) {
-        db.insert('accounts', details)
+    this.create = function(details, cb) {
+        db.insert('accounts', details, function(err, results) {
+            cb({success:1, results:results})
+            self.id = results.insertId
+        })
     }
 
     this.authenticate = function(email, password, cb) {
@@ -55,8 +58,15 @@ var Account = function(options) {
         db.where({token:token}).get('account_tokens', function(err, results) {
             if(results.length==0) { cb({success:0}); return; }
             details.account = results[0].account
-            db.insert('characters', details, function(err, results) {
-                cb(results)
+
+            db.where({name:details.name}).get('characters', function(err, results) {
+                if(results.length>0) {
+                    cb({success:0, error: 'Character name in use'});
+                } else {
+                    db.insert('characters', details, function(err, results) {
+                        cb({success:1, results:results})
+                    })
+                }
             })
         })
     }
