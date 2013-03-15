@@ -12,8 +12,10 @@ function CharactersCtrl($scope, socket, $rootScope, $location) {
 
     $(document).on('characterList', function(e, data) {
         console.log(data)
-        $scope.characters = data.characters.map(function(d) { return new Character(d)})
-        $scope.$apply();
+        if(data.characters.length > 0) {
+            $scope.characters = data.characters.map(function(d) { return new Character(d)})
+            $scope.$apply();
+        }
     })
 
     socket.on('join-fail', function() {

@@ -11,6 +11,7 @@ function LoginCtrl($scope, socket, $rootScope, $location) {
                 $scope.$parent.token = data.token;
             } else {
                 $scope.error = 'Invalid login'
+                $scope.notice = false
             }
             $scope.$apply();
         })

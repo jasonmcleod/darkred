@@ -12,7 +12,7 @@ var Account = function(options) {
 
         db.where({email:details.email}).get('accounts', function(err, results) {
 
-            if(results.length>0) {
+            if(results && results.length>0) {
                 cb({success:0, error:"Email already registered"})
                 return false;
             } else {
@@ -70,7 +70,9 @@ var Account = function(options) {
     }
 
     this.authenticate = function(email, password, cb) {
+
         db.where({email:email, password:password}).get('accounts',function(err, results) {
+            console.log(results)
             if(results.length==0) {
                 cb({success:0})
             } else {

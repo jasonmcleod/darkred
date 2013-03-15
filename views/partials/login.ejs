@@ -1,4 +1,8 @@
 <div ng-controller="LoginCtrl" ng-show="!$parent.loggedIn && !$parent.creatingAccount">
+    
+    <div class='error' ng-show="error">{{error}}</div>
+    <div class='notice' ng-show="notice">{{notice}}</div>
+
     <form method="post">
         <div>
             <label>Email:</label>

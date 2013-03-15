@@ -1,7 +1,11 @@
 function AppCtrl($scope, socket) {
 
-    if(window.location.hash=="#activation-failed") { $scope.error = 'Invalid activation link' }
-    if(window.location.hash=="#activation") { $scope.notice = 'Activation successful! Login below!' }
+    $scope.hash = function(str) {
+    	return (window.location.hash == "#" + str || window.location.hash == "#/" + str)
+    }
+
+    if($scope.hash("activation-failed")) { $scope.error = 'Invalid activation link' }
+    if($scope.hash("activated")) { $scope.notice = 'Activation successful! Login below!' }
 
     // shortcut to alter anything
     $scope.loggedIn = false;
