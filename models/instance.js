@@ -65,9 +65,9 @@ var Instance = function(id) {
         var self = this;
         io.sockets.on('connection', function(socket) {
 
-            for(var m in managers) {
-                managers[m](socket,io,self)
-            }
+            // for(var m in managers) {
+            //     managers[m](socket,io,self)
+            // }
 
         })
     }

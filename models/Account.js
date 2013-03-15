@@ -1,3 +1,47 @@
+var Account = db.define("accounts", {
+    id: Number,
+    email: String,
+    password: String,
+    activated: Number,
+    token:String,
+    activationCode:String
+}, {
+    methods: {
+        fullName: function () {
+            return this.name + ' ' + this.surname;
+        },
+        generateToken: function(cb) {
+            this.token = Math.random()*99999;
+            this.save(cb)
+        }
+    },
+    validations: {
+        //age: orm.validators.rangeNumber(18, undefined, "under-age")
+    }
+});
+
+// Account.find({ email: "tests" }, function (err, accounts) {
+//     // SQL: "SELECT * FROM person WHERE surname = 'Doe'"
+//
+//     // console.log("People found: %d", accounts.length);
+//     // console.log("First person: %s, age %d", accounts[0].fullName(), accounts[0].age);
+//
+//     accounts[0].activated = 16;
+//     accounts[0].save(function (err) {
+//         // err.msg = "under-age";
+//     });
+// });
+
+
+
+
+
+
+
+
+/*
+
+
 var Email = require('./Email');
 
 var Account = function(options) {
@@ -152,4 +196,5 @@ var Account = function(options) {
 
 }
 
+*/
 module.exports = Account
