@@ -1,2 +1,3 @@
 resources/*
 node_modules/*
+config/env/development.config.js
