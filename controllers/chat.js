@@ -1,6 +1,7 @@
-module.exports = function(socket, io) {
+module.exports.bindSocket = function(socket, io, instance) {
     socket.on('chat', function(data) {
         io.sockets.emit('addChat', {user: socket.id, text:data.text})
     });
 }
-managers.push(module.exports)
+
+controllers['chat'] = module.exports

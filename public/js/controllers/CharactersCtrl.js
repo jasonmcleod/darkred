@@ -3,6 +3,7 @@ function CharactersCtrl($scope, socket, $rootScope, $location) {
     CHARS = $scope;
 
     $scope.selectCharacter = function() {
+        console.log('choose', $scope.characters[this.$index].id)
         socket.emit('join', {character:$scope.characters[this.$index].id, token:$scope.$parent.token})
     }
 

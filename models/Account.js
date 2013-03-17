@@ -1,3 +1,4 @@
+var Character = require('../models/Character');
 var Account = db.define("accounts", {
     id: Number,
     email: String,
@@ -11,7 +12,11 @@ var Account = db.define("accounts", {
             return this.name + ' ' + this.surname;
         },
         generateToken: function(cb) {
-            this.token = Math.random()*99999;
+            this.token = Math.random()*99999999999;
+            this.save(cb)
+        },
+        generateActivationCode:function(cb) {
+            this.activationCode = Math.random()*99999999999;
             this.save(cb)
         }
     },
@@ -20,17 +25,51 @@ var Account = db.define("accounts", {
     }
 });
 
-// Account.find({ email: "tests" }, function (err, accounts) {
-//     // SQL: "SELECT * FROM person WHERE surname = 'Doe'"
+Account.hasMany("characters", Character); // omitting the other Model, it will assume self model
+
+// Account.get(1, function (err, Tests) {
 //
-//     // console.log("People found: %d", accounts.length);
-//     // console.log("First person: %s, age %d", accounts[0].fullName(), accounts[0].age);
+//     Character.create([{
+//         name:'char123',
+//         xp:0
+//     }], function(err, char1) {
 //
-//     accounts[0].activated = 16;
-//     accounts[0].save(function (err) {
-//         // err.msg = "under-age";
-//     });
+//         Tests.addCharacters(char1[0], function() {
+//             console.log('after add')
+//             console.log(arguments)
+//         })
+//     })
+//
+//     // Tests.addCharacters({
+//     //     name:'aaa',
+//     //     xp:0
+//     // },function() {
+//     //     console.log(arguments)
+//     // })
+//     // Tests.getCharacters(function (err, chars) {
+//     //     console.log(chars)
+//     //     chars.create([{
+//     //         name:'aaa',
+//     //         xp:0
+//     //     }],function() {
+//     //         console.log(arguments)
+//     //
+//     //     })
+//     //     // console.log(chars[0].name)
+//     //     // assumes table person_friends with columns person_id and friends_id
+//     // });
 // });
+
+// Account.find({ email: "tests" }, function (err, accounts) {
+//
+//     accounts.getCharacters(function() {
+//         console.log('get chars..')
+//         console.log(arguments)
+//     })
+//
+// });
+
+
 
 
 

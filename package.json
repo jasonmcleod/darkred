@@ -7,7 +7,6 @@
     , "express-hbs":""
     , "ejs": ">= 0.0.1"
     , "socket.io": "0.9.11"
-    , "mysql-activerecord": "*"
     , "mocha": ""
     , "should":""
     , "email-templates":""

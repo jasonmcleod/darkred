@@ -3,6 +3,10 @@ function AccountCreateCtrl($scope, socket) {
     $scope.error = false;
     $scope.success = false;
 
+    $scope.email = 'pixelparty@gmail.com'
+    $scope.password='a'
+    $scope.passwordConfirm='a'
+
     $scope.create = function() {
 
         if($scope.password != $scope.passwordConfirm) { $scope.error = 'Passwords don\'t match'; return false; }

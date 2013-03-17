@@ -1,20 +1,20 @@
 function LoginCtrl($scope, socket, $rootScope, $location) {
 
-    $scope.email = 'tests'
-    $scope.password = 'tests'
+    $scope.email = 'pixelparty@gmail.com'
+    $scope.password = 'a'
 
     $scope.login = function() {
         $.post('/auth/', {email:$scope.email, password:$scope.password}, function(data) {
             if(data.success==1) {
                 $scope.$parent.loggedIn = true
 
-                $.get('/characters/', {token: data.token}, function(data) {
+                $.get('/characters/list', {token: data.token}, function(data) {
                     $(document).trigger('characterList', {characters:data})
                 })
 
                 $scope.$parent.token = data.token;
             } else {
-                $scope.error = 'Invalid login'
+                $scope.error = data.error
                 $scope.notice = false
             }
             $scope.$apply();

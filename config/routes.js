@@ -1,7 +1,9 @@
 var routes = require('../routes');
 var account = require('../controllers/account');
+var character = require('../controllers/character');
+var chat = require('../controllers/chat');
 
-exports.init = function(app) {
+exports.init = function(app, io, instance) {
 
     // root
     app.get('/',                            routes.index);
@@ -14,8 +16,19 @@ exports.init = function(app) {
     app.get('/accounts/activate/:code',     account.activate)
 
     // character
-    app.post('/characters/create',          account.createCharacter)
-    app.get('/characters',                  account.characterList)
+    app.post('/characters/create',          character.create)
+    app.get('/characters/list',             character.list)
+
+
+    io.sockets.on('connection', function(socket) {
+        for(var c in controllers) {
+            //console.log(controllers[c].bindSocket)
+            // console.log(controllers[c])
+            controllers[c].bindSocket(socket, io, instance)
+            // controllers[c](socket,io,self)
+        }
+    })
+
 
     // dynamically create routes for all files in the shared directory
     require("fs").readdirSync("./shared/").forEach(function(file) {

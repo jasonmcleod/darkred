@@ -1,9 +1,6 @@
 var config = require('../config/application');
 var gameConfig = require('../config/game.config');
 
-managers = [];
-require("fs").readdirSync("./managers/").forEach(function(file) { require('../managers/' + file.replace('.js','')) });
-
 var Player = require('./player');
 
 var Instance = function(id) {
@@ -63,13 +60,10 @@ var Instance = function(id) {
 
     this.attachPacketHandlers = function(io) {
         var self = this;
-        io.sockets.on('connection', function(socket) {
-
-            // for(var m in managers) {
-            //     managers[m](socket,io,self)
-            // }
-
-        })
+        // io.sockets.on('connection', function(socket) {
+        //
+        //
+        // })
     }
 };
 module.exports = Instance;

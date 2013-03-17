@@ -6,10 +6,11 @@ var app = module.exports = express();
 var server = require('http').createServer(app)
 var util = require('util');
 var orm = require('orm');
-
 var config = require('./config/application');
 
-orm.connect("mysql://root:root@localhost:8889/arpg", function (err, db) {
+controllers = {};
+
+orm.connect("mysql://" + config.database.user + ":" + config.database.pass + "@" + config.database.host + ":" + config.database.port + "/" + config.database.database, function (err, db) {
 
     if (err) throw err;
 
@@ -65,5 +66,6 @@ orm.connect("mysql://root:root@localhost:8889/arpg", function (err, db) {
     app.instances[instance.id] = instance;
 
     // init routes
-    var routes = require('./config/routes').init(app);
+    var routes = require('./config/routes').init(app, io, instance);
+
 })
