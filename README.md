@@ -1,24 +1,38 @@
-# The game with a hundred names - using Angular this time.
+### The game with a hundred names - Now with more Angular
 
-Front-end stack:
-    Angular.js (jQuery) - framework/bindings
-    Easel.js - canvas library
-    LESS - CSS scripting
-    Keymaster - key bindings
-    Ejs - templating
+Written and re-written at least 6 times by now. I've called upon my techy friends to see what we can come up with, together.
 
-Back-end stack:
-    Node.js
-    Socket.io
-    MySQL
+### Introduction
 
-    mysql-node
-    node-orm - https://github.com/dresende/node-orm2
-    node-migrate - https://github.com/rsandor/node-migrate
+We don't even know what the hell this is going to be yet, but it's going to be great.
 
+##### Front-end:
 
+    angular.js / jQuery 	- framework/bindings with more brains
+    easel.js 				- canvas with less butthurt
+    LESS 					- CSS with more awesome
+    keymaster 				- key bindings with less keycode WTFing.
 
-# Configuration
-database.json
-once you have made changes to this file (locally) run the following command
-git update-index --assume-unchanged database.json
+##### Back-end:
+
+    node.js (0.8.12)		
+    socket.io    			
+    node-orm
+    db-migrate
+    ejs
+    node-mailer
+
+### Configuration
+Edit `database.json` to match your environment, but don't commit it.
+
+```
+$ git update-index --assume-unchanged database.json `
+$ npm install
+$ db-migrate up
+$ npm test
+```
+
+### Run
+``` 
+$node app.js
+```
