@@ -10,7 +10,6 @@ var config = require('./config/application');
 
 controllers = {};
 
-console.log(config)
 orm.connect(config.connectionString, function (err, db) { if (err) throw err;
 
     global.db = db;

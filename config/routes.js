@@ -19,13 +19,11 @@ exports.init = function(app, io, instance) {
     app.post('/characters/create',          character.create)
     app.get('/characters/list',             character.list)
 
-
     io.sockets.on('connection', function(socket) {
         for(var c in controllers) {
             controllers[c].bindSocket(socket, io, instance)
         }
     })
-
 
     // dynamically create routes for all files in the shared directory
     require("fs").readdirSync("./shared/").forEach(function(file) {
