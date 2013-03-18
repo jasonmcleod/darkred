@@ -2,8 +2,6 @@
     "dev":{
         "driver":"mysql",
         "user":"root",
-        "password":"root",
-        "port":"8889",
         "host":"localhost",
         "database":"arpg"
     }
