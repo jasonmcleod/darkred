@@ -4,3 +4,4 @@ node_modules/*
 .VolumeIcon.icns
 .fseventsd
 Icon^M^M
+config/env/.
