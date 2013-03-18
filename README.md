@@ -7,7 +7,6 @@ Front-end stack:
     Keymaster - key bindings
     Ejs - templating
 
-
 Back-end stack:
     Node.js
     Socket.io
@@ -19,5 +18,7 @@ Back-end stack:
 
 
 
-To dump the db:
-mysqldump -h 127.0.0.1 -P 8889 -u root -p --no-data arpg
+# Configuration
+database.json
+once you have made changes to this file (locally) run the following command
+git update-index --assume-unchanged database.json
