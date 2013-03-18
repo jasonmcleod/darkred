@@ -27,10 +27,19 @@ module.exports.create = function(req, res) {
             res.send({success:0, error:"Email already registered"})
             return false;
         } else {
+
+            console.log(req.body)
             Account.create([{
                 email:req.body.email,
-                password:req.body.password
+                password:req.body.password,
+                token:0,
+                activationCode:0
             }],function(err, results) {
+
+                console.log(err)
+
+                console.log(results)
+
                 results[0].generateActivationCode(function(err, account) {
                     if(!err) {
                         if(!req.body.test) {
