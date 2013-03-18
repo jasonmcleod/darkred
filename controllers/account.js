@@ -21,9 +21,8 @@ module.exports.authenticate = function(req, res) {
 }
 
 module.exports.create = function(req, res) {
-    var account = new Account()
+    // var account = new Account()
     Account.find({email:req.body.email}, function(err, results) {
-
         if(results && results.length>0) {
             res.send({success:0, error:"Email already registered"})
             return false;
@@ -34,7 +33,7 @@ module.exports.create = function(req, res) {
             }],function(err, results) {
                 results[0].generateActivationCode(function(err, account) {
                     if(!err) {
-                        // if(skipEmail === undefined) {
+                        if(!req.body.test) {
                             var msg = new Email({
                                 to:account.email,
                                 template:'account-created',
@@ -49,9 +48,9 @@ module.exports.create = function(req, res) {
                                     res.send({success:1})
                                 }
                             })
-                        // } else {
-                        //     res.send({success:1})
-                        // }
+                        } else {
+                            res.send({success:1})
+                        }
                     }
                 })
             })
@@ -61,10 +60,14 @@ module.exports.create = function(req, res) {
 
 module.exports.activate = function(req, res) {
     Account.find({activationCode:req.params.code}, function(err, accounts) {
-        accounts[0].activated=1
-        accounts[0].activationCode = '';
-        accounts[0].save();
-        res.send({success:1})
+        if(err || accounts.length<=0) {
+            res.redirect('/#activation-failed')
+        } else {
+            accounts[0].activated=1
+            accounts[0].activationCode = '';
+            accounts[0].save();
+            res.redirect('/#activated')
+        }
     })
 }
 

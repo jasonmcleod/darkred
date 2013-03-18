@@ -22,10 +22,7 @@ exports.init = function(app, io, instance) {
 
     io.sockets.on('connection', function(socket) {
         for(var c in controllers) {
-            //console.log(controllers[c].bindSocket)
-            // console.log(controllers[c])
             controllers[c].bindSocket(socket, io, instance)
-            // controllers[c](socket,io,self)
         }
     })
 

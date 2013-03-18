@@ -1,174 +1,35 @@
-var Account = require('../../models/Account');
-var config = require('../../config/application');
-
-var Db = require('mysql-activerecord');
-db = new Db.Adapter({
-    server: config.database.host,
-    username: config.database.user,
-    password: config.database.pass,
-    database: config.database.database,
-    port:config.database.port
-});
-
-var account = new Account({email:'tests',password:'tests'});
-
-// delete test data from db
-db.where({email:'tests'}).delete('accounts')
-db.where({name:'testCharacter'}).delete('characters')
-
-describe('New Account', function() {
-
-    it('should create a new account with a unique email, and valid credential', function(done) {
-        account.create({email: account.email, password:account.password}, function(results) {
-
-            results.success.should.equal(1)
-            done();
-
-        }, true)
-    })
-
-    it('should activate the new account', function(done) {
-        db.where({id:account.id}).get('account_activations', function(err, results) {
-            account.activate(results[0].code, function(results) {
-                results.success.should.equal(1)
-                done()
-            })
-        })
-    })
-
-    it('should fail if the email is already registered', function(done) {
-        account.create({email: account.email, password:account.password}, function(results) {
-
-            results.success.should.equal(0)
-            done();
-
-        }, true)
-    })
-});
-
-
-describe('Login', function() {
-
-    it('should find a user if login is valid and account is activated', function(done) {
-        account.authenticate(account.email, account.password, function(results) {
-            results.success.should.equal(1)
-            done();
-        })
-    })
-
-    it('should block you from logging in if account is not active', function(done) {
-        db.where({id:account.id}).update('accounts',{activated:0});
-        account.authenticate(account.email, account.password, function(results) {
-
-            results.success.should.equal(0)
-
-            db.where({id:account.id}).update('accounts',{activated:1});
-
-            done();
-
-        })
-    })
-
-    it('should fail to find a user if login is invalid', function(done) {
-        account.authenticate(account.email, 'badpassword', function(results) {
-            results.success.should.equal(0)
-            done();
-        })
-    })
-
-})
-
-describe('Characters', function() {
-
-    it('should create a character with a unique name', function(done) {
-        account.authenticate(account.email, account.password, function(results) {
-            var token = results.token
-
-            account.createCharacter(token, {name:'testCharacter', class:1}, function(data) {
-                data.success.should.equal(1)
-                done();
-            })
-
-        })
-    })
-
-    it('should fail when creating a character, if the name is in use', function(done) {
-        account.authenticate(account.email, account.password, function(results) {
-            var token = results.token
-
-            account.createCharacter(token, {name:'testCharacter', class:1}, function(results) {
-                results.success.should.equal(0)
-                done();
-            })
-
-        })
-    })
-
-    it('should return a list of characters', function(done) {
-        account.authenticate(account.email, account.password, function(results) {
-            var token = results.token
-            results.success.should.equal(1)
-            results.characters.length.should.be.above(0)
-            done();
-        })
-    })
-
-    it('should allow me to select one of my own characters', function(done) {
-        account.authenticate(account.email, account.password, function(results) {
-            var token = results.token
-            account.findCharacter(results.characters[0].id, token, function(chars) {
-                chars[0].id.should.be.above(0)
-                done();
-            })
-        })
-    })
-
-    it('should allow fail if i try to select a character thats not mine', function(done) {
-        account.authenticate(account.email, account.password, function(results) {
-            var token = results.token
-            account.findCharacter(-1, token, function(chars) {
-                chars.length.should.equal(0)
-                done();
-            })
-        })
-    })
-
-})
-
-describe('Tokens', function() {
-
-    it('should create a token for me', function(done) {
-        account.authenticate(account.email, account.password, function(results) {
-            var token = results.token
-            results.token.should.not.equal(false)
-            db.where({token:token, account:account.id}).get('account_tokens', function(err, results) {
-                results.length.should.equal(1)
-                done()
-            })
-        })
-    })
-
-    it('should authenticate with a token', function(done) {
-        account.authenticate(account.email, account.password, function(results) {
-            var token = results.token
-            var accountCheck1 = results.id
-            account.authByToken(token, function(data) {
-                data.success.should.equal(1)
-                done();
-            })
-        })
-    })
-
-    it('should remove my tokens from the database once I choose a character', function(done) {
-        account.authenticate(account.email, account.password, function(results) {
-            var token = results.token
-            account.findCharacter(results.characters[0].id, token, function(chars) {
-                db.where({account:account.id}).get('account_tokens', function(err, results) {
-                    results.length.should.equal(0)
-                    done()
-                })
-            })
-        })
-    })
-
-})
+// var orm = require('orm');
+// var config = require('../../config/application');
+//
+// describe('Connection', function() {
+//
+//     it('should connect to the database and run tests', function(done) {
+//
+//         orm.connect("mysql://" + config.database.user + ":" + config.database.pass + "@" + config.database.host + ":" + config.database.port + "/" + config.database.database, function (err, db) {
+//
+//             global.db = db
+//
+//             var Account = require('../../models/Account');
+//
+//             Account.find({email:'tests'}).remove()
+//
+//             if (err) throw err;
+//
+//             describe('New Account', function() {
+//
+//                 it('should create a new account with a unique email, and valid credential', function(done) {
+//                     Account.create([{
+//                         email: 'tests',
+//                         password:'tests',
+//                         activated:0,
+//                     }], function(err, results) {
+//                         results[0].email.should.equal('tests')
+//                         done();
+//                     })
+//                 })
+//             });
+//
+//             done();
+//         })
+//     })
+// })

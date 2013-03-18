@@ -14,7 +14,7 @@
     , "orm":""
   },
   "scripts": {
-    "test": "./node_modules/.bin/mocha --require should --recursive --reporter spec ./tests",
+    "test": "./node_modules/.bin/mocha --require should --recursive --reporter spec --globals db,Account ./tests",
     "start": "node server.js"
   }
 }

@@ -4,20 +4,25 @@ var Character = require('../models/Character');
 //req/res
 module.exports.create = function(req, res) {
 
-    Character.create([{
-        name:req.body.name,
-        xp:0
-    }], function(err, char) {
+    Character.find({name:req.body.name}, function(err, results) {
+        if(results.length>0) {
+            res.send({success:0, error:'That name is already in use'})
+        } else {
+            Character.create([{
+                name:req.body.name,
+                xp:0
+            }], function(err, char) {
 
-        Account.find({token:req.body.token}, function(err, account) {
-            account[0].addCharacters(char[0], function() {
-                console.log('after add')
-                console.log(arguments)
-                res.send({success:1})
+                Account.find({token:req.body.token}, function(err, account) {
+                    account[0].addCharacters(char[0], function() {
+                        res.send({success:1})
+                    })
+
+                })
+
             })
 
-        })
-
+        }
     })
 }
 
