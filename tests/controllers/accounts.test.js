@@ -5,33 +5,34 @@ controllers = {}
 
 describe('Connection', function() {
     it('should connect to the database and run tests', function(allDone) {
+
         orm.connect(config.connectionString, function (err, db) {
             if (err) throw err;
 
             global.db = db
             global.Account = require('../../models/Account');
 
-            Account.find({email:'tests'}).remove()
-
             var account = require('../../controllers/account');
 
-            describe("Create", function() {
+            describe("Create", function(done) {
+
                 it("should create an account", function(done){
                     var request = {
-                        body:{
-                            email:'tests',
-                            password:'tests',
-                            test:1
-                        }
-                    }
-                    var response = {
-                        send:function(data) {
-                            data.success.should.equal(1)
-                            done();
-                        }
-                    }
+                           body:{
+                               email:'tests',
+                               password:'tests',
+                               test:1
+                           }
+                       }
+                       var response = {
+                           send:function(data) {
+                               data.success.should.equal(1)
+                               done();
+                           }
+                       }
                     account.create(request, response);
                 });
+
 
                 it("should fail to create an account if the email is in use", function(done){
                      var request = {
@@ -48,7 +49,8 @@ describe('Connection', function() {
                          }
                      }
                      account.create(request, response);
-                 });
+                })
+
             });
 
             describe("Authentication / Activation", function() {

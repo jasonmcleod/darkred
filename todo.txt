@@ -1,4 +1,1 @@
-server doesnt use a password - need to modify the connection string in app.js to skip password and port
 tests require 2 runs to pass
-database.json.. should have config read this - since db-migrate expects it there
-tables are not set to auto increment

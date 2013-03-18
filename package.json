@@ -16,7 +16,7 @@
     , "db-migrate": ""
   },
   "scripts": {
-    "test": "./node_modules/.bin/mocha --require should --recursive --reporter spec --globals db,Account ./tests",
+    "test": "NODE_ENV=test node testPrep.js && db-migrate up -e test && NODE_ENV=test ./node_modules/.bin/mocha --require should --recursive --reporter spec --globals db,Account ./tests",
     "start": "node server.js"
   }
 }
