@@ -26,7 +26,7 @@ We don't even know what the hell this is going to be yet, but it's going to be g
 Edit `database.json` to match your environment, but don't commit it.
 
 ```
-$ git update-index --assume-unchanged database.json `
+$ git update-index --assume-unchanged database.json
 $ npm install
 $ db-migrate up
 $ npm test
@@ -34,5 +34,5 @@ $ npm test
 
 ### Run
 ``` 
-$node app.js
+$ node app.js
 ```
