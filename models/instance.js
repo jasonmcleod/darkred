@@ -58,12 +58,5 @@ var Instance = function(id) {
         }
     }
 
-    this.attachPacketHandlers = function(io) {
-        var self = this;
-        // io.sockets.on('connection', function(socket) {
-        //
-        //
-        // })
-    }
 };
 module.exports = Instance;

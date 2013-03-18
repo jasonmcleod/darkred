@@ -1,12 +1,12 @@
-var routes = require('../routes');
 var account = require('../controllers/account');
+var application = require('../controllers/app');
 var character = require('../controllers/character');
 var chat = require('../controllers/chat');
 
 exports.init = function(app, io, instance) {
 
     // root
-    app.get('/',                            routes.index);
+    app.get('/',                            application.index);
 
     // authentication
     app.post('/auth',                       account.authenticate)

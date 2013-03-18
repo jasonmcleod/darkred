@@ -11,20 +11,9 @@ var config = require('./config/application');
 controllers = {};
 
 console.log(config)
-orm.connect(config.connectionString, function (err, db) {
-
-    if (err) throw err;
+orm.connect(config.connectionString, function (err, db) { if (err) throw err;
 
     global.db = db;
-
-    // var Db = require('mysql-activerecord');
-    // global.db = new Db.Adapter({
-    //     server: config.database.host,
-    //     username: config.database.user,
-    //     password: config.database.pass,
-    //     database: config.database.database,
-    //     port:config.database.port
-    // });
 
     // load models
     var Instance = require('./models/instance')
@@ -51,7 +40,6 @@ orm.connect(config.connectionString, function (err, db) {
     });
 
     // build front-end file list
-    require('./lib/frontEndPackage').generate(function(files) { global.frontEndPackage = files; })
 
     // bootstrap app
     app.instances = {};
@@ -63,7 +51,6 @@ orm.connect(config.connectionString, function (err, db) {
 
     // kick off an instance
     var instance = new Instance('main');
-    instance.attachPacketHandlers(io)
     app.instances[instance.id] = instance;
 
     // init routes
