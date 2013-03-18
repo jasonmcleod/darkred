@@ -5,3 +5,4 @@ node_modules/*
 .fseventsd
 Icon^M^M
 database.json
+.DS_Store
