@@ -5,7 +5,7 @@ controllers = {}
 
 describe('Connection', function() {
     it('should connect to the database and run tests', function(allDone) {
-        orm.connect("mysql://" + config.database.user + ":" + config.database.pass + "@" + config.database.host + ":" + config.database.port + "/" + config.database.database, function (err, db) {
+        orm.connect(config.connectionString, function (err, db) {
             if (err) throw err;
 
             global.db = db

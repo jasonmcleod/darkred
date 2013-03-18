@@ -10,7 +10,8 @@ var config = require('./config/application');
 
 controllers = {};
 
-orm.connect("mysql://" + config.database.user + ":" + config.database.pass + "@" + config.database.host + ":" + config.database.port + "/" + config.database.database, function (err, db) {
+console.log(config)
+orm.connect(config.connectionString, function (err, db) {
 
     if (err) throw err;
 

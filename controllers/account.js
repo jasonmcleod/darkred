@@ -21,24 +21,18 @@ module.exports.authenticate = function(req, res) {
 }
 
 module.exports.create = function(req, res) {
-    // var account = new Account()
     Account.find({email:req.body.email}, function(err, results) {
         if(results && results.length>0) {
             res.send({success:0, error:"Email already registered"})
             return false;
         } else {
 
-            console.log(req.body)
             Account.create([{
                 email:req.body.email,
                 password:req.body.password,
                 token:0,
                 activationCode:0
             }],function(err, results) {
-
-                console.log(err)
-
-                console.log(results)
 
                 results[0].generateActivationCode(function(err, account) {
                     if(!err) {
