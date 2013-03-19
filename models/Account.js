@@ -5,7 +5,8 @@ var Account = db.define("accounts", {
     password: String,
     activated: Number,
     token:String,
-    activationCode:String
+    activationCode:String,
+    passwordCode:String
 }, {
     methods: {
         fullName: function () {
@@ -17,6 +18,10 @@ var Account = db.define("accounts", {
         },
         generateActivationCode:function(cb) {
             this.activationCode = Math.random()*99999999999;
+            this.save(cb)
+        },
+        generatePasswordCode:function(cb) {
+            this.passwordCode = Math.random()*99999999999;
             this.save(cb)
         }
     },

@@ -143,6 +143,57 @@ describe('Connection', function() {
 
             });
 
+            describe("Reset Password", function(done) {
+
+                it("should generate a password reset code", function(done){
+                    var request = {
+                           query:{
+                               email:'tests',
+                               test:1
+                           }
+                       }
+                       var response = {
+                           send:function(data) {
+                               data.success.should.equal(1)
+                               Account.find({email:request.query.email}, function(err, results) {
+                                   results[0].passwordCode.should.be.a('number')
+                                   done();
+                               })
+                           }
+                       }
+                    account.forgot(request, response);
+                });
+
+                it("should reset password with a valid passwordCode", function(done){
+
+                    Account.find({email:'tests'}, function(err, results) {
+                        var code = results[0].passwordCode
+                        var id = results[0].id
+
+                        var request = {
+                               body:{
+                                   password:'tests-reset',
+                                   passwordCode:code
+                               }
+                           }
+                           var response = {
+                               send:function(data) {
+                                   data.success.should.equal(1)
+                                   Account.find({id:id}, function(err, results) {
+                                       results[0].password.should.equal('tests-reset')
+                                       done();
+                                   })
+                               }
+                           }
+                        account.resetEnd(request, response);
+                    })
+
+
+                });
+
+
+            })
+
             allDone();
         })
     })

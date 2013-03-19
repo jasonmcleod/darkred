@@ -8,7 +8,8 @@ exports.up = function(db, callback) {
         password:'string',
         activated:'int',
         token:'string',
-        activationCode:'string'
+        activationCode:'string',
+        passwordCode:'string'
     },callback())
 };
 

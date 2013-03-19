@@ -74,6 +74,53 @@ module.exports.activate = function(req, res) {
     })
 }
 
+module.exports.forgot = function(req, res) {
+    Account.find({email:req.query.email}, function(err, results) {
+        if(err || results.length<=0) {
+            res.send({success:0, error:'No account found by that email.'})
+        } else {
+            results[0].generatePasswordCode(function(err, account) {
+                if(!err) {
+                    if(!req.query.test) {
+                        var msg = new Email({
+                            to:account.email,
+                            template:'account-forgot',
+                            subject:'Forgot Password',
+                            locals:{
+                                passwordCode:account.passwordCode
+                            }
+                        },function(err, results) {
+                            if(err) {
+                                res.send({success:0, err:err})
+                            } else {
+                                res.send({success:1})
+                            }
+                        })
+                    } else {
+                        res.send({success:1})
+                    }
+                }
+            })
+        }
+    })
+
+}
+
+module.exports.resetStart = function(req, res) {
+    res.redirect('/#reset/' + req.params.code || 'invalid')
+}
+
+module.exports.resetEnd = function(req, res) {
+    Account.find({passwordCode:req.body.passwordCode||''}, function(err, results) {
+        if(results.length<=0) {
+            res.send({success:0})
+        } else {
+            results[0].password = req.body.password
+            results[0].save();
+            res.send({success:1})
+        }
+    })
+}
 //io
 module.exports.bindSocket = function(socket, io, instance) {
     socket.on('join', function(data) {

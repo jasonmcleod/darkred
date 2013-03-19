@@ -14,6 +14,9 @@ exports.init = function(app, io, instance) {
     // account
     app.post('/accounts/create',            account.create)
     app.get('/accounts/activate/:code',     account.activate)
+    app.get('/accounts/forgot',             account.forgot)
+    app.get('/accounts/reset/:code',        account.resetStart)
+    app.post('/accounts/reset',             account.resetEnd)
 
     // character
     app.post('/characters/create',          character.create)
