@@ -187,11 +187,7 @@ describe('Connection', function() {
                            }
                         account.resetEnd(request, response);
                     })
-
-
                 });
-
-
             })
 
             allDone();
