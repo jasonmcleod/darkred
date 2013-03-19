@@ -4,5 +4,11 @@
         "user":"root",
         "host":"localhost",
         "database":"arpg"
+    },
+    "test": {
+        "driver":"mysql",
+        "user":"root",
+        "host":"localhost",
+        "database":"arpg-test"
     }
 }
