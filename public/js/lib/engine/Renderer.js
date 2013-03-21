@@ -51,7 +51,20 @@ function Renderer(options) {
 
                 if(!map[mapY] || !map[mapY][mapX]) { return }
 
-                var tile = map[mapY][mapX];
+                var tile = map[mapY][mapX][0];
+                renderTile(bufferCtx, tile-1, xx*options.tileSize,yy*options.tileSize)
+            }
+        }
+
+        for(var yy=0;yy<camera.height+1;yy++) {
+            for(var xx=0;xx<camera.width+1;xx++) {
+
+                var mapX = xx + ~~(camera.x/options.tileSize)
+                var mapY = yy + ~~(camera.y/options.tileSize)
+
+                if(!map[mapY] || !map[mapY][mapX]) { return }
+
+                var tile = map[mapY][mapX][1];
                 renderTile(bufferCtx, tile-1, xx*options.tileSize,yy*options.tileSize)
             }
         }
