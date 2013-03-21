@@ -11,17 +11,19 @@ function MapParser(options) {
     $.get(options.map, function(data) {
 
         // extract tile properties
-        $.each(data.tilesets[0].tileproperties, function(key) {
+        if(data.tilesets[0].hasOwnProperty('tileproperties')) {
+            $.each(data.tilesets[0].tileproperties, function(key) {
 
-            if(this.hasOwnProperty('blocksView')) {
-                //options.blockView.push(parseInt(key)+1)
-            }
+                if(this.hasOwnProperty('blocksView')) {
+                    //options.blockView.push(parseInt(key)+1)
+                }
 
-            if(this.hasOwnProperty('blocksMovement')) {
-                blocksMovement.push(parseInt(key)+1)
-            }
+                if(this.hasOwnProperty('blocksMovement')) {
+                    blocksMovement.push(parseInt(key)+1)
+                }
 
-        })
+            })
+        }
 
         var tilesetFile = data.tilesets[0].image.split('/');
         tilesetFile = tilesetFile[tilesetFile.length-1]

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="100" height="100" tilewidth="40" tileheight="40">
+ <tileset firstgid="1" name="losteden" tilewidth="40" tileheight="40">
+  <image source="../tilesets/losteden.png" trans="ff00ff" width="840" height="840"/>
+ </tileset>
+ <layer name="grass" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt1sEKgzAURUEX9v9/uVsRm9yXpJDSGQiCJZt31PQ46l7hoi6d7ewio8deRmZ7Xq5nuIfMdaZP1969+9JjTvp8P70jeqzn/NiLHnvRYy/pf6mne63f9BjTOqurPXr76Gv1SFZvnx41SY+ZZnrUpLO+f4MqHfTI9c7y5CzRY520x+iZokfNN3p8WvStnrkec/TYix6/w2wBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgv7wBiTYJWg==
+  </data>
+ </layer>
+ <layer name="base" width="100" height="100" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJzt2DeOFFEUhtE3QISZEDMJLhxMgtvCYFJcgAtBggCTIgFLwC4BuwSYgY3xo6GlpvReN9NFoQrOkb7sdnKvuqvUS6WUbWl72vGfom1v2pf2F/cYg9V0LB0v8/e4M+1Ku9OetPwXn3GPrZne01KZ/dt1MB1Kh9ORdLQx5x6Lm77FgbL527VS6jc5lU6nM+lsOleZcY9+JjuaPEcm1Z4na+l8upAupkuVGffoZ7KjX8+RE2XzFidL/XlyI91Mt9LtdKcy4x79TO9p3rP9YXqUHqcnjRn36GfRnfaJtqF2PutdjbahbjHrXY222j4vpyvparqWrjfmWt+Hee9qtHX3ejfdS89+dz89qMx1m/7fZd67Gm3dvT4tf97jeXpRmeu2lf9daOvu6mV6lV6nN+lteleZ8341jO6u3qcP6WP6lD6nL5U59xhGd1df07e0njbS9/SjMucew/iXe3aP/txjXNxjXNxjXNxjXNxjXNxjXNxj3OwcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFjUTwVtKYs=
+  </data>
+ </layer>
+ <layer name="fringe" width="100" height="100" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJztzsENACAMxLCuBmX/mbgtQKot5Z8qAAAA4Ecr7dTpPH4BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgEkup/YBCw==
+  </data>
+ </layer>
+</map>
