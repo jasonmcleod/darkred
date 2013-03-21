@@ -164,6 +164,27 @@ describe('Connection', function() {
                     account.forgot(request, response);
                 });
 
+                it("should fail to reset password with invalid passwordCode", function(done){
+
+                    Account.find({email:'tests'}, function(err, results) {
+                        var id = results[0].id
+
+                        var request = {
+                               body:{
+                                   password:'tests-reset',
+                                   passwordCode:'badcode'
+                               }
+                           }
+                           var response = {
+                               send:function(data) {
+                                   data.success.should.equal(0)
+                                   done();
+                               }
+                           }
+                        account.resetEnd(request, response);
+                    })
+                });
+
                 it("should reset password with a valid passwordCode", function(done){
 
                     Account.find({email:'tests'}, function(err, results) {
