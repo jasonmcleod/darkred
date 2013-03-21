@@ -49,8 +49,8 @@ function MapParser(options) {
 
     this.blocked = function(x, y) {
 
-        var tileX = Math.floor(x/16)
-        var tileY = Math.floor(y/16)
+        var tileX = Math.floor(x/options.tileSize)
+        var tileY = Math.floor(y/options.tileSize)
 
         return blocksMovement.indexOf(arr[tileY][tileX])>-1
     }

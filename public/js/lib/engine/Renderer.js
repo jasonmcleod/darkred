@@ -43,28 +43,22 @@ function Renderer(options) {
 
         if(x==lastBufferRender.x && y==lastBufferRender.y) return;
 
-        // var walls = [];
-
         for(var yy=0;yy<camera.height+1;yy++) {
             for(var xx=0;xx<camera.width+1;xx++) {
 
-                var mapX = xx + ~~(camera.x/16)
-                var mapY = yy + ~~(camera.y/16)
+                var mapX = xx + ~~(camera.x/options.tileSize)
+                var mapY = yy + ~~(camera.y/options.tileSize)
 
                 if(!map[mapY] || !map[mapY][mapX]) { return }
 
                 var tile = map[mapY][mapX];
                 renderTile(bufferCtx, tile-1, xx*options.tileSize,yy*options.tileSize)
-                // if($.inArray(tile, tilesThatBlockView) >-1) walls[walls.length] = {x:xx, y:yy}
             }
         }
 
         lastBufferRender = {x:x, y:y}
 
         return true;
-        // return walls;
-
-        // easelStage.update();
     }
 
 
@@ -79,13 +73,6 @@ function Renderer(options) {
     // method to render the terrain base
     var render = function(x,y) {
 
-        // viewport_ctx.drawImage(base_canvas,x%TILE_SIZE,y%TILE_SIZE, CAMERA_WIDTH * TILE_SIZE, CAMERA_HEIGHT * TILE_SIZE, 0, 0, CAMERA_WIDTH * TILE_SIZE, CAMERA_HEIGHT * TILE_SIZE)
-        // viewport_ctx.drawImage(stage_canvas,x%TILE_SIZE,y%TILE_SIZE, CAMERA_WIDTH * TILE_SIZE, CAMERA_HEIGHT * TILE_SIZE, 0, 0, CAMERA_WIDTH * TILE_SIZE, CAMERA_HEIGHT * TILE_SIZE)
-        // viewport_ctx.drawImage(lighting_canvas,x%TILE_SIZE,y%TILE_SIZE, CAMERA_WIDTH * TILE_SIZE, CAMERA_HEIGHT * TILE_SIZE, 0, 0, CAMERA_WIDTH * TILE_SIZE, CAMERA_HEIGHT * TILE_SIZE)
-
-        // finalCtx.drawImage(bufferCanvas,x%options.tileSize,y%options.tileSize, camera.width * options.tileSize, camera.height * options.tileSize, 0, 0, camera.width * options.tileSize, camera.height * options.tileSize)
-        // finalCtx.drawImage(stageCanvas,x%options.tileSize,y%options.tileSize, camera.width * options.tileSize, camera.height * options.tileSize, 0, 0, camera.width * options.tileSize, camera.height * options.tileSize)
-
         finalCtx.drawImage(bufferCanvas,x%options.tileSize,y%options.tileSize, camera.width * options.tileSize, camera.height * options.tileSize, 0, 0, camera.width * options.tileSize, camera.height * options.tileSize)
 
         stage.elements.map(function(elm) {
@@ -95,17 +82,6 @@ function Renderer(options) {
         stage.stage.update()
 
         finalCtx.drawImage(stageCanvas, 0, 0, camera.width * options.tileSize, camera.height * options.tileSize, 0, 0, camera.width * options.tileSize, camera.height * options.tileSize)
-
-
-        // console.log(bufferCanvas,
-        //     x % options.tileSize ,
-        //     y % options.tileSize ,
-        //     y,
-        //     camera.width * options.tileSize ,
-        //     y,
-        //     camera.height * options.tileSize ,y, 0, 0, camera.width * options.tileSize ,y, camera.height * options.tileSize ,y)
-        // stageCtx.drawImage(bufferCanvas, x % options.tileSize ,y % options.tileSize ,y, camera.width * options.tileSize ,y, camera.height * options.tileSize ,y, 0, 0, camera.width * options.tileSize ,y, camera.height * options.tileSize ,y)
-        // stageCtx.drawImage(bufferCanvas, 0, 0)
     }
 
     var start = function() {
