@@ -3,13 +3,13 @@ function GameCtrl($scope, socket, $rootScope, $location) {
     $scope.set = function(v, d) { $scope[v] = d; }
 
     $scope.socket = socket;
-    $scope.tileSize = 20;
+    $scope.tileSize = 40;
     $scope.players = {};
     $scope.socketEvents = new SocketEvents($scope, socket)
 
     // loads the map
     $scope.mapParser = new MapParser({
-        map:'/assets/maps/losteden.json',
+        map:'/assets/maps/losteden40.json',
         assetsPath:'/assets/tilesets/',
         tileSize:$scope.tileSize,
         callback:function(map, layers, tileset) {
@@ -17,8 +17,8 @@ function GameCtrl($scope, socket, $rootScope, $location) {
             // follows the player
             $scope.camera = new Camera({
                 tileSize:$scope.tileSize,
-                width:30,
-                height:20,
+                width:10,
+                height:10,
                 x:0,
                 y:0
             });

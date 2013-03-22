@@ -1,4 +1,5 @@
 function MapParser(options) {
+    var self = this;
 
     MAP = this
     MAPOP = options
@@ -10,6 +11,8 @@ function MapParser(options) {
 
     $.get(options.map, function(data) {
 
+        self.layers = data.layers
+
         // extract tile properties
         if(data.tilesets[0].hasOwnProperty('tileproperties')) {
             $.each(data.tilesets[0].tileproperties, function(key) {
@@ -18,7 +21,7 @@ function MapParser(options) {
                     //options.blockView.push(parseInt(key)+1)
                 }
 
-                if(this.hasOwnProperty('blocksMovement')) {
+                if(this.hasOwnProperty('blocksMovement') || this.hasOwnProperty('b')) {
                     blocksMovement.push(parseInt(key)+1)
                 }
 
@@ -27,7 +30,11 @@ function MapParser(options) {
 
         var layers = [];
         for(var z = 0; z<data.layers.length; z++) {
-            layers.push(data.layers[z].properties.type == 'base' ? 0:1)
+            if(data.layers[z].hasOwnProperty('properties')) {
+                layers.push(data.layers[z].properties.type == 'base' ? 0:1)
+            } else {
+                layers.push(0)
+            }
         }
 
         var tilesetFile = data.tilesets[0].image.split('/');
@@ -69,7 +76,10 @@ function MapParser(options) {
         var tileX = Math.floor(x/options.tileSize)
         var tileY = Math.floor(y/options.tileSize)
 
-        return blocksMovement.indexOf(arr[tileY][tileX][1]) >-1 || blocksMovement.indexOf(arr[tileY][tileX][0])>-1
+
+        for(var z = 0; z<self.layers.length; z++) {
+            if(blocksMovement.indexOf(arr[tileY][tileX][z]) >-1) return true
+        }
     }
 
 }

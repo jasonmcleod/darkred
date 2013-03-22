@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="100" height="100" tilewidth="40" tileheight="40">
+ <tileset firstgid="1" name="losteden" tilewidth="40" tileheight="40">
+  <image source="../tilesets/losteden.png" trans="ff00ff" width="840" height="840"/>
+  <terraintypes>
+   <terrain name="Path" tile="22"/>
+  </terraintypes>
+  <tile id="0" terrain=",,,0"/>
+  <tile id="1" terrain=",,0,0"/>
+  <tile id="2" terrain=",,0,"/>
+  <tile id="21" terrain=",0,,0"/>
+  <tile id="22" terrain="0,0,0,0"/>
+  <tile id="23" terrain="0,,0,"/>
+  <tile id="42" terrain=",0,,"/>
+  <tile id="43" terrain="0,0,,"/>
+  <tile id="44" terrain="0,,,"/>
+  <tile id="85">
+   <properties>
+    <property name="b" value="1"/>
+   </properties>
+  </tile>
+  <tile id="86">
+   <properties>
+    <property name="b" value="1"/>
+   </properties>
+  </tile>
+  <tile id="87">
+   <properties>
+    <property name="b" value="1"/>
+   </properties>
+  </tile>
+  <tile id="88">
+   <properties>
+    <property name="b" value="1"/>
+   </properties>
+  </tile>
+  <tile id="105">
+   <properties>
+    <property name="b" value="1"/>
+   </properties>
+  </tile>
+  <tile id="106">
+   <properties>
+    <property name="b" value="1"/>
+   </properties>
+  </tile>
+  <tile id="110">
+   <properties>
+    <property name="b" value="1"/>
+   </properties>
+  </tile>
+  <tile id="126">
+   <properties>
+    <property name="b" value="1"/>
+   </properties>
+  </tile>
+  <tile id="131">
+   <properties>
+    <property name="b" value="1"/>
+   </properties>
+  </tile>
+  <tile id="147">
+   <properties>
+    <property name="b" value="1"/>
+   </properties>
+  </tile>
+  <tile id="151">
+   <properties>
+    <property name="b" value="1"/>
+   </properties>
+  </tile>
+  <tile id="152">
+   <properties>
+    <property name="b" value="1"/>
+   </properties>
+  </tile>
+  <tile id="168">
+   <properties>
+    <property name="b" value="1"/>
+   </properties>
+  </tile>
+  <tile id="172">
+   <properties>
+    <property name="b" value="1"/>
+   </properties>
+  </tile>
+  <tile id="173">
+   <properties>
+    <property name="b" value="1"/>
+   </properties>
+  </tile>
+  <tile id="190">
+   <properties>
+    <property name="b" value="1"/>
+   </properties>
+  </tile>
+  <tile id="191">
+   <properties>
+    <property name="b" value="1"/>
+   </properties>
+  </tile>
+  <tile id="192">
+   <properties>
+    <property name="b" value="1"/>
+   </properties>
+  </tile>
+  <tile id="193">
+   <properties>
+    <property name="b" value="1"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="terrain1" width="100" height="100" visible="0">
+  <properties>
+   <property name="type" value="base"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt10EKwjAURdGoXYN2Dyruf3dmUiqSyE+V8sFz4EEHdtJbok6llGmHEbNHCz3i9MhFj1wiz/JQd6w7BT+vxXaR53muu9TNZW3TW6sZcaM9luve5sb9xG3t8ai7NXZv3E/c1h7vZ9en7xbiIj2uZX33e2dX65zSY9zob6XXNst175zSY9wv/2Po8T09ctmjhyZxe/XQJEaPXPTIRY9c9MhFj1z0yEWLXPQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD+zRPQlw5P
+  </data>
+ </layer>
+ <layer name="terrain2" width="100" height="100" visible="0">
+  <properties>
+   <property name="type" value="base"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztztsNgkAARFE691kCqJTgA0pQ0MaYAvZ/E/ec5GZ+p+sAAAAA4H/s0j4d0rGwp3Suda5BfRrSJV0Le0tjtXftuadHeqZXYac0V3vXnnf6pCWthf2mX51rAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADQvA2B7Bkp
+  </data>
+ </layer>
+ <layer name="fringe1" width="100" height="100">
+  <properties>
+   <property name="type" value="1"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt1zsKhDAUhtEszce4hPExS1Bw9t95wTZYiUE9Bz5ukeZvkxJwtr70AAAA4PGqqI6aqM3cT9SVGvdC37T/BYdozNwp+hVb9z5ztBy8r9H/oi0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAPW3zyQgN
+  </data>
+ </layer>
+</map>
