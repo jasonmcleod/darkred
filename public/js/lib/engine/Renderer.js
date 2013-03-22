@@ -9,6 +9,7 @@ function Renderer(options) {
     var camera =    options.camera  || false; if(!camera)  console.error('Renderer needs a Camera() passed into it.');
     var tileset =   options.tileset || false; if(!tileset) console.error('Renderer needs a MapParser.tileset passed into it.');
     var map =       options.map     || false; if(!tileset) console.error('Renderer needs a MapParser.map passed into it.');
+    var layers =    options.layers;
 
     var finalCanvas = document.createElement('canvas');
     finalCanvas.width = options.width;
@@ -27,6 +28,11 @@ function Renderer(options) {
     stageCanvas.height = options.height;
     var stageCtx = stageCanvas.getContext('2d')
 
+    var fringeCanvas = document.createElement('canvas');
+    fringeCanvas.width = options.width;
+    fringeCanvas.height = options.height;
+    var fringeCtx = fringeCanvas.getContext('2d')
+
     // initialize an easel stage
     var easelStage = new createjs.Stage(stageCanvas);
     easelStage.autoClear = true;
@@ -43,29 +49,26 @@ function Renderer(options) {
 
         if(x==lastBufferRender.x && y==lastBufferRender.y) return;
 
-        for(var yy=0;yy<camera.height+1;yy++) {
-            for(var xx=0;xx<camera.width+1;xx++) {
+        fringeCtx.clearRect(0,0,(camera.width+1) * options.tileSize, (camera.height+1) * options.tileSize)
 
-                var mapX = xx + ~~(camera.x/options.tileSize)
-                var mapY = yy + ~~(camera.y/options.tileSize)
+        for(var l=0;l<layers.length;l++) {
 
-                if(!map[mapY] || !map[mapY][mapX]) { return }
+            for(var yy=0;yy<camera.height+1;yy++) {
+                for(var xx=0;xx<camera.width+1;xx++) {
 
-                var tile = map[mapY][mapX][0];
-                renderTile(bufferCtx, tile-1, xx*options.tileSize,yy*options.tileSize)
-            }
-        }
+                    var mapX = xx + ~~(camera.x/options.tileSize)
+                    var mapY = yy + ~~(camera.y/options.tileSize)
 
-        for(var yy=0;yy<camera.height+1;yy++) {
-            for(var xx=0;xx<camera.width+1;xx++) {
+                    if(!map[mapY] || !map[mapY][mapX]) { return }
 
-                var mapX = xx + ~~(camera.x/options.tileSize)
-                var mapY = yy + ~~(camera.y/options.tileSize)
+                    var tile = map[mapY][mapX][l];
 
-                if(!map[mapY] || !map[mapY][mapX]) { return }
-
-                var tile = map[mapY][mapX][1];
-                renderTile(bufferCtx, tile-1, xx*options.tileSize,yy*options.tileSize)
+                    if(layers[l] == 0) {
+                        renderTile(bufferCtx, tile-1, xx*options.tileSize,yy*options.tileSize, false)
+                    } else {
+                        renderTile(fringeCtx, tile-1, xx*options.tileSize,yy*options.tileSize, true)
+                    }
+                }
             }
         }
 
@@ -74,17 +77,20 @@ function Renderer(options) {
         return true;
     }
 
-
     // method to render a single tile onto the buffer
-    var renderTile = function(ctx, tile, x, y) {
+    var renderTile = function(ctx, tile, x, y, clear) {
         var sourceY = Math.floor(tile / tileset.width)
         var sourceX = tile - sourceY * tileset.width
+
+        // if(clear) ctx
         ctx.drawImage(tileset.img, sourceX * options.tileSize, sourceY* options.tileSize, options.tileSize, options.tileSize, x, y, options.tileSize, options.tileSize)
     }
 
 
     // method to render the terrain base
     var render = function(x,y) {
+
+        // finalCtx.clearRect(0,0,camera.width * options.tileSize, camera.height * options.tileSize)
 
         finalCtx.drawImage(bufferCanvas,x%options.tileSize,y%options.tileSize, camera.width * options.tileSize, camera.height * options.tileSize, 0, 0, camera.width * options.tileSize, camera.height * options.tileSize)
 
@@ -95,6 +101,8 @@ function Renderer(options) {
         stage.stage.update()
 
         finalCtx.drawImage(stageCanvas, 0, 0, camera.width * options.tileSize, camera.height * options.tileSize, 0, 0, camera.width * options.tileSize, camera.height * options.tileSize)
+        finalCtx.drawImage(fringeCanvas,x%options.tileSize,y%options.tileSize, camera.width * options.tileSize, camera.height * options.tileSize, 0, 0, camera.width * options.tileSize, camera.height * options.tileSize)
+
     }
 
     var start = function() {

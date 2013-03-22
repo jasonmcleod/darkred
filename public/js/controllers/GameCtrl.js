@@ -3,7 +3,7 @@ function GameCtrl($scope, socket, $rootScope, $location) {
     $scope.set = function(v, d) { $scope[v] = d; }
 
     $scope.socket = socket;
-    $scope.tileSize = 40;
+    $scope.tileSize = 20;
     $scope.players = {};
     $scope.socketEvents = new SocketEvents($scope, socket)
 
@@ -12,13 +12,13 @@ function GameCtrl($scope, socket, $rootScope, $location) {
         map:'/assets/maps/losteden.json',
         assetsPath:'/assets/tilesets/',
         tileSize:$scope.tileSize,
-        callback:function(map, tileset) {
+        callback:function(map, layers, tileset) {
 
             // follows the player
             $scope.camera = new Camera({
                 tileSize:$scope.tileSize,
-                width:11,
-                height:11,
+                width:30,
+                height:20,
                 x:0,
                 y:0
             });
@@ -26,6 +26,7 @@ function GameCtrl($scope, socket, $rootScope, $location) {
             // renders everything onto a canvas
             $scope.renderer = new Renderer({
                 map:map,
+                layers:layers,
                 width:$scope.tileSize * ($scope.camera.width+1),
                 height:$scope.tileSize * ($scope.camera.height+1),
                 tileSize:$scope.tileSize,

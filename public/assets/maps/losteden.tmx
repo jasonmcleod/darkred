@@ -1,21 +1,220 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="100" height="100" tilewidth="40" tileheight="40">
- <tileset firstgid="1" name="losteden" tilewidth="40" tileheight="40">
+<map version="1.0" orientation="orthogonal" width="100" height="100" tilewidth="20" tileheight="20">
+ <tileset firstgid="1" name="losteden" tilewidth="20" tileheight="20">
   <image source="../tilesets/losteden.png" trans="ff00ff" width="840" height="840"/>
+  <tile id="297">
+   <properties>
+    <property name="blocksMovement" value="1"/>
+   </properties>
+  </tile>
+  <tile id="298">
+   <properties>
+    <property name="blocksMovement" value="1"/>
+   </properties>
+  </tile>
+  <tile id="299">
+   <properties>
+    <property name="blocksMovement" value="1"/>
+   </properties>
+  </tile>
+  <tile id="300">
+   <properties>
+    <property name="blocksMovement" value="1"/>
+   </properties>
+  </tile>
+  <tile id="301">
+   <properties>
+    <property name="blocksMovement" value="1"/>
+   </properties>
+  </tile>
+  <tile id="302">
+   <properties>
+    <property name="blocksMovement" value="1"/>
+   </properties>
+  </tile>
+  <tile id="338">
+   <properties>
+    <property name="blocksMovement" value="1"/>
+   </properties>
+  </tile>
+  <tile id="345">
+   <properties>
+    <property name="blocksMovement" value="1"/>
+   </properties>
+  </tile>
+  <tile id="346">
+   <properties>
+    <property name="blocksMovement" value="1"/>
+   </properties>
+  </tile>
+  <tile id="379">
+   <properties>
+    <property name="blocksMovement" value="1"/>
+   </properties>
+  </tile>
+  <tile id="388">
+   <properties>
+    <property name="blocksMovement" value="1"/>
+   </properties>
+  </tile>
+  <tile id="420">
+   <properties>
+    <property name="blocksMovement" value="1"/>
+   </properties>
+  </tile>
+  <tile id="430">
+   <properties>
+    <property name="blocksMovement" value="1"/>
+   </properties>
+  </tile>
+  <tile id="462">
+   <properties>
+    <property name="blocksMovement" value="1"/>
+   </properties>
+  </tile>
+  <tile id="472">
+   <properties>
+    <property name="blocksMovement" value="1"/>
+   </properties>
+  </tile>
+  <tile id="504">
+   <properties>
+    <property name="blocksMovement" value="1"/>
+   </properties>
+  </tile>
+  <tile id="514">
+   <properties>
+    <property name="blocksMovement" value="1"/>
+   </properties>
+  </tile>
+  <tile id="546">
+   <properties>
+    <property name="blocksMovement" value="1"/>
+   </properties>
+  </tile>
+  <tile id="556">
+   <properties>
+    <property name="blocksMovement" value="1"/>
+   </properties>
+  </tile>
+  <tile id="588">
+   <properties>
+    <property name="blocksMovement" value="1"/>
+   </properties>
+  </tile>
+  <tile id="598">
+   <properties>
+    <property name="blocksMovement" value="1"/>
+   </properties>
+  </tile>
+  <tile id="630">
+   <properties>
+    <property name="blocksMovement" value="1"/>
+   </properties>
+  </tile>
+  <tile id="640">
+   <properties>
+    <property name="blocksMovement" value="1"/>
+   </properties>
+  </tile>
+  <tile id="672">
+   <properties>
+    <property name="blocksMovement" value="1"/>
+   </properties>
+  </tile>
+  <tile id="682">
+   <properties>
+    <property name="blocksMovement" value="1"/>
+   </properties>
+  </tile>
+  <tile id="714">
+   <properties>
+    <property name="blocksMovement" value="1"/>
+   </properties>
+  </tile>
+  <tile id="723">
+   <properties>
+    <property name="blocksMovement" value="1"/>
+   </properties>
+  </tile>
+  <tile id="724">
+   <properties>
+    <property name="blocksMovement" value="1"/>
+   </properties>
+  </tile>
+  <tile id="757">
+   <properties>
+    <property name="blocksMovement" value="1"/>
+   </properties>
+  </tile>
+  <tile id="765">
+   <properties>
+    <property name="blocksMovement" value="1"/>
+   </properties>
+  </tile>
+  <tile id="800">
+   <properties>
+    <property name="blocksMovement" value="1"/>
+   </properties>
+  </tile>
+  <tile id="801">
+   <properties>
+    <property name="blocksMovement" value="1"/>
+   </properties>
+  </tile>
+  <tile id="802">
+   <properties>
+    <property name="blocksMovement" value="1"/>
+   </properties>
+  </tile>
+  <tile id="803">
+   <properties>
+    <property name="blocksMovement" value="1"/>
+   </properties>
+  </tile>
+  <tile id="804">
+   <properties>
+    <property name="blocksMovement" value="1"/>
+   </properties>
+  </tile>
+  <tile id="805">
+   <properties>
+    <property name="blocksMovement" value="1"/>
+   </properties>
+  </tile>
+  <tile id="806">
+   <properties>
+    <property name="blocksMovement" value="1"/>
+   </properties>
+  </tile>
+  <tile id="807">
+   <properties>
+    <property name="blocksMovement" value="1"/>
+   </properties>
+  </tile>
  </tileset>
- <layer name="grass" width="100" height="100">
+ <layer name="base" width="100" height="100">
+  <properties>
+   <property name="type" value="base"/>
+  </properties>
   <data encoding="base64" compression="zlib">
-   eJzt1sEKgzAURUEX9v9/uVsRm9yXpJDSGQiCJZt31PQ46l7hoi6d7ewio8deRmZ7Xq5nuIfMdaZP1969+9JjTvp8P70jeqzn/NiLHnvRYy/pf6mne63f9BjTOqurPXr76Gv1SFZvnx41SY+ZZnrUpLO+f4MqHfTI9c7y5CzRY520x+iZokfNN3p8WvStnrkec/TYix6/w2wBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgv7wBiTYJWg==
+   eJztmWeO1EAQhU2UPFchSvZVlnQZ4mVggcuwhONQ/tFSzaNSD6OV2vM+qeTU9kxXbnuepukgsirZjmfYajnntW1/Udu2PxvPwHNt/Ar3bddGpc2jR6/ZWO8ea5zW5zod2wJ1XHne6PbQOtBx4vly1edPHY9xshj3eP9Rjx0VHetRHuiJCctfPR22c227GM+xjq3/qPdHBXN4lps8e1h5v8eO+Ps6l3ljML/pZ46Krt9eLT01h/fc0/RtxRrWGzyH/rScVUO3C+YRz897cnhWR7LalMVOZtf1rBq6XfScdQ5Hf7N6Ha37TEeRvtEf8Bjv83xhD/mqzd/KORgraKdeHaHuT9169XwP9vD0ZNkkqzNeX9aTr6KYzOq5ftaoWLVT62KdjvWM+or6sh5/j/JVz5p1ZFts6Hxl5QS8hvqyYqgi0dgsrrI168hYPtt8UsfMAc7htTsid0XuidwXeSDy0Hi+1uVsnI/qU6V+jNzrbnj2sGLA8tU29pHIY5EnIk9Fnok8N56PPZMVE1F9iupHy68jk+WJpjv0T7zvSuSFyEuRVyKvRd5M9nuoSu7xbBatB0d/V7KR5WzUB+qibd+KvBN5L/JB5KPIp+lYh5W6jDUrqjdWLmz7o+LNzdK9139u288iX0SuRb6KfBP5bjy3uob06k0UU3rMqGRzs2yC9XO79kPkRuSnyC+R3yJ/Jvv7RtR3Vfstr543GRVvbri+QMH3KdaawfvWaNlaf5s8JVdhHzIqUS7GHtTKV9H3XStXeWvqamxk9X/0nreSr5pNKr6POsdeYJn+jb3DFNfwai3X37ZGpZKL0SaZHTwdZv4fxUCllms/GJXI53rfjUTnUI94nP2PSi3fU/3oyRHROgJ9GfVo6bXi+5X/uQd7ZLqo2gptEtkgu9/LY5dkj2odiexh9Van2taLEW+7B1tsVN7R6fwc1ZAee3h6r35n3Ks9LP1GvWkk+A3L6suqecdan1prIby+B3tgbdXz04Lzr9jIy/9Zj4BxGsXtnuxhvevAOME5a1th/KBNe2pPFKd4bPnGHuyR5WJPn9pvtW10HOn9ar7y4tTzCet95chU+xk9Xy93YH/q2dGySxaneOxtL4HMtyPdVmKj8i7M8wncXgKZb1dkdvatWIh6r8hml4KXH7D/8r5hRHZs40kda82OawUtnl0s27VnkjpYv7N3UGgX7I0PsE/6iHr/aO2H+vfqCvl/KjaydI9Czkdv3BBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghVf4CgfSbog==
   </data>
  </layer>
- <layer name="base" width="100" height="100">
+ <layer name="terrain" width="100" height="100" visible="0">
+  <properties>
+   <property name="type" value="base"/>
+  </properties>
   <data encoding="base64" compression="zlib">
-   eJzt2DeOFFEUhtE3QISZEDMJLhxMgtvCYFJcgAtBggCTIgFLwC4BuwSYgY3xo6GlpvReN9NFoQrOkb7sdnKvuqvUS6WUbWl72vGfom1v2pf2F/cYg9V0LB0v8/e4M+1Ku9OetPwXn3GPrZne01KZ/dt1MB1Kh9ORdLQx5x6Lm77FgbL527VS6jc5lU6nM+lsOleZcY9+JjuaPEcm1Z4na+l8upAupkuVGffoZ7KjX8+RE2XzFidL/XlyI91Mt9LtdKcy4x79TO9p3rP9YXqUHqcnjRn36GfRnfaJtqF2PutdjbahbjHrXY222j4vpyvparqWrjfmWt+Hee9qtHX3ejfdS89+dz89qMx1m/7fZd67Gm3dvT4tf97jeXpRmeu2lf9daOvu6mV6lV6nN+lteleZ8341jO6u3qcP6WP6lD6nL5U59xhGd1df07e0njbS9/SjMucew/iXe3aP/txjXNxjXNxjXNxjXNxjXNxjXNxj3OwcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFjUTwVtKYs=
+   eJzt2dlOU2EUQOH2FIW3UGQoLZP6Hso8OLyHyAwO76HM4PQeogwVHN5DlKEtqwkJXvTGxD/nD64vXUl7d7J3TnqxMxlJkqS/U6YKVWs/snwooRw10DW6To3UlE33Wf8HeWbcQQUqUid1UTf1UC/dpjt0130EN8CMB2mIhmmERmmMxukBPaRH9Nh9BDfFjKdphmZpjuZpgRbpGT2nF/TSfQS3woxXaY3WaYOqVKYKvaV39J4+uI/gdpjxLu3RPpUu9pFP+F+hr3z/Rt/ph/sI7pgZn9Apnf3xXtR2kmEfWUooRw1J2k979bUw41Zqo/bk8r0oUJE6qYu6qcd9BHePGd+nPuqnARqkIRqmERqlMRp3H8E9YcYT9JQmaYqmaYZmaY7maYEW3Udwr5jxa1qiZVqhVVqjddqgTdqiN+4juI/MeJs+0WfaoV3ao30q0Rc6oEP3EdxPZnxEv+g3HdMJndIZlalC1doucmk/7dV3gxnfpGa6RS3USm3UTnnqoAIV3Yekf8h7Rly8Z8TFe0ZcvGfEpd49o+Q9IzX17hkl7xmp8Z4RF+8ZcfGeERfvGXHxnhEX7xlx8Z4RF+8ZkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkqR6zgEIBqTr
   </data>
  </layer>
  <layer name="fringe" width="100" height="100">
+  <properties>
+   <property name="type" value="fringe"/>
+  </properties>
   <data encoding="base64" compression="zlib">
-   eJztzsENACAMxLCuBmX/mbgtQKot5Z8qAAAA4Ecr7dTpPH4BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgEkup/YBCw==
+   eJzt2UlOAkAQQFFQ0asoDuhVHADhKs5wbuFzBDdIwnvpn/SyU7XswQAA4O9+a7O7DDt1Uqd1VqM6r4vhPz/yiFw266sa13Xd1G3d1aTu68E+AAAAAAA4Mv4zDov/jMPy2Kyf6rlealqzmtdrLWppH3vz1qzf66M+66u+66dWtbYLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIC92wKGsA/F
   </data>
  </layer>
 </map>

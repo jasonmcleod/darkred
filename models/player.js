@@ -15,8 +15,8 @@ Player.prototype.reset = function(id, name) {
     this.id = id;
     this.name = name;
     this.team = 0;
-    this.x = 350;
-    this.y = 350;
+    this.x = 400;
+    this.y = 400;
     this.rotation = 0;
 
     this.lastUpdate = 0;
