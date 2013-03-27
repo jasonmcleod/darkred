@@ -296,4 +296,14 @@
    eJzt2U1OwlAUBtBXDOBcdAuOcS64Bcc492cLjmEOul2Rz4CBGEgaUtIEz0m/5jW9TW5ukw76SgEAOM73z6nKUa2vL6rtvV7W/WrfUwDN6+x8b7oH1gAAAADAefpKlmWzb3HA777F5Z//h/Yzmndbc57D1N3tqR16H416rDnPSeqezP7k3mvOeJq6mfcBAMA/dJUMkuvkpuVeKOU+GSXj5KHdVojn5CV5Td5a7oVS5ski+Ug+W+4FAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgNNaAb7+DNc=
   </data>
  </layer>
+ <objectgroup name="Encounters" width="100" height="100">
+  <properties>
+   <property name="type" value="encounters"/>
+  </properties>
+  <object x="1052" y="671" width="60" height="48">
+   <properties>
+    <property name="encounter" value="1"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>

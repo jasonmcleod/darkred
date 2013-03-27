@@ -3,7 +3,7 @@ var application = require('../controllers/app');
 var character = require('../controllers/character');
 var chat = require('../controllers/chat');
 
-exports.init = function(app, io, instance) {
+exports.init = function(app, io, game) {
 
     // root
     app.get('/',                            application.index);
@@ -24,7 +24,7 @@ exports.init = function(app, io, instance) {
 
     io.sockets.on('connection', function(socket) {
         for(var c in controllers) {
-            controllers[c].bindSocket(socket, io, instance)
+            controllers[c].bindSocket(socket, io, game)
         }
     })
 

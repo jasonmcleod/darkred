@@ -34,6 +34,11 @@
     <property name="b" value="1"/>
    </properties>
   </tile>
+  <tile id="96">
+   <properties>
+    <property name="b" value="1"/>
+   </properties>
+  </tile>
   <tile id="105">
    <properties>
     <property name="b" value="1"/>
@@ -110,20 +115,23 @@
    </properties>
   </tile>
  </tileset>
- <layer name="terrain1" width="100" height="100" visible="0">
+ <tileset firstgid="442" name="losteden" tilewidth="40" tileheight="40">
+  <image source="../tilesets/losteden.png" trans="ff00ff" width="840" height="840"/>
+ </tileset>
+ <layer name="terrain1" width="100" height="100">
   <properties>
    <property name="type" value="base"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzt10EKwjAURdGoXYN2Dyruf3dmUiqSyE+V8sFz4EEHdtJbok6llGmHEbNHCz3i9MhFj1wiz/JQd6w7BT+vxXaR53muu9TNZW3TW6sZcaM9luve5sb9xG3t8ai7NXZv3E/c1h7vZ9en7xbiIj2uZX33e2dX65zSY9zob6XXNst175zSY9wv/2Po8T09ctmjhyZxe/XQJEaPXPTIRY9c9MhFj1z0yEWLXPQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD+zRPQlw5P
+   eJzt1bENwkAQRFEDrgHoAei/PSwRTWBpszmJ96RJL9gf3L5t277A+Gl30CO1O+iR2h30SO0OeqR2Bz1Su4Meqd1BjzS51eXY9WS34Rt6zExudT/2ONlz+IYeM5NbvY69T/YZvqHFTPvf0CO1W+iR2i30SO0WmqR2Bz1Su4Meqd1Bj9TuoEdy87XosRYt1qIHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwb75cYw15
   </data>
  </layer>
- <layer name="terrain2" width="100" height="100" visible="0">
+ <layer name="terrain2" width="100" height="100">
   <properties>
    <property name="type" value="base"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztztsNgkAARFE691kCqJTgA0pQ0MaYAvZ/E/ec5GZ+p+sAAAAA4H/s0j4d0rGwp3Suda5BfRrSJV0Le0tjtXftuadHeqZXYac0V3vXnnf6pCWthf2mX51rAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADQvA2B7Bkp
+   eJzt1rlNQ0EYhVGXZmwoAWOckZqtBNYSDNglsJbA2hg3QbImQICe3kjMOdKnSX9pkjsYADBMG2mUxmkzbdU8qHHbaZJ20jTtplnVi9o2T/vpIB2mo3Rc9aK2naTTdJbO00W6rHnQP7K31k8t0lW6TjdpmVbdn9ak3/zDl9t0l+7TQ3pMT10e1bC//Mdzekmv6S29p48ObwL4TrmZyteG6le5mcrXhupXuZnK14bqV7mZyteGAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAej4BAD8wTQ==
   </data>
  </layer>
  <layer name="fringe1" width="100" height="100">
@@ -131,7 +139,17 @@
    <property name="type" value="1"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzt1zsKhDAUhtEszce4hPExS1Bw9t95wTZYiUE9Bz5ukeZvkxJwtr70AAAA4PGqqI6aqM3cT9SVGvdC37T/BYdozNwp+hVb9z5ztBy8r9H/oi0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAPW3zyQgN
+   eJzt1zsOgkAYhdFZmg9cAqJ0tpLA/jtuQmNBqIgT5Zzky19Mc9spBdjbvfYAgHh9BAD8n1M6p0u6rtwm3WqNO6C2LH/BLj1W7jP11dYdzzsNG+9jmr60BQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPhNM524CTA=
   </data>
  </layer>
+ <objectgroup name="Encounters" width="100" height="100">
+  <properties>
+   <property name="type" value="encounters"/>
+  </properties>
+  <object name="test encounter" x="450" y="325" width="145" height="86">
+   <properties>
+    <property name="id" value="1"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>

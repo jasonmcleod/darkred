@@ -11,6 +11,8 @@ function MapParser(options) {
 
     $.get(options.map, function(data) {
 
+        console.log(data)
+
         self.layers = data.layers
 
         // extract tile properties
@@ -31,14 +33,16 @@ function MapParser(options) {
         var layers = [];
         for(var z = 0; z<data.layers.length; z++) {
             if(data.layers[z].hasOwnProperty('properties')) {
-                layers.push(data.layers[z].properties.type == 'base' ? 0:1)
-            } else {
-                layers.push(0)
+                layers.push(data.layers[z].properties.type)// == 'base' ? 0:1)
+            // } else {
+            //     layers.push(0)
             }
         }
 
         var tilesetFile = data.tilesets[0].image.split('/');
         tilesetFile = tilesetFile[tilesetFile.length-1]
+
+        console.log(layers)
 
         img = new Image()
         img.src = options.assetsPath + tilesetFile;
@@ -60,9 +64,12 @@ function MapParser(options) {
 
             // for each layer
             for(var z = 0; z < data.layers.length; z++) {
-                for(var y = 0;y < data.height; y++) {
-                    for(var x = 0; x< data.width; x++) {
-                        arr[y][x][z] = data.layers[z].data[y * data.height + x]
+                console.log(data.layers[z].type)
+                if(data.layers[z].type == 'tilelayer') {
+                    for(var y = 0;y < data.height; y++) {
+                        for(var x = 0; x< data.width; x++) {
+                            arr[y][x][z] = data.layers[z].data[y * data.height + x]
+                        }
                     }
                 }
             }
@@ -71,11 +78,10 @@ function MapParser(options) {
         }
     });
 
-    this.blocked = function(x, y) {
+    this.blocked = function(x, y, ox, oy) {
 
-        var tileX = Math.floor(x/options.tileSize)
-        var tileY = Math.floor(y/options.tileSize)
-
+        var tileX = Math.floor(x/(options.tileSize))
+        var tileY = Math.floor(y/(options.tileSize))
 
         for(var z = 0; z<self.layers.length; z++) {
             if(blocksMovement.indexOf(arr[tileY][tileX][z]) >-1) return true

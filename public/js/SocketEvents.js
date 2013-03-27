@@ -2,9 +2,18 @@ function SocketEvents($scope, socket) {
 
     socket.on('instance',function(data) {
 
-        $scope.instance = data.instance
+        console.log(data)
 
-        $.each(data.instance.players, function(k,v) {
+        $scope.game = data.game
+
+        $.each(data.game.npcs, function(k,v) {
+            console.log(v)
+            v.$scope = $scope;
+            $scope.npcs[k] = new Npc(v);
+            $scope.npcs[k].addToStage()
+        })
+
+        $.each(data.game.players, function(k,v) {
             v.$scope = $scope;
             $scope.players[k] = new Player(v);
             $scope.players[k].addToStage()
@@ -17,5 +26,6 @@ function SocketEvents($scope, socket) {
 
     // player messages
     new PlayerManager($scope, socket)
+    new NpcManager($scope, socket)
 
 }

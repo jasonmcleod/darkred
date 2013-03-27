@@ -1,10 +1,13 @@
 function GameCtrl($scope, socket, $rootScope, $location) {
 
+    app.game = $scope;
+
     $scope.set = function(v, d) { $scope[v] = d; }
 
     $scope.socket = socket;
     $scope.tileSize = 40;
     $scope.players = {};
+    $scope.npcs = []
     $scope.socketEvents = new SocketEvents($scope, socket)
 
     // loads the map
@@ -17,8 +20,8 @@ function GameCtrl($scope, socket, $rootScope, $location) {
             // follows the player
             $scope.camera = new Camera({
                 tileSize:$scope.tileSize,
-                width:10,
-                height:10,
+                width:20,
+                height:12,
                 x:0,
                 y:0
             });
@@ -38,6 +41,7 @@ function GameCtrl($scope, socket, $rootScope, $location) {
             $scope.renderer.start();
 
             $scope.map = map;
+            $scope.layers = layers;
             $scope.tileset = tileset;
 
             document.getElementById('stage').appendChild($scope.renderer.finalCanvas).setAttribute('id','final')

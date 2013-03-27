@@ -63,7 +63,7 @@ function Renderer(options) {
 
                     var tile = map[mapY][mapX][l];
 
-                    if(layers[l] == 0) {
+                    if(layers[l] == 'base') {
                         renderTile(bufferCtx, tile-1, xx*options.tileSize,yy*options.tileSize, false)
                     } else {
                         renderTile(fringeCtx, tile-1, xx*options.tileSize,yy*options.tileSize, true)

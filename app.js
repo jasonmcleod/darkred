@@ -6,7 +6,6 @@ var app = module.exports = express();
 var server = require('http').createServer(app)
 var util = require('util');
 var orm = require('orm');
-var config = require('./config/application');
 
 controllers = {};
 
@@ -15,7 +14,8 @@ orm.connect(config.connectionString, function (err, db) { if (err) throw err;
     global.db = db;
 
     // load models
-    var Instance = require('./models/instance')
+    // var Instance = require('./models/instance')
+    var Mainloop = require('./mainloop');
 
     // Configuration
     app.configure(function(){
@@ -49,10 +49,12 @@ orm.connect(config.connectionString, function (err, db) { if (err) throw err;
     io.set('log level', 1);
 
     // kick off an instance
-    var instance = new Instance('main');
-    app.instances[instance.id] = instance;
+    // var instance = new Instance('main');
+    // app.instances[instance.id] = instance;
+    var game = new Mainloop(app, io)
 
     // init routes
-    var routes = require('./config/routes').init(app, io, instance);
+    var routes = require('./config/routes').init(app, io, game);
 
 })
+

@@ -10,7 +10,7 @@ function LocalPlayer(options) {
             y:this.y + (options.y || 0)
         };
 
-        if(!this.$scope.mapParser.blocked(final.x, final.y)) {
+        if(!this.$scope.mapParser.blocked(final.x, final.y, this.x, this.y)) {
 
             this.x = final.x
             this.y = final.y;

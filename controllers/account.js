@@ -122,7 +122,7 @@ module.exports.resetEnd = function(req, res) {
     })
 }
 //io
-module.exports.bindSocket = function(socket, io, instance) {
+module.exports.bindSocket = function(socket, io, game) {
     socket.on('join', function(data) {
 
         Account.find({token:data.token}, function(err, accounts) {
@@ -132,9 +132,9 @@ module.exports.bindSocket = function(socket, io, instance) {
                     var found = false;
                     for(var c in characters) {
                         if(characters[c].id == data.character) {
-                            var player = instance.addPlayer(socket.id, characters[c].name);
+                            var player = game.addPlayer(socket.id, characters[c].name);
 
-                            socket.emit('instance', {instance:instance.data(), me:player.id});
+                            socket.emit('instance', {game:game, me:player.id});
                             socket.emit('join-success', {me:player.id});
 
                             socket.broadcast.emit('playerJoin', player)
@@ -152,7 +152,7 @@ module.exports.bindSocket = function(socket, io, instance) {
     })
 
     socket.on('disconnect', function(data) {
-        instance.removePlayer(this.id);
+        game.removePlayer(this.id);
         socket.broadcast.emit('playerDrop', {id:this.id});
     })
 

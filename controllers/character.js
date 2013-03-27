@@ -35,10 +35,10 @@ module.exports.list = function(req, res) {
 }
 
 //io
-module.exports.bindSocket = function(socket, io, instance) {
+module.exports.bindSocket = function(socket, io, game) {
 
     socket.on('move', function(data) {
-        var player = instance.players[socket.id]
+        var player = game.players[socket.id]
         if(!player) return
         player.x = data.x
         player.y = data.y

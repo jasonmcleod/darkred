@@ -6,7 +6,6 @@ var Player = function(id, name) {
     this.TOTAL_HEALTH = 100;
     this.CLIP_SIZE = 32;
     this.reset(id, name)
-
 }
 
 Player.prototype.reset = function(id, name) {
@@ -91,9 +90,9 @@ Player.prototype.reload = function() {
 }
 
 Player.prototype.setPosition = function(obj) {
-        this.x = obj.x;
-        this.y = obj.y;
-    }
+    this.x = obj.x;
+    this.y = obj.y;
+}
 
 Player.prototype.onKillingSpree = function() {
     return this.killSpree >= 2;
