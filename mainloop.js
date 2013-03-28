@@ -4,6 +4,8 @@ var Encounter = require('./models/Encounter');
 var Npc = require('./models/Npc');
 var Player = require('./models/Player');
 var WorldNpc = require('./models/WorldNpc');
+var _ = require('underscore')
+var jm = require('./lib/jm')
 
 var Mainloop = function(app, io) {
 
@@ -13,24 +15,25 @@ var Mainloop = function(app, io) {
     this.npcs = []
 
     this.map = new MapParser(config.map)
-    this.map.encounters.map(function(e) {
-        Encounter.find({id:e.properties.id},function(err, data) {
 
-            if(data.length==0) {
-                Encounter.create([{
-                    id:e.id,
-                    name:e.name,
-                    x:e.x,
-                    y:e.y,
-                    width:e.width,
-                    height:e.height
-                }], function(err, results) {
-                    self.addNpc(results[0])
+    Encounter.find(function(err, encounters) {
+        for(var e=0; e < encounters.length; e++) {
+            (function(e) {
+                encounters[e].getSpawns(function(err, spawns) {
+                    for(var s=0;s<spawns.length;s++) {
+                        for(var n=spawns[s].low; n<spawns[s].high;n++) {
+                            if(_.chance(spawns[s].chance)) {
+                                self.addNpc({
+                                    npc:spawns[s].npc,
+                                    x: _.between(encounters[e].x, encounters[e].width),
+                                    y: _.between(encounters[e].y, encounters[e].height)
+                                })
+                            }
+                        }
+                    }
                 })
-            } else {
-                self.addNpc(data)
-            }
-        })
+            })(e)
+        }
     })
 
     setInterval(this.loop,20, this, io)
@@ -49,8 +52,8 @@ Mainloop.prototype.removePlayer = function(id) {
     delete this.players[id]
 }
 
-Mainloop.prototype.addNpc = function() {
-    var npc = new WorldNpc({id:this.npcs.length});
+Mainloop.prototype.addNpc = function(data) {
+    var npc = new WorldNpc({id:this.npcs.length, x:Math.random()*200, y:Math.random()*200});
     this.npcs.push(npc);
     return npc;
 }
@@ -59,8 +62,6 @@ Mainloop.prototype.loop = function(self, io) {
     for(var n in self.npcs) {
         self.npcs[n].wander(io)
     }
-    //console.log(instance);
-    // console.log('looping...')
 }
 
 module.exports = Mainloop

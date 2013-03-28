@@ -22,6 +22,9 @@ orm.connect(config.connectionString, function (err, db) { if (err) throw err;
 
             Spawn.create([{
                 name:'Test Encounter 1 - Test Spawn 1',
+                chance:80,
+                low:4,
+                high:10,
                 npc:npcs[0].id
             }], function(err, spawns) {
                 encounters[0].addSpawns(spawns[0], function() {
