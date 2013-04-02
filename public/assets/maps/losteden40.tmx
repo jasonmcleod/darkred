@@ -148,7 +148,12 @@
   </properties>
   <object name="test encounter" x="450" y="325" width="145" height="86">
    <properties>
-    <property name="id" value=""/>
+    <property name="id" value="1"/>
+   </properties>
+  </object>
+  <object name="2nd encounter" x="908" y="529" width="60" height="53">
+   <properties>
+    <property name="id" value="2"/>
    </properties>
   </object>
  </objectgroup>

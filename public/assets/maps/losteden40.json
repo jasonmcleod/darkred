@@ -54,13 +54,26 @@
                  "name":"test encounter",
                  "properties":
                     {
-                     "id":""
+                     "id":"1"
                     },
                  "type":"",
                  "visible":true,
                  "width":145,
                  "x":450,
                  "y":325
+                }, 
+                {
+                 "height":53,
+                 "name":"2nd encounter",
+                 "properties":
+                    {
+                     "id":"2"
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":60,
+                 "x":908,
+                 "y":529
                 }],
          "opacity":1,
          "properties":

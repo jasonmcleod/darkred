@@ -4,8 +4,7 @@ var Encounter = require('./models/Encounter');
 var Npc = require('./models/Npc');
 var Player = require('./models/Player');
 var WorldNpc = require('./models/WorldNpc');
-var _ = require('underscore')
-var jm = require('./lib/jm')
+var EncounterManager = require('./managers/encounters');
 
 var Mainloop = function(app, io) {
 
@@ -15,28 +14,9 @@ var Mainloop = function(app, io) {
     this.npcs = []
 
     this.map = new MapParser(config.map)
+    this.encounterManager = new EncounterManager(this)
 
-    Encounter.find(function(err, encounters) {
-        for(var e=0; e < encounters.length; e++) {
-            (function(e) {
-                encounters[e].getSpawns(function(err, spawns) {
-                    for(var s=0;s<spawns.length;s++) {
-                        for(var n=spawns[s].low; n<spawns[s].high;n++) {
-                            if(_.chance(spawns[s].chance)) {
-                                self.addNpc({
-                                    npc:spawns[s].npc,
-                                    x: _.between(encounters[e].x, encounters[e].width),
-                                    y: _.between(encounters[e].y, encounters[e].height)
-                                })
-                            }
-                        }
-                    }
-                })
-            })(e)
-        }
-    })
-
-    setInterval(this.loop,20, this, io)
+    setInterval(this.loop, 20, this, io)
 
     return this;
 }
@@ -46,7 +26,6 @@ Mainloop.prototype.addPlayer = function(id, name) {
     this.players[id] = player;
     return player;
 }
-
 
 Mainloop.prototype.removePlayer = function(id) {
     delete this.players[id]
