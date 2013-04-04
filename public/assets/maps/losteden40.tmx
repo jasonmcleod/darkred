@@ -123,7 +123,7 @@
    <property name="type" value="base"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzt2DEKw0AQBEFF+v9j/EBHDgaDxAX2HKsq2PyYVqTzOI5zk3vd3BO0G+iR2g1W20zX3n21y3TtvfVI7b1Xm0zX3lqP1N5aj9TeWo/U3lqP1N5aj9Te+m7/p3T4aG+vR2pvr0dqb79607X31SO199UjtffVI7X31SO199UjtffVI7X31SO199UjtffVI7X31SO191296f+y2vvqkdr76pHa++qR2vvqkdr7rt50zT31+Lbj963HXj2u3jXdji2u3vUE/9oYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4JfeQ6tR0w==
+   eJztw8EJAAAMA6F7Zf+RC51DwVVTVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/AS5D6mE=
   </data>
  </layer>
  <layer name="terrain2" width="100" height="100">
@@ -131,18 +131,18 @@
    <property name="type" value="base"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzt1rlNQ0EYhVGXZmwoAWOckZqtBNYSDNglsJbA2hg3QbImQICe3kjMOdKnSX9pkjsYADBMG2mUxmkzbdU8qHHbaZJ20jTtplnVi9o2T/vpIB2mo3Rc9aK2naTTdJbO00W6rHnQP7K31k8t0lW6TjdpmVbdn9ak3/zDl9t0l+7TQ3pMT10e1bC//Mdzekmv6S29p48ObwL4TrmZyteG6le5mcrXhupXuZnK14bqV7mZyteGAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAej4BAD8wTQ==
+   eJzt1sFNQkEYhdFXmqiUoIIlsMASVLAEFCkBUEsAhca8hg1OAW8Wc07yZbZ/MpvbdQBcpEG6TFfpOg1rHtS4m3Sb7tIojdN91YvaNkmzs6bpoepFbXvs/v/HPL1Uvahti/Sa3tIyvadV1Yvatk6btE0f6TN9Vb2obbu0T9/pJx3SseZBQFP+NtNTeu5Om6l8bah+lZupfG2ofpWbqXxtqH6Vm6l8bSgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKjnF5+ZLq0=
   </data>
  </layer>
  <layer name="fringe1" width="100" height="100">
   <properties>
-   <property name="type" value="1"/>
+   <property name="type" value="fringe"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzt1zsOgkAYhdFZmg9cAqJ0tpLA/jtuQmNBqIgT5Zzky19Mc9spBdjbvfYAgHh9BAD8n1M6p0u6rtwm3WqNO6C2LH/BLj1W7jP11dYdzzsNG+9jmr60BQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPhNM524CTA=
+   eJztzrsJgAAQREFL81uC3xIUtP/MLUAMFXEGHhdcskUBAAAAfE2ZqlSn5uK2qXtr3A/1aUhjmi7unJbX1v3Pmrab/56Oh7YAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA33QCktwHtw==
   </data>
  </layer>
- <objectgroup name="Encounters" width="100" height="100">
+ <objectgroup name="Encounters" width="100" height="100" visible="0">
   <properties>
    <property name="type" value="encounters"/>
   </properties>
@@ -157,4 +157,12 @@
    </properties>
   </object>
  </objectgroup>
+ <layer name="fixtures" width="100" height="100" visible="0">
+  <properties>
+   <property name="type" value="fixtures"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztzgENAAAIA6BXtX8JY3w6SEACAAAAfDXtAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAActMajAGI=
+  </data>
+ </layer>
 </map>

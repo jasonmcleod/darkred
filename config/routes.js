@@ -1,5 +1,6 @@
 var account = require('../controllers/account');
 var application = require('../controllers/app');
+var editor = require('../controllers/editor');
 var character = require('../controllers/character');
 var chat = require('../controllers/chat');
 
@@ -21,6 +22,14 @@ exports.init = function(app, io, game) {
     // character
     app.post('/characters/create',          character.create)
     app.get('/characters/list',             character.list)
+
+    // editor
+    app.get('/editor',                      editor.index)
+    app.get('/editor/fixture-defs',         editor.fixtureDefs)
+    app.get('/editor/fixtures',             editor.fixtures)
+    app.get('/editor/npc-defs',             editor.npcDefs)
+    app.get('/editor/npcs',                 editor.npcs)
+
 
     io.sockets.on('connection', function(socket) {
         for(var c in controllers) {

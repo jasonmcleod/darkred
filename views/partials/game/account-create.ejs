@@ -1,0 +1,17 @@
+<div ng-controller="AccountCreateCtrl" ng-show="$parent.creatingAccount">
+    <form ng-hide="success">
+        <span class='error' ng-show="error">{{error}}</span><br>
+        Email<input ng-model='email'><br>
+        Password<input type='password' ng-model='password'><br>
+        Confirm Password<input type='password' ng-model='passwordConfirm'><br>
+        <button ng-click='create()'>Create</button><br>
+        You'll create your first character once you login.<br>
+        <button ng-click='cancel()'>Cancel</button>
+    </form>
+
+    <div ng-show="success">
+        Account has been created. Check your email for an activation link.
+        <button ng-click="returnToLogin()">Login</button>
+    </div>
+
+</div>

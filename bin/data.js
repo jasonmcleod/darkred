@@ -35,7 +35,6 @@ orm.connect(config.connectionString, function (err, db) { if (err) throw err;
     });
 
 
-
     Account.create([{
         email:'tests',
         password:'tests',

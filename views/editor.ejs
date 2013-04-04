@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="editor" ng-controller="AppCtrl" ng-cloak>
+
+    <head>
+        <meta charset="utf8">
+        <base href="/">
+        <title>Redux Editor</title>
+        <link rel="stylesheet" href="/css/editor.css">
+    </head>
+
+    <body>
+
+        <input type='text' ng-model='scale'>
+
+        <% include partials/editor/map %>
+
+        <script src="/js/lib/angular/angular.js"></script>
+        <script src="/js/lib/jquery.min.js"></script>
+        <script src="/js/lib/jquery-ui.min.js"></script>
+        <script src="/js/lib/easeljs.min.js"></script>
+
+        <script src="/js/lib/engine/lib/transparentImage.js"></script>
+        <script src="/js/lib/engine/Camera.js"></script>
+        <script src="/js/lib/engine/Renderer.js"></script>
+        <script src="/js/lib/engine/StageManager.js"></script>
+        <script src="/js/lib/engine/MapParser.js"></script>
+        <script src="/js/lib/requestanimationframe.js"></script>
+        <script src="/js/lib/keymaster.js"></script>
+
+        <script src="/socket.io/socket.io.js" type="text/javascript"></script>
+
+        <script src="/js/editor/app.js"></script>
+        <script src="/js/editor/services.js"></script>
+
+        <% for(f in frontEndPackage) { %><script src="js/editor/<%- frontEndPackage[f] %>"></script><% } %>
+
+    </body>
+
+</html>

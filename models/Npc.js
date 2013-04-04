@@ -1,7 +1,8 @@
 var Npc = db.define("npcs", {
     id: Number,
     name: String,
-    level: String,
+    x: Number,
+    y: Number,
     hp:Number
 });
 

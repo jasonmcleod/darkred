@@ -1,0 +1,29 @@
+body {
+    padding:0px;
+    margin:0px;
+}
+.grid-box {
+    position:absolute;
+    top:0px;
+    left:0px;
+    border:1px solid #fff;
+    z-index:2;
+}
+#zoom {
+    width:640px;
+    height:480px;
+}
+#zoom canvas {
+/*    opacity:.2;*/
+    margin:0px;
+    padding:0px;
+    -webkit-transform:scale(.50);
+    -webkit-transform-origin:0px 0px;
+}
+
+.drag-map {
+    z-index:10;
+    position:absolute;
+    background:red;
+    opacity:.5;
+}

@@ -1,5 +1,5 @@
 var files = ''
-require('../lib/frontEndPackage').generate(function(data) {
+require('../lib/frontEndPackage').generate('game', function(data) {
     files = data
 })
 

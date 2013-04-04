@@ -10,12 +10,12 @@
 
     <body>
 
-        <% include partials/login %>
-        <% include partials/characters %>
-        <% include partials/game %>
-        <% include partials/character-create %>
-        <% include partials/account-create %>
-        <% include partials/account-reset %>
+        <% include partials/game/login %>
+        <% include partials/game/characters %>
+        <% include partials/game/game %>
+        <% include partials/game/character-create %>
+        <% include partials/game/account-create %>
+        <% include partials/game/account-reset %>
 
 
         <div ng-controller="LogoutCtrl" ng-show="$parent.loggedIn">
@@ -37,19 +37,19 @@
 
         <script src="/socket.io/socket.io.js" type="text/javascript"></script>
 
-        <script src="/js/app.js"></script>
-        <script src="/js/services.js"></script>
-        <script src="/js/SocketEvents.js"></script>
-        <script src="/js/mainloop.js"></script>
+        <script src="/js/game/app.js"></script>
+        <script src="/js/game/services.js"></script>
+        <script src="/js/game/SocketEvents.js"></script>
+        <script src="/js/game/mainloop.js"></script>
 
         <script src="/shared/LevelTable.js"></script>
 
-        <script src="/js/scraps.js"></script>
+        <script src="/js/game/scraps.js"></script>
 
-        <% for(f in frontEndPackage) {%><script src="js/<%- frontEndPackage[f] %>"></script><% } %>
+        <% for(f in frontEndPackage) {%><script src="js/game/<%- frontEndPackage[f] %>"></script><% } %>
 
-        <script src="/js/filters.js"></script>
-        <script src="/js/directives.js"></script>
+        <script src="/js/game/filters.js"></script>
+        <script src="/js/game/directives.js"></script>
     </body>
 
 </html>

@@ -7,6 +7,9 @@ module.exports = function(self) {
 
     Encounter.find(function(err, encounters) {
         for(var e=0; e < encounters.length; e++) {
+
+
+
             (function(e) {
                 encounters[e].getSpawns(function(err, spawns) {
                     for(var s=0;s<spawns.length;s++) {
@@ -22,6 +25,9 @@ module.exports = function(self) {
                     }
                 })
             })(e)
+
+
+
         }
     })
 
