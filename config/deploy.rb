@@ -3,10 +3,10 @@ load 'deploy' if respond_to?(:namespace) # cap2 differentiator
 set :stages, %w(prod)
 set :default_stage, "prod"
 
-set :application, "arpg"
+set :application, "darkred"
 set :node_file, "app.js"
 
-set :repository, "git@bitbucket.org:jasonmcleod/arpg.git"
+set :repository, "git@github.com:jasonmcleod/darkred.git"
 set :branch, "master"
 set :deploy_to, "/var/www/#{application}"
 
