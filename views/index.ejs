@@ -13,13 +13,13 @@
     <body>
 
         <h1>Dark Red</h1>
+
         <% include partials/game/login %>
         <% include partials/game/characters %>
         <% include partials/game/game %>
         <% include partials/game/character-create %>
         <% include partials/game/account-create %>
         <% include partials/game/account-reset %>
-
 
         <div ng-controller="LogoutCtrl" ng-show="$parent.loggedIn">
             <a ng-click='logout()'>Logout</a>
@@ -37,6 +37,8 @@
         <script src="/js/lib/engine/MapParser.js"></script>
         <script src="/js/lib/requestanimationframe.js"></script>
         <script src="/js/lib/keymaster.js"></script>
+        <script src="/js/lib/knob.js"></script>
+
 
         <script src="/socket.io/socket.io.js" type="text/javascript"></script>
 

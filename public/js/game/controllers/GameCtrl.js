@@ -1,4 +1,4 @@
-function GameCtrl($scope, socket, $rootScope, $location) {
+function GameCtrl($scope, socket, $rootScope, $location, $timeout) {
 
     app.game = $scope;
 
@@ -9,6 +9,12 @@ function GameCtrl($scope, socket, $rootScope, $location) {
     $scope.players = {};
     $scope.npcs = []
     $scope.socketEvents = new SocketEvents($scope, socket)
+
+    $scope.hp = 20;
+
+    $scope.setHP = function(v) {
+        $scope.hp = v
+    }
 
     // loads the map
     $scope.mapParser = new MapParser({

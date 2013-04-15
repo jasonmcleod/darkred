@@ -1,5 +1,12 @@
 <div ng-controller="GameCtrl" ng-show="$parent.loggedIn && $parent.characterSelected">
     <!-- <ul><li ng-repeat='player in players'>{{player.name}}</li></ul> -->
+    <input arc-meter data-width="100" data-height="100" data-displayPrevious=true data-fgColor="#ffec03" data-skin="tron" ng-model='hp' data-thickness=".2">
+
+    <button ng-click='setHP(10)'>10</button>
+    <button ng-click='setHP(20)'>20</button>
+    <button ng-click='setHP(80)'>80</button>
+    <button ng-click='setHP(90)'>90</button>
+
     <div id='stage'></div>
 
     <div ng-controller="ChatCtrl">
