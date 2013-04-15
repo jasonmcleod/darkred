@@ -11,9 +11,18 @@ var connection = mysql.createConnection({
 
 var tables = [
     'accounts',
-    'characters',
     'accounts_characters',
-    'migrations'
+    'characters',
+    'migrations',
+    'encounters',
+    'encounters_spawns',
+    'fixture_defs',
+    'fixtures',
+    'migrations',
+    'npc_defs',
+    'npcs',
+    'spawns',
+    'spawns_npcs'
 ]
 
 function next() {
