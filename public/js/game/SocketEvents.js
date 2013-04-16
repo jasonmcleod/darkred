@@ -7,7 +7,6 @@ function SocketEvents($scope, socket) {
         $scope.game = data.game
 
         $.each(data.game.npcs, function(k,v) {
-            console.log(v)
             v.$scope = $scope;
             $scope.npcs[k] = new Npc(v);
             $scope.npcs[k].addToStage()
@@ -19,7 +18,7 @@ function SocketEvents($scope, socket) {
             $scope.players[k].addToStage()
         })
 
-        $scope.me = $.extend($scope.players[data.me], new LocalPlayer({$scope:$scope}));
+        $scope.me = $.extend($scope.players[data.me], new LocalPlayer({x:$scope.players[data.me].x,y:$scope.players[data.me].y},$scope));
         $scope.me.syncCamera();
 
     });

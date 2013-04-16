@@ -1,7 +1,41 @@
-function LocalPlayer(options) {
+function LocalPlayer(options, $scope) {
+    var self = this;
+
+    $.extend(self, options)
 
     this.lastPushTime = 0;
     this.lastPushData = {}
+    this.firingSpeed = 80;
+    $scope.firing = false;
+    $scope.hp = 60;
+
+    var firingInterval = false;
+    this.recoilFactor = 0
+
+    $scope.$watch('firing', function(n) {
+        if(n) {
+            firingInterval = setInterval(function() {
+                if(!n) clearInterval(firingInterval)
+                self.fire(self);
+            },self.firingSpeed)
+        } else {
+            clearInterval(firingInterval)
+        }
+    })
+
+    this.fire = function() {
+        var b = new Projectile({
+            // x:self.globalx,
+            // y:self.globaly,
+            x:$scope.camera.x + ($scope.camera.width * app.game.tileSize / 2),
+            y:$scope.camera.y + ($scope.camera.height * app.game.tileSize / 2),
+            trajectoryX:$scope.mouseX + _.range(self.recoilFactor*-1, self.recoilFactor) - ($scope.camera.width * app.game.tileSize / 2),
+            trajectoryY:$scope.mouseY + _.range(self.recoilFactor*-1, self.recoilFactor) - ($scope.camera.height * app.game.tileSize / 2),
+            owner:self.id,
+            speed:10
+        }, $scope)
+        // $scope.socket.emit('fire', b);
+    }
 
     this.moveBy = function(options) {
 
@@ -26,7 +60,7 @@ function LocalPlayer(options) {
 
             if((new Date()).getTime() - this.lastPushTime > 40) {
                 if(this.lastPushData.x != this.x || this.lastPushData.y != this.y) {
-                    this.$scope.socket.emit('move', {x:this.x, y:this.y, rotation:this.rotation})
+                    $scope.socket.emit('move', {x:this.x, y:this.y, rotation:this.rotation})
                     this.lastPushTime = (new Date()).getTime()
                 }
             }
@@ -35,12 +69,14 @@ function LocalPlayer(options) {
     }
 
     this.push = function() {
-        this.$scope.socket.emit('move', {x:this.x, y:this.y})
+        $scope.socket.emit('move', {x:this.x, y:this.y})
     }
 
     this.syncCamera = function() {
-        this.$scope.camera.x = this.$scope.me.x - this.$scope.camera.width *  this.$scope.tileSize /2
-        this.$scope.camera.y = this.$scope.me.y - this.$scope.camera.height * this.$scope.tileSize /2
+        $scope.camera.x = $scope.me.x - $scope.camera.width *  $scope.tileSize /2
+        $scope.camera.y = $scope.me.y - $scope.camera.height * $scope.tileSize /2
     }
+
+    return this;
 
 }

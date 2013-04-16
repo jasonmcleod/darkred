@@ -16,9 +16,13 @@ function StageManager(options) {
     }
 
     this.remove = function(what) {
-        this.stage.removeChild(what)
-        $.each(this.elements, function() {
-            if(this==what) delete this;
+        var self = this;
+        $.each(this.elements, function(i) {
+            if(this.id==what.id) {
+                self.stage.removeChild(what)
+                self.elements.remove(i)
+                delete this;
+            }
         })
     }
 }

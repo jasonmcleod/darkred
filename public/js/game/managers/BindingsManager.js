@@ -7,6 +7,17 @@ function BindingsManager($scope) {
         $scope.me.moveBy({rotation:Math.atan2(deltaY, deltaX) / Math.PI * 180});
     })
 
+    $('#stage').bind('mousedown', function() {
+        $scope.me.fire();
+        $scope.firing = true
+        $scope.$apply()
+    })
+
+    $(document).bind('mouseup', function() {
+        $scope.firing = false
+        $scope.$apply()
+    })
+
     return {
         monitorMovement: function() {
             if($('input:focus').length>0) return

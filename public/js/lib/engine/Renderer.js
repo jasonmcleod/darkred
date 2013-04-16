@@ -109,6 +109,7 @@ function Renderer(options) {
         (function animloop(){
           requestAnimFrame(animloop);
           loop();
+          $(document).trigger('tick')
         })();
     }
 

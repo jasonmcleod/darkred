@@ -7,10 +7,9 @@ function GameCtrl($scope, socket, $rootScope, $location, $timeout) {
     $scope.socket = socket;
     $scope.tileSize = 40;
     $scope.players = {};
-    $scope.npcs = []
-    $scope.socketEvents = new SocketEvents($scope, socket)
+    $scope.npcs = [];
 
-    $scope.hp = 20;
+    $scope.socketEvents = new SocketEvents($scope, socket)
 
     $scope.setHP = function(v) {
         $scope.hp = v

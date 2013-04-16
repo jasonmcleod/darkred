@@ -4,7 +4,7 @@ app.directive('arcMeter', ['$compile', function($compile) {
         link: function($scope, $element, attrs, controller) {
 
             $scope.$watch($element.attr('ng-model'), function(n, o) {
-                $({val:o}).stop().animate({val:n},{
+                $({val:o||0}).stop().animate({val:n},{
                     step:function(now) {
                         $($element).val(now).trigger('change')
                     },

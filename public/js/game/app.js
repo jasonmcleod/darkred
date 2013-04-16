@@ -9,9 +9,20 @@ var app = angular.module('myApp', ['myApp.filters', 'myApp.directives']).config(
 var cursorX, cursorY;
 var debugging = false
 
+
+var config = {
+    sounds:false
+}
+
 $(function() {
     $(window).bind('mousemove',function(e) {
         cursorX = e.pageX;
         cursorY = e.pageY;
     })
 })
+
+Array.prototype.remove = function(from, to) {
+  var rest = this.slice((to || from) + 1 || this.length);
+  this.length = from < 0 ? this.length + from : from;
+  return this.push.apply(this, rest);
+};
