@@ -5,7 +5,7 @@ function LocalPlayer(options, $scope) {
 
     this.lastPushTime = 0;
     this.lastPushData = {}
-    this.firingSpeed = 80;
+    this.firingSpeed = 30;
     $scope.firing = false;
     $scope.hp = 60;
 
@@ -30,7 +30,7 @@ function LocalPlayer(options, $scope) {
             trajectoryX:$scope.mouseX + _.range(self.recoilFactor*-1, self.recoilFactor) - ($scope.camera.width * app.game.tileSize / 2),
             trajectoryY:$scope.mouseY + _.range(self.recoilFactor*-1, self.recoilFactor) - ($scope.camera.height * app.game.tileSize / 2),
             owner:self.id,
-            speed:10
+            speed:5
         }, $scope)
 
         $scope.socket.emit('fireProjectile', bullet);
