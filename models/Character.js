@@ -14,22 +14,3 @@ var Character = db.define("characters", {
 });
 
 module.exports = Character;
-
-// Character.hasOne("account", Account, {
-//     reverse : "accounts"
-// });
-// Character.hasOne("account", Account, {
-//     reverse : "account"
-// });
-
-// Character.hasOne("account", Account);
-
-// Character.find({id:1},function(err, data) {
-//
-//     console.log(arguments)
-//
-//     data[0].getAccount(function() {
-//         console.log(arguments)
-//     })
-//
-// })

@@ -15,4 +15,8 @@ function PlayerManager($scope, socket) {
     socket.on('playerMove', function(data) {
         $scope.players[data.id].update(data)
     })
+
+    socket.on('playerFireProjectile', function(data) {
+        var bullet = new Projectile(data, $scope)
+    })
 }

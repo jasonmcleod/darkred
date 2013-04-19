@@ -24,9 +24,7 @@ function LocalPlayer(options, $scope) {
     })
 
     this.fire = function() {
-        var b = new Projectile({
-            // x:self.globalx,
-            // y:self.globaly,
+        var bullet = new Projectile({
             x:$scope.camera.x + ($scope.camera.width * app.game.tileSize / 2),
             y:$scope.camera.y + ($scope.camera.height * app.game.tileSize / 2),
             trajectoryX:$scope.mouseX + _.range(self.recoilFactor*-1, self.recoilFactor) - ($scope.camera.width * app.game.tileSize / 2),
@@ -34,7 +32,8 @@ function LocalPlayer(options, $scope) {
             owner:self.id,
             speed:10
         }, $scope)
-        // $scope.socket.emit('fire', b);
+
+        $scope.socket.emit('fireProjectile', bullet);
     }
 
     this.moveBy = function(options) {

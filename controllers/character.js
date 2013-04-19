@@ -46,6 +46,15 @@ module.exports.bindSocket = function(socket, io, game) {
         socket.broadcast.emit('playerMove', player)
     });
 
+    socket.on('fireProjectile', function(data) {
+        var player = game.players[socket.id]
+        if(!player) return
+        var projectile = player.fireProjectile(data)
+        console.log(projectile)
+        socket.broadcast.emit('playerFireProjectile', projectile)
+    });
+
+
 }
 
 controllers['characters'] = module.exports;

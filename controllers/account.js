@@ -4,7 +4,7 @@ var Character = require('../models/Character');
 
 // req/res
 module.exports.authenticate = function(req, res) {
-    Account.find({email:req.body.email, password:req.body.password},function (err, accounts) {
+    Account.find({email:req.body.email, password:require('crypto').createHash('sha1').update(req.body.password).digest('hex')},function (err, accounts) {
         if(accounts.length==0) {
             res.send({success:0, error:'Incorrect email/password combination'})
         } else {
@@ -29,7 +29,7 @@ module.exports.create = function(req, res) {
 
             Account.create([{
                 email:req.body.email,
-                password:req.body.password,
+                password:require('crypto').createHash('sha1').update(req.body.password).digest('hex'),
                 token:0,
                 activationCode:0
             }],function(err, results) {

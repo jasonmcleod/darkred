@@ -4,25 +4,21 @@ var Projectile = function(options, $scope) {
 
     this.speed = options.speed || 12;
     this.delta = 1;
-
     this.trajectoryX = options.trajectoryX
     this.trajectoryY = options.trajectoryY
-
     this.length = Math.sqrt(Math.pow(this.trajectoryX,2) + (Math.pow(this.trajectoryY,2)))
-
     this.owner = options.owner;
     this.spawnTime = new Date();
+    this.removed = false;
 
     self.sprite = new SpriteWithContainer('/assets/sprites/projectile.png', 16, 16)
     self.sprite.globalx = options.x
     self.sprite.globaly = options.y
     $scope.renderer.stage.add(self.sprite);
 
-    this.removed = false;
-
     if(config.sounds) {
         this.sound = new Audio("/assets/sounds/single.mp3");
-        this.sound.volume =( Math.random()/2 + .5);
+        this.sound.volume = ( Math.random()/2 + .5);
         this.sound.play();
     }
 
@@ -56,18 +52,23 @@ var Projectile = function(options, $scope) {
         }
     });
 
-
     this.remove = function() {
         $scope.renderer.stage.remove(this.sprite)
         this.removed = true;
         delete this;
     }
 
+    return {
+        x:options.x,
+        y:options.y,
+        trajectoryX:this.trajectoryX,
+        trajectoryY:this.trajectoryY,
+        owner:this.owner,
+        length:this.length,
+        sprite:{
+            globalx:this.sprite.globalx,
+            globaly:this.sprite.globaly
+        }
+    };
+
 }
-Projectile.prototype.onRemove = function() {};
-
-
-//     this.data = function() {
-//         return {startX: options.x, startY: options.y, endX: options.endX, endY: options.endY, owner: this.owner};
-//     }
-// }
