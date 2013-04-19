@@ -65,6 +65,7 @@ var Projectile = function(options, $scope) {
         trajectoryY:this.trajectoryY,
         owner:this.owner,
         length:this.length,
+        speed:this.speed,
         sprite:{
             globalx:this.sprite.globalx,
             globaly:this.sprite.globaly

@@ -30,7 +30,7 @@ function LocalPlayer(options, $scope) {
             trajectoryX:$scope.mouseX + _.range(self.recoilFactor*-1, self.recoilFactor) - ($scope.camera.width * app.game.tileSize / 2),
             trajectoryY:$scope.mouseY + _.range(self.recoilFactor*-1, self.recoilFactor) - ($scope.camera.height * app.game.tileSize / 2),
             owner:self.id,
-            speed:5
+            speed:25
         }, $scope)
 
         $scope.socket.emit('fireProjectile', bullet);
