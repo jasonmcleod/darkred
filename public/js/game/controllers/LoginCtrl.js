@@ -26,9 +26,12 @@ function LoginCtrl($scope, socket, $rootScope, $location) {
     }
 
     $scope.forgot = function() {
-        $.get('/accounts/forgot',{email:'pixelparty@gmail.com' || prompt('Enter your email address')},function(data) {
+        $.get('/accounts/forgot',{email:$scope.email || prompt('Enter your email address')},function(data) {
             if(data.success==1) {
                 $scope.notice = 'Check your email to reset your password'
+                $scope.$apply();
+            } else {
+                $scope.error = data.error
                 $scope.$apply();
             }
         })
