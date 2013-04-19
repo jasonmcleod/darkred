@@ -33,7 +33,7 @@ module.exports.create = function(req, res) {
                 token:0,
                 activationCode:0
             }],function(err, results) {
-
+                if(err) console.log(err)
                 results[0].generateActivationCode(function(err, account) {
                     if(!err) {
                         if(!req.body.test) {

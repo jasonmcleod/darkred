@@ -37,7 +37,7 @@ orm.connect(config.connectionString, function (err, db) { if (err) throw err;
 
     Account.create([{
         email:'tests',
-        password:'tests',
+        password:require('crypto').createHash('sha1').update('tests').digest('hex'),
         activated:1
     }], function(err, accounts) {
         console.log(accounts)
